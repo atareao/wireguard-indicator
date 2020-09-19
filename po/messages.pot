@@ -1,0 +1,186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-19 08:35+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: schemas/wireguard-indicator.gschema.xml:6
+msgid "Service name"
+msgstr ""
+
+#: schemas/wireguard-indicator.gschema.xml:7
+msgid "Set the name of the systemd service"
+msgstr ""
+
+#: schemas/wireguard-indicator.gschema.xml:11
+msgid "Check time"
+msgstr ""
+
+#: schemas/wireguard-indicator.gschema.xml:12
+msgid "Set the check time to test the WireGuard status"
+msgstr ""
+
+#: schemas/wireguard-indicator.gschema.xml:16
+msgid "Dark theme"
+msgstr ""
+
+#: schemas/wireguard-indicator.gschema.xml:17
+msgid "Enable dark theme otherwise light theme"
+msgstr ""
+
+#: extension_old.js:17
+msgid "Loading..."
+msgstr ""
+
+#: extension.js:83
+msgid "Wireguard status"
+msgstr ""
+
+#: extension.js:85 extension.js:172
+msgid "Enable WireGuard"
+msgstr ""
+
+#: extension.js:95
+msgid "Settings"
+msgstr ""
+
+#: extension.js:169
+msgid "Disable WireGuard"
+msgstr ""
+
+#: extension.js:217
+msgid "Help"
+msgstr ""
+
+#: extension.js:219
+msgid "Project Page"
+msgstr ""
+
+#: extension.js:221
+msgid "Get help online..."
+msgstr ""
+
+#: extension.js:223
+msgid "Report a bug..."
+msgstr ""
+
+#: extension.js:228
+msgid "El atareao"
+msgstr ""
+
+#: extension.js:230
+msgid "GitHub"
+msgstr ""
+
+#: extension.js:232
+msgid "Twitter"
+msgstr ""
+
+#: extension.js:234
+msgid "Telegram"
+msgstr ""
+
+#: extension.js:236
+msgid "Mastodon"
+msgstr ""
+
+#: extension.js:238
+msgid "Spotify"
+msgstr ""
+
+#: extension.js:240
+msgid "YouTube"
+msgstr ""
+
+#: preferenceswidget.js:232
+msgid "Nothing"
+msgstr ""
+
+#: preferenceswidget.js:245
+msgid "True"
+msgstr ""
+
+#: preferenceswidget.js:258
+msgid "False"
+msgstr ""
+
+#: prefs.js:63
+msgid "WireGuard Indicator"
+msgstr ""
+
+#: prefs.js:68
+msgid "Version: "
+msgstr ""
+
+#: prefs.js:79
+msgid "Atareao"
+msgstr ""
+
+#: prefs.js:86
+msgid "Copyright © 2020 Lorenzo Carbonell"
+msgstr ""
+
+#: prefs.js:93
+msgid ""
+"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS "
+"OR\n"
+msgstr ""
+
+#: prefs.js:94
+msgid ""
+"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
+msgstr ""
+
+#: prefs.js:95
+msgid ""
+"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n"
+msgstr ""
+
+#: prefs.js:96
+msgid ""
+"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
+msgstr ""
+
+#: prefs.js:97
+msgid ""
+"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n"
+msgstr ""
+
+#: prefs.js:98
+msgid ""
+"FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER "
+"DEALINGS\n"
+msgstr ""
+
+#: prefs.js:99
+msgid "IN THE SOFTWARE.\n"
+msgstr ""
+
+#: prefs.js:129
+msgid "Preferences"
+msgstr ""
+
+#: prefs.js:133
+msgid "Indicator options"
+msgstr ""
+
+#: prefs.js:136
+msgid "General options"
+msgstr ""
+
+#: prefs.js:142
+msgid "About"
+msgstr ""

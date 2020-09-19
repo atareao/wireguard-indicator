@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="24"
+   width="24"
+   id="svg4"
+   version="1.1"
+   viewBox="0 0 24 24"
+   role="img"
+   class="svg-inline--fa fa-telegram-plane fa-w-14"
+   data-icon="telegram-plane"
+   data-prefix="fab"
+   aria-hidden="true"
+   sodipodi:docname="telegram.svg"
+   inkscape:version="1.0 (1.0+r73+1)">
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     id="namedview5614"
+     showgrid="false"
+     inkscape:zoom="11.185185"
+     inkscape:cx="4.9470199"
+     inkscape:cy="26.254967"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <path
+     style="fill:#0088cc;stroke-width:0.04911118;fill-opacity:1"
+     id="path2"
+     d="m 22.937241,4.4546314 -3.31992,15.6566496 c -0.25047,1.105 -0.90364,1.38002 -1.83185,0.85944 l -5.05845,-3.72754 -2.44082,2.34752 c -0.27011,0.27011 -0.4960302,0.49602 -1.0166002,0.49602 l 0.36342,-5.15176 9.3753202,-8.4716796 c 0.40763,-0.36342 -0.0884,-0.56478 -0.63353,-0.20136 l -11.5902402,7.2979196 -4.9897,-1.56173 c -1.08534999,-0.33887 -1.10499999,-1.08536 0.22592,-1.60594 L 21.537571,2.8732514 c 0.90364,-0.33887 1.69433,0.20136 1.39967,1.58138 z" />
+</svg>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   aria-hidden="true"
+   data-prefix="fab"
+   data-icon="telegram-plane"
+   class="svg-inline--fa fa-telegram-plane fa-w-14"
+   role="img"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="spotify.svg"
+   width="24"
+   height="24"
+   inkscape:export-filename="/home/lorenzo/Escritorio/spotify.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.0 (1.0+r73+1)">
+  <metadata
+     id="metadata10">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1043"
+     id="namedview6"
+     showgrid="false"
+     inkscape:zoom="7.8755493"
+     inkscape:cx="-3.7775143"
+     inkscape:cy="-0.71952653"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4"
+     inkscape:document-rotation="0" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:#1db954;stroke-width:0.04435453;fill-opacity:1"
+     d="M 12,1.0000759 C 5.9278645,1.0000759 1.0000758,5.9278645 1.0000758,12 1.0000758,18.072136 5.9278645,22.999924 12,22.999924 18.072136,22.999924 22.999924,18.072136 22.999924,12 22.999924,5.9278645 18.072136,1.0000759 12,1.0000759 Z m 4.466502,16.1849691 c -0.18629,0 -0.301611,-0.05766 -0.474594,-0.159676 -2.767723,-1.667731 -5.987862,-1.738698 -9.1680819,-1.086686 -0.1729827,0.04435 -0.3991908,0.115321 -0.5278189,0.115321 -0.430239,0 -0.7008017,-0.341529 -0.7008017,-0.700801 0,-0.456852 0.2705627,-0.674189 0.6032217,-0.745156 3.6326362,-0.802817 7.3451108,-0.73185 10.5120238,1.162088 0.270563,0.172983 0.430239,0.328224 0.430239,0.73185 0,0.403626 -0.314917,0.68306 -0.674188,0.68306 z m 1.193136,-2.909657 c -0.230643,0 -0.385884,-0.102016 -0.54556,-0.186289 -2.772159,-1.641118 -6.906001,-2.302001 -10.5829918,-1.304024 -0.2129018,0.05766 -0.3282235,0.115322 -0.527819,0.115322 -0.4745935,0 -0.8604779,-0.385884 -0.8604779,-0.860478 0,-0.474593 0.2306436,-0.78951 0.6874953,-0.918139 1.233056,-0.345965 2.4927246,-0.603221 4.3378734,-0.603221 2.878609,0 5.659638,0.714108 7.850752,2.018131 0.359272,0.212902 0.501206,0.4879 0.501206,0.873784 -0.0044,0.479029 -0.377013,0.864914 -0.860478,0.864914 z m 1.374991,-3.379816 c -0.230644,0 -0.372578,-0.05766 -0.572173,-0.172982 C 15.304413,8.837522 9.6580807,8.3851058 6.0032672,9.40526 5.8435909,9.4496146 5.6439955,9.5205818 5.4310938,9.5205818 c -0.5854799,0 -1.0334607,-0.4568517 -1.0334607,-1.046767 0,-0.6032216 0.3725781,-0.9447515 0.7717689,-1.0600733 1.5612796,-0.4568518 3.3088481,-0.674189 5.211658,-0.674189 3.23788,0 6.631002,0.674189 9.110421,2.1201468 0.345965,0.1995954 0.572173,0.4745935 0.572173,1.0024123 0,0.6032214 -0.4879,1.0334604 -1.029025,1.0334604 z"
+     id="path894" />
+</svg>
