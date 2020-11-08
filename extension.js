@@ -54,10 +54,6 @@ function notify(msg, details, icon='tasker') {
     source.notify(notification);
 }
 
-function getValue(keyName){
-    return Convenience.getSettings().get_value(keyName).deep_unpack();
-}
-
 var WireGuardIndicator = GObject.registerClass(
     class WireGuardIndicator extends PanelMenu.Button{
         _init(){
@@ -76,8 +72,7 @@ var WireGuardIndicator = GObject.registerClass(
             this.icon = new St.Icon({style_class: 'system-status-icon'});
             this._update();
             box.add(this.icon);
-            //box.add(PopupMenu.arrowIcon(St.Side.BOTTOM));
-            this.actor.add_child(box);
+            this.add_child(box);
             /* Start Menu */
             this.wireGuardSwitch = new PopupMenu.PopupSwitchMenuItem(
                 _('Wireguard status'),
@@ -100,20 +95,16 @@ var WireGuardIndicator = GObject.registerClass(
             /* Help */
             this.menu.addMenuItem(this._get_help());
             /* Init */
-            
-            this._update();
-            this._sourceId = GLib.timeout_add_seconds(
-                GLib.PRIORITY_DEFAULT, this._checktime,
-                this._update.bind(this));
-            this._settings.connect('changed', ()=>{
-                this._update();
-                GLib.source_remove(this._sourceId);
-                this._sourceId = GLib.timeout_add_seconds(
-                    GLib.PRIORITY_DEFAULT, this._checktime,
-                    this._update.bind(this));
-            });
+            this._sourceId = 0;
+            this._settingsChanged();
+            this._settings.connect('changed',
+                                   this._settingsChanged.bind(this));
         }
-        //_toggleSwitch(value){
+        _getValue(keyName){
+            this._settings = Convenience.getSettings();
+            return this._settings.get_value(keyName).deep_unpack();
+        }
+
         _toggleSwitch(widget, value){
             let setstatus = ((value == true) ? 'start': 'stop');
             try {
@@ -135,9 +126,9 @@ var WireGuardIndicator = GObject.registerClass(
             }
         }
         _update(){
-            this._servicename = getValue('servicename');
-            this._checktime = getValue('checktime');
-            this._darkthem = getValue('darktheme')
+            this._servicename = this._getValue('servicename');
+            this._checktime = this._getValue('checktime');
+            this._darkthem = this._getValue('darktheme')
 
             try {
                 let command = ['systemctl', 'status', this._servicename];
@@ -162,25 +153,27 @@ var WireGuardIndicator = GObject.registerClass(
             return true;
         }
         _set_icon_indicator(active){
-            let msg = '';
-            let status_string = '';
-            let darktheme = getValue('darktheme');
-            if(active){
-                msg = _('Disable WireGuard');
-                status_string = 'active';
-            }else{
-                msg = _('Enable WireGuard');
-                status_string = 'paused';
+            if(this.wireGuardSwitch){
+                let msg = '';
+                let status_string = '';
+                let darktheme = this._getValue('darktheme');
+                if(active){
+                    msg = _('Disable WireGuard');
+                    status_string = 'active';
+                }else{
+                    msg = _('Enable WireGuard');
+                    status_string = 'paused';
+                }
+                GObject.signal_handlers_block_by_func(this.wireGuardSwitch,
+                                                      this._toggleSwitch);
+                this.wireGuardSwitch.setToggleState(active);
+                GObject.signal_handlers_unblock_by_func(this.wireGuardSwitch,
+                                                        this._toggleSwitch);
+                this.wireGuardSwitch.label.set_text(msg);
+                let theme_string = (darktheme?'dark': 'light');
+                let icon_string = 'wireguard-' + status_string + '-' + theme_string;
+                this.icon.set_gicon(this._get_icon(icon_string));
             }
-            GObject.signal_handlers_block_by_func(this.wireGuardSwitch,
-                                                  this._toggleSwitch);
-            this.wireGuardSwitch.setToggleState(active);
-            GObject.signal_handlers_unblock_by_func(this.wireGuardSwitch,
-                                                    this._toggleSwitch);
-            this.wireGuardSwitch.label.set_text(msg);
-            let theme_string = (darktheme?'dark': 'light');
-            let icon_string = 'wireguard-' + status_string + '-' + theme_string;
-            this.icon.set_gicon(this._get_icon(icon_string));
         }
         _get_icon(icon_name){
             let base_icon = Extension.path + '/icons/' + icon_name;
@@ -240,9 +233,15 @@ var WireGuardIndicator = GObject.registerClass(
                 _('YouTube'), 'youtube', 'http://youtube.com/c/atareao'));
             return menu_help;
         }
-        destroy() {
-            this._settings.disconnect(this._settingsChanged);
-            super.destroy();
+        _settingsChanged(){
+            this._update();
+            if(this._sourceId > 0){
+                GLib.source_remove(this._sourceId);
+            }
+            this._sourceId = GLib.timeout_add_seconds(
+                GLib.PRIORITY_DEFAULT, this._checktime,
+                this._update.bind(this));
+            log(this._sourceId);
         }
     }
 );
@@ -251,7 +250,6 @@ let wireGuardIndicator;
 
 function init(){
     Convenience.initTranslations();
-    var settings = Convenience.getSettings();
 }
 
 function enable(){

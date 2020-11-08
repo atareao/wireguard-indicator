@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WireGuard Indicator - 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-19 08:31+0200\n"
+"POT-Creation-Date: 2020-09-20 07:27+0200\n"
 "PO-Revision-Date: 2020-09-15 19:23+0200\n"
 "Last-Translator: Lorenzo <atareao@atareao.es>\n"
 "Language-Team: Spanish\n"
@@ -41,67 +41,63 @@ msgstr "Tema oscuro"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Establece el tema oscuro"
 
-#: extension_old.js:17
-msgid "Loading..."
-msgstr "Cargando"
-
-#: extension.js:83
+#: extension.js:79
 msgid "Wireguard status"
 msgstr "Estado de Wireguard"
 
-#: extension.js:85 extension.js:172
+#: extension.js:81 extension.js:165
 msgid "Enable WireGuard"
 msgstr "Habilita WireGuard"
 
-#: extension.js:95
+#: extension.js:91
 msgid "Settings"
 msgstr "Configuración"
 
-#: extension.js:169
+#: extension.js:162
 msgid "Disable WireGuard"
 msgstr "Deshabilita WireGuard"
 
-#: extension.js:217
+#: extension.js:211
 msgid "Help"
 msgstr "Ayuda"
 
-#: extension.js:219
+#: extension.js:213
 msgid "Project Page"
 msgstr "Página del proyecto"
 
-#: extension.js:221
+#: extension.js:215
 msgid "Get help online..."
 msgstr "Consigue ayuda en línea..."
 
-#: extension.js:223
+#: extension.js:217
 msgid "Report a bug..."
 msgstr "Informa de un error..."
 
-#: extension.js:228
+#: extension.js:222
 msgid "El atareao"
 msgstr "El atareao"
 
-#: extension.js:230
+#: extension.js:224
 msgid "GitHub"
 msgstr "GitHub"
 
-#: extension.js:232
+#: extension.js:226
 msgid "Twitter"
 msgstr "Twitter"
 
-#: extension.js:234
+#: extension.js:228
 msgid "Telegram"
 msgstr "Telegram"
 
-#: extension.js:236
+#: extension.js:230
 msgid "Mastodon"
 msgstr "Mastodon"
 
-#: extension.js:238
+#: extension.js:232
 msgid "Spotify"
 msgstr "Spotify"
 
-#: extension.js:240
+#: extension.js:234
 msgid "YouTube"
 msgstr "YouTube"
 
@@ -184,3 +180,6 @@ msgstr "Opciones generales"
 #: prefs.js:142
 msgid "About"
 msgstr "Acerca de"
+
+#~ msgid "Loading..."
+#~ msgstr "Cargando"

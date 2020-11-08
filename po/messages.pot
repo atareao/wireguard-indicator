@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-19 08:35+0200\n"
+"POT-Creation-Date: 2020-09-20 07:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,67 +41,63 @@ msgstr ""
 msgid "Enable dark theme otherwise light theme"
 msgstr ""
 
-#: extension_old.js:17
-msgid "Loading..."
-msgstr ""
-
-#: extension.js:83
+#: extension.js:79
 msgid "Wireguard status"
 msgstr ""
 
-#: extension.js:85 extension.js:172
+#: extension.js:81 extension.js:165
 msgid "Enable WireGuard"
 msgstr ""
 
-#: extension.js:95
+#: extension.js:91
 msgid "Settings"
 msgstr ""
 
-#: extension.js:169
+#: extension.js:162
 msgid "Disable WireGuard"
 msgstr ""
 
-#: extension.js:217
+#: extension.js:211
 msgid "Help"
 msgstr ""
 
-#: extension.js:219
+#: extension.js:213
 msgid "Project Page"
 msgstr ""
 
-#: extension.js:221
+#: extension.js:215
 msgid "Get help online..."
 msgstr ""
 
-#: extension.js:223
+#: extension.js:217
 msgid "Report a bug..."
 msgstr ""
 
-#: extension.js:228
+#: extension.js:222
 msgid "El atareao"
 msgstr ""
 
-#: extension.js:230
+#: extension.js:224
 msgid "GitHub"
 msgstr ""
 
-#: extension.js:232
+#: extension.js:226
 msgid "Twitter"
 msgstr ""
 
-#: extension.js:234
+#: extension.js:228
 msgid "Telegram"
 msgstr ""
 
-#: extension.js:236
+#: extension.js:230
 msgid "Mastodon"
 msgstr ""
 
-#: extension.js:238
+#: extension.js:232
 msgid "Spotify"
 msgstr ""
 
-#: extension.js:240
+#: extension.js:234
 msgid "YouTube"
 msgstr ""
 
