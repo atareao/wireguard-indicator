@@ -164,11 +164,13 @@ var WireGuardIndicator = GObject.registerClass(
                     msg = _('Enable WireGuard');
                     status_string = 'paused';
                 }
-                GObject.signal_handlers_block_by_func(this.wireGuardSwitch,
-                                                      this._toggleSwitch);
-                this.wireGuardSwitch.setToggleState(active);
-                GObject.signal_handlers_unblock_by_func(this.wireGuardSwitch,
-                                                        this._toggleSwitch);
+                if(this.wireGuardSwitch.state != active){
+                    GObject.signal_handlers_block_by_func(this.wireGuardSwitch,
+                                                          this._toggleSwitch);
+                    this.wireGuardSwitch.setToggleState(active);
+                    GObject.signal_handlers_unblock_by_func(this.wireGuardSwitch,
+                                                            this._toggleSwitch);
+                }
                 this.wireGuardSwitch.label.set_text(msg);
                 let theme_string = (darktheme?'dark': 'light');
                 let icon_string = 'wireguard-' + status_string + '-' + theme_string;
@@ -243,6 +245,11 @@ var WireGuardIndicator = GObject.registerClass(
                 this._update.bind(this));
             log(this._sourceId);
         }
+        disableUpdate(){
+            if(this._sourceId > 0){
+                GLib.source_remove(this._sourceId);
+            }
+        }
     }
 );
 
@@ -258,5 +265,6 @@ function enable(){
 }
 
 function disable() {
+    wireGuardIndicator.disableUpdate();
     wireGuardIndicator.destroy();
 }

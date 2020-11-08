@@ -38,9 +38,9 @@ const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
 
 
-let ColorSetting = GObject.registerClass(
+var ColorSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.ColorSetting'
+        GTypeName: (Extension.uuid + '.ColorSetting').replace(/[\W_]+/g,'_')
     },
     class ColorSetting extends Gtk.Button{
         _init(settings, keyName, params={}) {
@@ -59,7 +59,6 @@ let ColorSetting = GObject.registerClass(
 
             this.drawingArea = new Gtk.DrawingArea();
             this.drawingArea.connect('draw', (widget, cr)=>{
-                log('DDDD'+this.background_color.green);
                 cr.setSourceRGBA(this.background_color.red,
                                  this.background_color.green,
                                  this.background_color.blue,
@@ -90,9 +89,9 @@ let ColorSetting = GObject.registerClass(
 );
 
 /** A Gtk.Switch subclass for boolean GSettings. */
-let BoolSetting = GObject.registerClass(
+var BoolSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.BoolSetting'
+        GTypeName: (Extension.uuid + '.BoolSetting').replace(/[\W_]+/g,'_')
     },
     class BoolSetting extends Gtk.Switch{
         _init(settings, keyName) {
@@ -108,9 +107,9 @@ let BoolSetting = GObject.registerClass(
 );
 
 /** A Gtk.ComboBoxText subclass for GSetting choices and enumerations */
-let EnumSetting = GObject.registerClass(
+var EnumSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.EnumSetting'
+        GTypeName: (Extension.uuid + '.EnumSetting').replace(/[\W_]+/g, '_')
     },
     class EnumSetting extends Gtk.ComboBoxText{
 
@@ -144,9 +143,9 @@ let EnumSetting = GObject.registerClass(
 );
 
 /** A Gtk.MenuButton subclass for GSetting flags */
-let FlagsSetting = GObject.registerClass(
+var FlagsSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.FlagsSetting'
+        GTypeName: (Extension.uuid + '.FlagsSetting').replace(/[\W_]+/g, '_')
     },
     class FlagsSetting extends Gtk.MenuButton{
         _init(settings, keyName, params={}) {
@@ -203,9 +202,9 @@ let FlagsSetting = GObject.registerClass(
 );
 
 /** A Gtk.Button/Popover subclass for GSetting nullable booleans (maybe) */
-let MaybeSetting = GObject.registerClass(
+var MaybeSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.MaybeSetting'
+        GTypeName: (Extension.uuid + '.MaybeSetting').replace(/[\W_]+/g, '_')
     },
     class MaybeSetting extends Gtk.Button{
 
@@ -286,9 +285,9 @@ let MaybeSetting = GObject.registerClass(
 );
 
 /** A Gtk.SpinButton subclass for unranged integer GSettings */
-let NumberSetting = GObject.registerClass(
+var NumberSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.NumberSetting'
+        GTypeName: (Extension.uuid + '.NumberSetting').replace(/[\W_]+/g, '_')
     },
     class NumberSetting extends Gtk.SpinButton{
 
@@ -346,9 +345,9 @@ let NumberSetting = GObject.registerClass(
 );
 
 /** A Gtk.Scale subclass for ranged integer GSettings */
-let RangeSetting = GObject.registerClass(
+var RangeSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.RangeSetting'
+        GTypeName: (Extension.uuid + '.RangeSetting').replace(/[\W_]+/g, '_')
     },
     class RangeSetting extends Gtk.Scale{
 
@@ -384,9 +383,9 @@ let RangeSetting = GObject.registerClass(
 );
 
 /** A Gtk.Entry subclass for string GSettings */
-let StringSetting = GObject.registerClass(
+var StringSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.StringSetting'
+        GTypeName: (Extension.uuid + '.StringSetting').replace(/[\W_]+/g, '_')
     },
     class StringSetting extends Gtk.Entry{
 
@@ -435,9 +434,9 @@ let StringSetting = GObject.registerClass(
 );
 
 /** A Gtk.FileChooserButton subclass for folder GSettings */
-let FolderSetting = GObject.registerClass(
+var FolderSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.FolderSetting'
+        GTypeName: (Extension.uuid + '.FolderSetting').replace(/[\W_]+/g, '_')
     },
     class FolderSetting extends Gtk.FileChooserButton{
 
@@ -459,9 +458,9 @@ let FolderSetting = GObject.registerClass(
 );
 
 /** A Gtk.Entry subclass for all other GSettings */
-let OtherSetting = GObject.registerClass(
+var OtherSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.OtherSetting'
+        GTypeName: (Extension.uuid + '.OtherSetting').replace(/[\W_]+/g, '_')
     },
     class OtherSetting extends Gtk.Entry{
 
@@ -506,9 +505,9 @@ let OtherSetting = GObject.registerClass(
 /**
  * Convenience classes for widgets similar to Gnome Control Center
  */
-let Row = GObject.registerClass(
+var Row = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.Row'
+        GTypeName: (Extension.uuid + '.Row').replace(/[\W_]+/g, '_')
     },
     class Row extends Gtk.ListBoxRow{
 
@@ -546,9 +545,9 @@ let Row = GObject.registerClass(
     }
 );
 
-let Setting = GObject.registerClass(
+var Setting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.Setting'
+        GTypeName: (Extension.uuid + '.Setting').replace(/[\W_]+/g, '_')
     },
     class Setting extends Row{
 
@@ -583,9 +582,9 @@ let Setting = GObject.registerClass(
     }
 );
 
-let Section = GObject.registerClass(
+var Section = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.Section'
+        GTypeName: (Extension.uuid + '.Section').replace(/[\W_]+/g, '_')
     },
     class Section extends Gtk.Frame{
         _init(params={}){
@@ -691,9 +690,9 @@ let Section = GObject.registerClass(
 
 
 /** A composite widget resembling A Gnome Control Center panel. */
-let Page = GObject.registerClass(
+var Page = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.Page'
+        GTypeName: (Extension.uuid + '.Page').replace(/[\W_]+/g, '_')
     },
     class Page extends Gtk.ScrolledWindow{
         _init(params={}){
@@ -747,9 +746,9 @@ let Page = GObject.registerClass(
 
 
 /** A GtkStack subclass with a pre-attached GtkStackSwitcher */
-let Stack = GObject.registerClass(
+var Stack = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.Stack'
+        GTypeName: (Extension.uuid + '.Stack').replace(/[\W_]+/g, '_')
     },
     class Stack extends Gtk.Stack{
         _init(params={}){

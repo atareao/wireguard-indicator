@@ -43,7 +43,7 @@ function init() {
 
 var AboutWidget = GObject.registerClass(
     {
-        GTypeName: Extension.uuid + '.AboutWidget'
+        GTypeName: (Extension.uuid + '.AboutWidget').replace(/[\W_]+/g,'_')
     },
     class AboutWidget extends Gtk.Grid{
         _init(){
