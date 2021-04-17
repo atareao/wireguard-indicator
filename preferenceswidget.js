@@ -35,6 +35,7 @@ String.format = imports.format.format;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = ExtensionUtils.getCurrentExtension();
 const Gettext = imports.gettext.domain(Extension.uuid);
+const DialogWidgets = Extension.imports.dialogwidgets;
 const _ = Gettext.gettext;
 
 
@@ -382,6 +383,120 @@ var RangeSetting = GObject.registerClass(
     }
 );
 
+var ArrayStringSetting = GObject.registerClass(
+    {
+        GTypeName: Extension.uuid.replace(/[\W_]+/g, '_') + '_ArrayStringSetting'
+    },
+    class ArrayStringSetting extends Gtk.Grid{
+        _init(settings, keyName){
+            super._init({
+                can_focus: true,
+                visible: true
+            });
+            this._keyName = keyName;
+            this._settings = settings;
+            let model = new Gtk.ListStore();
+            model.set_column_types([GObject.TYPE_STRING, GObject.TYPE_STRING]);
+            let items = settings.get_strv(keyName);
+            for(let i=0; i < items.length; i++){
+                let [name, service] = items[i].split("|");
+                model.set(model.append(), [0, 1], [name, service]);
+            }
+            this._tunnels = new Gtk.TreeView({
+                expand: true,
+                model: model});
+
+            let col1 = new Gtk.TreeViewColumn({title: _('Name')});
+            let cell1 = new Gtk.CellRendererText();
+            col1.pack_start(cell1, true);
+            col1.add_attribute(cell1, "text", 0);
+            this._tunnels.insert_column(col1, 0);
+
+            let col2 = new Gtk.TreeViewColumn({title: _('Service')});
+            let cell2 = new Gtk.CellRendererText();
+            col2.pack_start(cell2, true);
+            col2.add_attribute(cell2, "text", 1);
+            this._tunnels.insert_column(col2, 1);
+
+            this.attach(this._tunnels, 0, 0, 1, 1);
+            let buttons_box = Gtk.Grid.new();
+            let button_add = Gtk.Button.new_from_icon_name(
+                'list-add-symbolic', Gtk.IconSize.BUTTON);
+            button_add.connect('clicked', () =>{
+                let dialog = new DialogWidgets.EntryDialog(_(
+                    'Name'), _('Service'));
+                if (dialog.run() == Gtk.ResponseType.OK){
+                    let new_name = dialog.getEntry1();
+                    let new_service = dialog.getEntry2();
+                    let new_entry = new_name + "|" + new_service;
+                    log(new_entry);
+                    if(!this.get_values().includes(new_entry)){
+                        model.set(model.append(), [0, 1], [new_name, new_service]);
+                    }
+                }
+                dialog.hide();
+                dialog.destroy();
+            });
+            buttons_box.attach(button_add, 0, 0, 1, 1);
+            let button_remove = Gtk.Button.new_from_icon_name(
+                'list-remove-symbolic', Gtk.IconSize.BUTTON);
+            button_remove.connect('clicked', () => {
+                let [isselected, liststore, iter] = this._tunnels.get_selection().get_selected();
+                if(isselected === true){
+                    liststore.remove(iter);
+                }
+            });
+            buttons_box.attach(button_remove, 0, 1, 1, 1);
+            let button_edit = Gtk.Button.new_from_icon_name(
+                'list-edit-symbolic', Gtk.IconSize.BUTTON);
+            button_edit.connect('clicked', () => {
+                let [isselected, liststore, iter] = this._tunnels.get_selection().get_selected();
+                if(isselected === true){
+                    let name = liststore.get_value(iter, 0);
+                    let service = liststore.get_value(iter, 1);
+                    let dialog = new DialogWidgets.EntryDialog(_('Name'), _('Service'));
+                    dialog.setEntry1(name);
+                    dialog.setEntry2(service);
+                    if(dialog.run() == Gtk.ResponseType.OK){
+                        name = dialog.getEntry1();
+                        service = dialog.getEntry2();
+                        let new_value = name + "|" + service;
+                        if(!this.get_values().includes(new_value)){
+                            liststore.set_value(iter, 0, name);
+                            liststore.set_value(iter, 1, service);
+                        }
+                    }
+                    dialog.hide();
+                    dialog.destroy();
+                }
+            });
+            buttons_box.attach(button_edit, 0, 3, 1, 1);
+            this.attach(buttons_box, 1, 0, 1, 1);
+
+            model.connect('row-changed', this._on_model_changed.bind(this));
+            model.connect('row-deleted', this._on_model_changed.bind(this));
+            model.connect('row-inserted', this._on_model_changed.bind(this));
+        }
+        get_values(){
+            let values = [];
+            let model = this._tunnels.get_model();
+            let [exists, iter] = model.get_iter_first();
+            while(exists){
+                let new_name = model.get_value(iter, 0);
+                let new_service = model.get_value(iter, 1);
+                let new_entry = new_name + "|" + new_service;
+                log(new_entry);
+                values.push(new_entry);
+                exists = model.iter_next(iter);
+            }
+            return values;
+        }
+
+        _on_model_changed(){
+            this._settings.set_strv(this._keyName, this.get_values());
+        }
+    }
+);
 /** A Gtk.Entry subclass for string GSettings */
 var StringSetting = GObject.registerClass(
     {
@@ -661,6 +776,8 @@ var Section = GObject.registerClass(
 
             if (widget !== undefined) {
                 widget = new widget(settings, keyName);
+            } else if (type === "as") {
+                widget = new ArrayStringSetting(settings, keyName);
             } else if (type === "b") {
                 widget = new BoolSetting(settings, keyName);
             } else if (type === "enum") {

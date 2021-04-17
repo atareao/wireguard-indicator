@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="wireguard-indicator@atareao.es">
     <schema path="/es/atareao/wireguard-indicator/" id="es.atareao.wireguard-indicator">
-        <key name="servicename" type="s" >
-            <default>"wg-quick@wg0.service"</default>
-            <summary>Service name</summary>
-            <description>Set the name of the systemd service</description>
+        <key name="services" type="as" >
+            <default>["service1|wg-quick@wg0.service", "service2|wg-quick@wg1.service"]</default>
+            <summary>Services name</summary>
+            <description>Set the name of the systemd services</description>
         </key>
         <key name="checktime" type="i" >
             <default>5</default>

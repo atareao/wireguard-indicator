@@ -131,7 +131,7 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             var settings = Convenience.getSettings();
             
             let indicatorSection = preferencesPage.addSection(_("Indicator options"), null, {});
-            indicatorSection.addGSetting(settings, "servicename");
+            indicatorSection.addGSetting(settings, "services");
             indicatorSection.addGSetting(settings, "checktime");
             let appearanceSection = preferencesPage.addSection(_("General options"), null, {});
             appearanceSection.addGSetting(settings, "darktheme");

@@ -70,6 +70,11 @@ var WireGuardIndicator = GObject.registerClass(
                                       y_align: Clutter.ActorAlign.CENTER });
             //box.add(label);
             this.icon = new St.Icon({style_class: 'system-status-icon'});
+            this._services = this._getValue('services');
+            this._checktime = this._getValue('checktime');
+            this._darkthem = this._getValue('darktheme')
+            log(this._services[0]);
+            log(this._services[1]);
             this._update();
             box.add(this.icon);
             this.add_child(box);
@@ -107,49 +112,54 @@ var WireGuardIndicator = GObject.registerClass(
 
         _toggleSwitch(widget, value){
             let setstatus = ((value == true) ? 'start': 'stop');
-            try {
-                let command = ['systemctl', setstatus, this._servicename];
-                let proc = Gio.Subprocess.new(
-                    command,
-                    Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
-                );
-                proc.communicate_utf8_async(null, null, (proc, res) => {
-                    try{
-                        let [, stdout, stderr] = proc.communicate_utf8_finish(res);
-                        this._update();
-                    }catch(e){
-                        logError(e);
-                    }
-                });
-            } catch (e) {
-                logError(e);
-            }
+            this._services.forEach((item, index, array)=>{
+                try {
+                    let [name, service] = item.split('|');
+                    let command = ['systemctl', setstatus, service];
+                    let proc = Gio.Subprocess.new(
+                        command,
+                        Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+                    );
+                    proc.communicate_utf8_async(null, null, (proc, res) => {
+                        try{
+                            let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                            this._update();
+                        }catch(e){
+                            logError(e);
+                        }
+                    });
+                } catch (e) {
+                    logError(e);
+                }
+            });
         }
-        _update(){
-            this._servicename = this._getValue('servicename');
-            this._checktime = this._getValue('checktime');
-            this._darkthem = this._getValue('darktheme')
 
-            try {
-                let command = ['systemctl', 'status', this._servicename];
-                let proc = Gio.Subprocess.new(
-                    command,
-                    Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
-                );
-                proc.communicate_utf8_async(null, null, (proc, res) => {
-                    try {
-                        let [, stdout, stderr] = proc.communicate_utf8_finish(res);
-                        let active = (stdout.indexOf('Active: active') > -1);
-                        this._set_icon_indicator(active);
-                    } catch (e) {
-                        logError(e);
-                    } finally {
-                        //loop.quit();
-                    }
-                });
-            } catch (e) {
-                logError(e);
-            }
+        _update(){
+            this._services.forEach((item, index, array)=>{
+                log(item);
+                let [name, service] = item.split('|');
+                try {
+                    log(service);
+                    let command = ['systemctl', 'status', service];
+                    let proc = Gio.Subprocess.new(
+                        command,
+                        Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
+                    );
+                    proc.communicate_utf8_async(null, null, (proc, res) => {
+                        try {
+                            let [, stdout, stderr] = proc.communicate_utf8_finish(res);
+                            let active = (stdout.indexOf('Active: active') > -1);
+                            this._set_icon_indicator(active);
+                        } catch (e) {
+                            logError(e);
+                        } finally {
+                            //loop.quit();
+                        }
+                    });
+                } catch (e) {
+                    logError(e);
+                }
+            });
             return true;
         }
         _set_icon_indicator(active){
@@ -236,6 +246,9 @@ var WireGuardIndicator = GObject.registerClass(
             return menu_help;
         }
         _settingsChanged(){
+            this._services = this._getValue('services');
+            this._checktime = this._getValue('checktime');
+            this._darkthem = this._getValue('darktheme')
             this._update();
             if(this._sourceId > 0){
                 GLib.source_remove(this._sourceId);
