@@ -448,7 +448,7 @@ var ArrayStringSetting = GObject.registerClass(
             });
             buttons_box.attach(button_remove, 0, 1, 1, 1);
             let button_edit = Gtk.Button.new_from_icon_name(
-                'list-edit-symbolic', Gtk.IconSize.BUTTON);
+                'document-edit-symbolic', Gtk.IconSize.BUTTON);
             button_edit.connect('clicked', () => {
                 let [isselected, liststore, iter] = this._tunnels.get_selection().get_selected();
                 if(isselected === true){
@@ -493,7 +493,9 @@ var ArrayStringSetting = GObject.registerClass(
         }
 
         _on_model_changed(){
+            log("=== Model Changed ===");
             this._settings.set_strv(this._keyName, this.get_values());
+            this.get_toplevel().set_focus(null);
         }
     }
 );

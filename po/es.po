@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WireGuard Indicator - 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 07:27+0200\n"
+"POT-Creation-Date: 2021-04-17 20:10+0200\n"
 "PO-Revision-Date: 2020-09-15 19:23+0200\n"
 "Last-Translator: Lorenzo <atareao@atareao.es>\n"
 "Language-Team: Spanish\n"
@@ -18,11 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: schemas/wireguard-indicator.gschema.xml:6
-msgid "Service name"
+#, fuzzy
+msgid "Services name"
 msgstr "Nombre del servicio"
 
 #: schemas/wireguard-indicator.gschema.xml:7
-msgid "Set the name of the systemd service"
+#, fuzzy
+msgid "Set the name of the systemd services"
 msgstr "Indica el nombre del servicio Systemd de WireGuard"
 
 #: schemas/wireguard-indicator.gschema.xml:11
@@ -41,65 +43,65 @@ msgstr "Tema oscuro"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Establece el tema oscuro"
 
-#: extension.js:79
+#: extension.js:77
 msgid "Wireguard status"
 msgstr "Estado de Wireguard"
 
-#: extension.js:81 extension.js:165
-msgid "Enable WireGuard"
-msgstr "Habilita WireGuard"
-
-#: extension.js:91
+#: extension.js:85
 msgid "Settings"
 msgstr "Configuración"
 
-#: extension.js:162
-msgid "Disable WireGuard"
-msgstr "Deshabilita WireGuard"
-
-#: extension.js:211
+#: extension.js:219
 msgid "Help"
 msgstr "Ayuda"
 
-#: extension.js:213
+#: extension.js:221
 msgid "Project Page"
 msgstr "Página del proyecto"
 
-#: extension.js:215
+#: extension.js:223
 msgid "Get help online..."
 msgstr "Consigue ayuda en línea..."
 
-#: extension.js:217
+#: extension.js:225
 msgid "Report a bug..."
 msgstr "Informa de un error..."
 
-#: extension.js:222
+#: extension.js:230
 msgid "El atareao"
 msgstr "El atareao"
 
-#: extension.js:224
+#: extension.js:232
 msgid "GitHub"
 msgstr "GitHub"
 
-#: extension.js:226
+#: extension.js:234
 msgid "Twitter"
 msgstr "Twitter"
 
-#: extension.js:228
+#: extension.js:236
 msgid "Telegram"
 msgstr "Telegram"
 
-#: extension.js:230
+#: extension.js:238
 msgid "Mastodon"
 msgstr "Mastodon"
 
-#: extension.js:232
+#: extension.js:240
 msgid "Spotify"
 msgstr "Spotify"
 
-#: extension.js:234
+#: extension.js:242
 msgid "YouTube"
 msgstr "YouTube"
+
+#: dialogwidgets.js:33
+msgid "Cancel"
+msgstr ""
+
+#: dialogwidgets.js:34
+msgid "Ok"
+msgstr ""
 
 #: preferenceswidget.js:232
 msgid "Nothing"
@@ -112,6 +114,15 @@ msgstr "Cierto"
 #: preferenceswidget.js:258
 msgid "False"
 msgstr "Falso"
+
+#: preferenceswidget.js:409 preferenceswidget.js:427 preferenceswidget.js:457
+msgid "Name"
+msgstr ""
+
+#: preferenceswidget.js:415 preferenceswidget.js:427 preferenceswidget.js:457
+#, fuzzy
+msgid "Service"
+msgstr "Nombre del servicio"
 
 #: prefs.js:63
 msgid "WireGuard Indicator"
@@ -180,6 +191,12 @@ msgstr "Opciones generales"
 #: prefs.js:142
 msgid "About"
 msgstr "Acerca de"
+
+#~ msgid "Enable WireGuard"
+#~ msgstr "Habilita WireGuard"
+
+#~ msgid "Disable WireGuard"
+#~ msgstr "Deshabilita WireGuard"
 
 #~ msgid "Loading..."
 #~ msgstr "Cargando"

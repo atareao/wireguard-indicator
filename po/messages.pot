@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 07:27+0200\n"
+"POT-Creation-Date: 2021-04-17 20:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: schemas/wireguard-indicator.gschema.xml:6
-msgid "Service name"
+msgid "Services name"
 msgstr ""
 
 #: schemas/wireguard-indicator.gschema.xml:7
-msgid "Set the name of the systemd service"
+msgid "Set the name of the systemd services"
 msgstr ""
 
 #: schemas/wireguard-indicator.gschema.xml:11
@@ -41,64 +41,64 @@ msgstr ""
 msgid "Enable dark theme otherwise light theme"
 msgstr ""
 
-#: extension.js:79
+#: extension.js:77
 msgid "Wireguard status"
 msgstr ""
 
-#: extension.js:81 extension.js:165
-msgid "Enable WireGuard"
-msgstr ""
-
-#: extension.js:91
+#: extension.js:85
 msgid "Settings"
 msgstr ""
 
-#: extension.js:162
-msgid "Disable WireGuard"
-msgstr ""
-
-#: extension.js:211
+#: extension.js:219
 msgid "Help"
 msgstr ""
 
-#: extension.js:213
+#: extension.js:221
 msgid "Project Page"
 msgstr ""
 
-#: extension.js:215
+#: extension.js:223
 msgid "Get help online..."
 msgstr ""
 
-#: extension.js:217
+#: extension.js:225
 msgid "Report a bug..."
 msgstr ""
 
-#: extension.js:222
+#: extension.js:230
 msgid "El atareao"
 msgstr ""
 
-#: extension.js:224
+#: extension.js:232
 msgid "GitHub"
 msgstr ""
 
-#: extension.js:226
+#: extension.js:234
 msgid "Twitter"
 msgstr ""
 
-#: extension.js:228
+#: extension.js:236
 msgid "Telegram"
 msgstr ""
 
-#: extension.js:230
+#: extension.js:238
 msgid "Mastodon"
 msgstr ""
 
-#: extension.js:232
+#: extension.js:240
 msgid "Spotify"
 msgstr ""
 
-#: extension.js:234
+#: extension.js:242
 msgid "YouTube"
+msgstr ""
+
+#: dialogwidgets.js:33
+msgid "Cancel"
+msgstr ""
+
+#: dialogwidgets.js:34
+msgid "Ok"
 msgstr ""
 
 #: preferenceswidget.js:232
@@ -111,6 +111,14 @@ msgstr ""
 
 #: preferenceswidget.js:258
 msgid "False"
+msgstr ""
+
+#: preferenceswidget.js:409 preferenceswidget.js:427 preferenceswidget.js:457
+msgid "Name"
+msgstr ""
+
+#: preferenceswidget.js:415 preferenceswidget.js:427 preferenceswidget.js:457
+msgid "Service"
 msgstr ""
 
 #: prefs.js:63

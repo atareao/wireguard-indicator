@@ -6,5 +6,5 @@
     "uuid": "wireguard-indicator@atareao.es",
     "gettext-domain": "wireguard-indicator@atareao.es", 
     "settings-schema": "es.atareao.wireguard-indicator",
-    "version": 3
+    "version": 4
 }
