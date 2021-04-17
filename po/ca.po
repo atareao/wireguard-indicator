@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WireGuard Indicator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-20 07:27+0200\n"
+"PO-Revision-Date: 2021-02-23 11:05+0100\n"
+"Language-Team: Català\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: Dani Talens <databio@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ca\n"
+
+#: schemas/wireguard-indicator.gschema.xml:6
+msgid "Service name"
+msgstr "Nom del servei"
+
+#: schemas/wireguard-indicator.gschema.xml:7
+msgid "Set the name of the systemd service"
+msgstr "Indica el nom del servei Systemd de WireGuard"
+
+#: schemas/wireguard-indicator.gschema.xml:11
+msgid "Check time"
+msgstr "Interval de comprovació"
+
+#: schemas/wireguard-indicator.gschema.xml:12
+msgid "Set the check time to test the WireGuard status"
+msgstr "Indica l'interval de comprovació de Wireguard"
+
+#: schemas/wireguard-indicator.gschema.xml:16
+msgid "Dark theme"
+msgstr "Tema fosc"
+
+#: schemas/wireguard-indicator.gschema.xml:17
+msgid "Enable dark theme otherwise light theme"
+msgstr "Estableix el tema fosc"
+
+#: extension.js:79
+msgid "Wireguard status"
+msgstr "Estat de Wireguard"
+
+#: extension.js:81 extension.js:165
+msgid "Enable WireGuard"
+msgstr "Activa WireGuard"
+
+#: extension.js:91
+msgid "Settings"
+msgstr "Configuració"
+
+#: extension.js:162
+msgid "Disable WireGuard"
+msgstr "Desactiva WireGuard"
+
+#: extension.js:211
+msgid "Help"
+msgstr "Ajuda"
+
+#: extension.js:213
+msgid "Project Page"
+msgstr "Pàgina del projecte"
+
+#: extension.js:215
+msgid "Get help online..."
+msgstr "Cerca ajuda en línia."
+
+#: extension.js:217
+msgid "Report a bug..."
+msgstr "Notifica un error."
+
+#: extension.js:222
+msgid "El atareao"
+msgstr "El atareao"
+
+#: extension.js:224
+msgid "GitHub"
+msgstr "GitHub"
+
+#: extension.js:226
+msgid "Twitter"
+msgstr "Twitter"
+
+#: extension.js:228
+msgid "Telegram"
+msgstr "Telegram"
+
+#: extension.js:230
+msgid "Mastodon"
+msgstr "Mastodon"
+
+#: extension.js:232
+msgid "Spotify"
+msgstr "Spotify"
+
+#: extension.js:234
+msgid "YouTube"
+msgstr "YouTube"
+
+#: preferenceswidget.js:232
+msgid "Nothing"
+msgstr "Res"
+
+#: preferenceswidget.js:245
+msgid "True"
+msgstr "Vertader"
+
+#: preferenceswidget.js:258
+msgid "False"
+msgstr "Fals"
+
+#: prefs.js:63
+msgid "WireGuard Indicator"
+msgstr "Indicador de WireGuard"
+
+#: prefs.js:68
+msgid "Version: "
+msgstr "Versió: "
+
+#: prefs.js:79
+msgid "Atareao"
+msgstr "Atareao"
+
+#: prefs.js:86
+msgid "Copyright © 2020 Lorenzo Carbonell"
+msgstr "Copyright © 2020 Lorenzo Carbonell"
+
+#: prefs.js:93
+msgid ""
+"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS "
+"OR\n"
+msgstr ""
+"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS "
+"OR\n"
+
+#: prefs.js:94
+msgid ""
+"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
+msgstr ""
+"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
+
+#: prefs.js:95
+msgid ""
+"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL "
+"THE\n"
+msgstr ""
+"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL "
+"THE\n"
+
+#: prefs.js:96
+msgid ""
+"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
+msgstr ""
+"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
+
+#: prefs.js:97
+msgid ""
+"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n"
+msgstr ""
+"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n"
+
+#: prefs.js:98
+msgid ""
+"FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER "
+"DEALINGS\n"
+msgstr ""
+"FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER "
+"DEALINGS\n"
+
+#: prefs.js:99
+msgid "IN THE SOFTWARE.\n"
+msgstr "IN THE SOFTWARE.\n"
+
+#: prefs.js:129
+msgid "Preferences"
+msgstr "Preferències"
+
+#: prefs.js:133
+msgid "Indicator options"
+msgstr "Opcions de l'indicador"
+
+#: prefs.js:136
+msgid "General options"
+msgstr "Opcions generals"
+
+#: prefs.js:142
+msgid "About"
+msgstr "Quant a"
