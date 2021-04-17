@@ -33,6 +33,7 @@ codefactor-badge: True
 <p><span id="project_title">WireGuard Indicator</span> is an indicator to show the status of your WireGuard VPN.</p>
 <p>WireGuard Indicator can enable and disable the WireGuard VPN by clicking on it.</p>
 <p>You need becomes root</p>
+
 <!-- end description -->
 
 <!-- start prerequisites -->
@@ -45,6 +46,7 @@ sudo apt install wireguard
 ```
 
 Of course, you need to configure your loved WireGuard.
+
 <!-- end prerequisites -->
 
 <!-- start installing -->
@@ -55,6 +57,7 @@ To install <span id="project_title">WireGuard Indicator</span>, follow these ste
 Goto [GNOME Extensions page](https://extensions.gnome.org/) and search for WireGuard Indicator.
 
 Enable the extension by click the switch.
+
 <!-- end installing -->
 
 <!-- start using -->
@@ -74,9 +77,12 @@ You can set some options as you can see in next screenshot
 
 ![WireGuard Indicator](./screenshots/screenshot_03.png)
 
+* Enable the dark theme for the WireGuard Indicator icon
+
+![WireGuard Indicator](./screenshots/screenshot_04.png)
+
 * Set the systemd service name
 * Set the check time
-* Enable the dark theme for the WireGuard Indicator icon
 
 <!-- end using -->
 
@@ -94,12 +100,14 @@ To contribute to **<span id="project_title">WireGuard Indicator</span>**, follow
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 </commit_message></branch_name>
 
+
 <!-- end contributing -->
 
 <!-- start contributors -->
 ## 👤 Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
 
 
 <!-- end contributors -->
@@ -113,6 +121,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 				<img src="https://avatars3.githubusercontent.com/u/298055?v=4" width="100px"/>
 			</a>
 		</td>
+		<td id="dtalens" align="center">
+			<a href="https://github.com/dtalens">
+				<img src="https://avatars.githubusercontent.com/u/6631832?v=4" width="100px"/>
+			</a>
+		</td>
 	</tr>
 	<tr id="info_name">
 		<td id="atareao" align="center">
@@ -120,11 +133,21 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 				<strong>Lorenzo Carbonell</strong>
 			</a>
 		</td>
+		<td id="dtalens" align="center">
+			<a href="https://github.com/dtalens">
+				<strong>dtalens</strong>
+			</a>
+		</td>
 	</tr>
 	<tr id="info_commit">
 		<td id="atareao" align="center">
 			<a href="/commits?author=atareao">
 				<span id="role">💻</span>
+			</a>
+		</td>
+		<td id="dtalens" align="center">
+			<a href="/commits?author=dtalens">
+				<span id="role">🌍</span>
 			</a>
 		</td>
 	</tr>
