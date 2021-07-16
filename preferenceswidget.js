@@ -22,21 +22,14 @@
  * IN THE SOFTWARE.
  */
 
-imports.gi.versions.Gdk = "3.0";
-imports.gi.versions.Gio = "2.0";
-imports.gi.versions.GLib = "2.0";
-imports.gi.versions.GObject = "2.0";
-imports.gi.versions.Gtk = "3.0";
-
-const {Gdk, Gio, GLib, GObject, Gtk} = imports.gi
-
 String.format = imports.format.format;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Extension = ExtensionUtils.getCurrentExtension();
-const Gettext = imports.gettext.domain(Extension.uuid);
-const DialogWidgets = Extension.imports.dialogwidgets;
+const Extension = imports.misc.ExtensionUtils.getCurrentExtension();
+const {Gdk, GdkPixbuf, Gio, GLib, GOject, Gtk} = imports.gi;
+const Gettext = imports.gettext.domain(Extension.metadata['gettext-domain']);
 const _ = Gettext.gettext;
+
+const DialogWidgets = Extension.imports.dialogwidgets;
 
 
 var ColorSetting = GObject.registerClass(
@@ -704,27 +697,17 @@ var Section = GObject.registerClass(
         GTypeName: (Extension.uuid + '.Section').replace(/[\W_]+/g, '_')
     },
     class Section extends Gtk.Frame{
-        _init(params={}){
-            params = Object.assign({
-                width_request: 460,
-                selection_mode: Gtk.SelectionMode.NONE,
-                margin_bottom: 32
-            }, params);
-            super._init({
-                can_focus: false,
-                margin_bottom: params.margin_bottom,
-                hexpand: true,
-                shadow_type: Gtk.ShadowType.IN
-            });
-            this.list = new Gtk.ListBox({
+        _init(params){
+            super._init(params);
+            this._list = new Gtk.ListBox({
                 can_focus: false,
                 hexpand: true,
                 activate_on_single_click: true,
-                selection_mode: params.selection_mode,
-                width_request: params.width_request
+                selection_mode: Gtk.SelectionMode.NONE,
             });
-            this.add(this.list);
-            this.list.set_header_func(this._header_func);
+            // Gtk.Frame.prototype.set_child.call(this, this._list);
+            this.set_child(this._list);
+            this._list.set_header_func(this._header_func);
         }
 
         _header_func(row, before){
@@ -742,9 +725,43 @@ var Section = GObject.registerClass(
          */
         addRow(row, params={}) {
             if (!row) { row = new Row(params);}
-            this.list.add(row);
+            this._list.append(row);
             return row;
         }
+
+        insertRow(row, position){
+            this._list.insert(row, position);
+        }
+
+        removeRow(row){
+            if(row){
+                this._list.remove(row);
+            }
+        }
+
+        show(){
+            this._list.show();
+        }
+
+        length(){
+            return this._list.length;
+        }
+
+        removeAllRows(){
+            const numberOfRows = this._list.length;
+            for(const i = numberOfRows - 1; i >= 0; i--){
+                const child = this._list.get_row_at_index(i);
+                if(child){
+                    this.removeRow(child);
+                }
+            }
+            this._list.show();
+        }
+
+        getIndex(index){
+            return this._list.get_row_at_index(index);
+        }
+
 
         /**
          * Add a new row to @section and return the row. @summary will be placed on
@@ -807,6 +824,38 @@ var Section = GObject.registerClass(
     }
 );
 
+var SectionRow = GObject.removeRow(
+    {
+        GTypeName: (Extension.uuid + '.SectionRow').replace(/[\W_]+/g, '_')
+    },
+    class SectionRow extends ListBoxRow{
+        _init(params){
+            super._init(params);
+            this.activatable = false;
+            this._grid = new Gtk.Grid({
+                orientation: Gtk.Orientation.HORIZONTAL,
+                margin_top: 5,
+                margin_bottom: 5,
+                margin_start: 5,
+                margin_end: 5,
+                column_spacing: 20,
+                row_spacing: 20
+            });
+            this._numberOfChildren = 0;
+            Gtk.ListBoxRow.prototype.set_child.call(this, this._grid);
+        }
+
+        add(widget) {
+            this._grid.attach(widget, this.x, 0, 1, 1);
+            this._numberOfChildren++;
+        }
+        
+        setVerticalAlignmentBottom(){
+            this._grid.vexpand = true;
+            this._grid.valign = Gtk.Align.END;
+        }
+    }
+);
 
 /** A composite widget resembling A Gnome Control Center panel. */
 var Page = GObject.registerClass(
@@ -895,3 +944,96 @@ var Stack = GObject.registerClass(
         }
     }
 );
+
+var Notebook = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.Notebook').replace(/[\W_]+/g, '_')
+    },
+    class Notebook extends Gtk.Notebook{
+        _init(){
+            super._init({
+                marginStart:5,
+                marginEnd: 5
+            });
+        }
+
+        append_page(notebookPage){
+            Gtk.Notebook.prototype.append_page.call(
+                this,
+                notebookPage,
+                notebookPage.getTitleLabel()
+            )
+        }
+    }
+);
+
+var NotebookPage = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.NotebookPage').replace(/[\W_]+/g, '_')
+    },
+    class NotebookPage extends Gtk.Box {
+        _init(title) {
+            super._init({
+                orientation: Gtk.Orientation.VERTICAL,
+                margin_top: 20,
+                margin_bottom: 20,
+                margin_start: 20,
+                margin_end: 20,
+                spacing: 20,
+                homogeneous: false
+            });
+            this._title = new Gtk.Label({
+                label: "<b>" + title + "</b>",
+                use_markup: true,
+                xalign: 0
+            });
+        }
+
+        getTitleLabel() {
+            return this._title;
+        }
+    }
+);
+
+var Button = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.Button').replace(/[\W_]+/g, '_')
+    },
+    class Button extends Gtk.Button {
+        _init(params) {
+            super._init();
+            this._params = params;
+            this.halign = Gtk.Align.END;
+            this.valign = Gtk.Align.CENTER;
+            this.box = new Gtk.Box({
+                orientation: Gtk.Orientation.HORIZONTAL,
+                spacing: 5
+            });
+            this.set_child(this.box);
+
+            if (this._params.icon_name) {
+                let image = new Gtk.Image({
+                    icon_name: this._params.icon_name,
+                    halign: Gtk.Align.CENTER
+                });
+                this.box.append(image);
+            }
+            if (this._params.tooltip_text){
+                this.set_tooltip_text(this._params.tooltip_text);
+            }
+            if (this._params.title){
+                let label = new Gtk.Label({
+                    label: _(this._params.title),
+                    use_markup: true,
+                    xalign: 0
+                });
+                if(this._params.icon_first)
+                    this.box.append(label);
+                else
+                    this.box.prepend(label);
+            }
+        }
+    }
+);
+
+

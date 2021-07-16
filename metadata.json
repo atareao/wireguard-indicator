@@ -1,10 +1,11 @@
 {
-    "name": "WireGuard Indicator",
     "description": "Manage WireGuard VPN from Desktop",
-    "shell-version": ["3.36"],
+    "extension-id": "wireguard-indicator@atareao.es", 
+    "gettext-domain": "wireguard-indicator@atareao.es", 
+    "name": "WireGuard Indicator",
+    "settings-schema": "es.atareao.wireguard-indicator",
+    "shell-version": ["40"],
     "url": "https://github.com/atareao/wireguard-indicator", 
     "uuid": "wireguard-indicator@atareao.es",
-    "gettext-domain": "wireguard-indicator@atareao.es", 
-    "settings-schema": "es.atareao.wireguard-indicator",
-    "version": 4
+    "version": 5
 }

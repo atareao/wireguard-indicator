@@ -9,16 +9,23 @@ const _ = Gettext.gettext;
 
 var EntryDialog = GObject.registerClass(
     class EntryDialog extends Gtk.Dialog{
-        _init(text1, text2){
-            super._init();
-            let grid = new Gtk.Grid();
-            grid.set_row_spacing(5);
-            grid.set_column_spacing(5);
-            grid.set_margin_start(5);
-            grid.set_margin_end(5);
-            grid.set_margin_top(5);
-            grid.set_margin_bottom(5);
-            this.get_content_area().add(grid);
+        _init(parent, title, text1, text2){
+            super._init({
+                title: title,
+                transient_for: parent.get_root(),
+                modal: true
+            });
+            let grid = new Gtk.Grid({
+                rowSpacing: 5,
+                columnSpacing: 5,
+                marginTop: 5,
+                marginBottom: 5,
+                marginStart: 5,
+                marginEnd:5,
+                hexpand: false,
+                halign: Gtk.Align.CENTER
+            });
+            grid.insert_after(this.get_content_area(), null);
 
             let label1 = Gtk.Label.new(text1);
             grid.attach(label1, 0, 0, 1, 1);
@@ -32,7 +39,6 @@ var EntryDialog = GObject.registerClass(
 
             this.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
             this.add_button(_('Ok'), Gtk.ResponseType.OK);
-            this.show_all();
         }
 
         getEntry1(){
