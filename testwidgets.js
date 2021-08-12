@@ -24,12 +24,9 @@
 
 String.format = imports.format.format;
 
-const Extension = imports.misc.ExtensionUtils.getCurrentExtension();
 const {Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk} = imports.gi;
-const Gettext = imports.gettext.domain(Extension.metadata['gettext-domain']);
-const _ = Gettext.gettext;
-
-const DialogWidgets = Extension.imports.dialogwidgets;
+imports.searchPath.push(".");
+const Extension = {"uuid": "test"};
 
 
 var ColorSetting = GObject.registerClass(
@@ -548,7 +545,7 @@ var FolderSetting = GObject.registerClass(
     {
         GTypeName: (Extension.uuid + '.FolderSetting').replace(/[\W_]+/g, '_')
     },
-    class FolderSetting extends Gtk.FileChooserButton{
+    class FolderSetting extends Gtk.FileChooserWidget{
 
         _init(settings, keyName) {
             super._init({
@@ -692,11 +689,11 @@ var Setting = GObject.registerClass(
     }
 );
 
-var Section = GObject.registerClass(
+var Frame = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.Section').replace(/[\W_]+/g, '_')
+        GTypeName: (Extension.uuid + '.Frame').replace(/[\W_]+/g, '_')
     },
-    class Section extends Gtk.Frame{
+    class Frame extends Gtk.Frame{
         _init(params){
             super._init(params);
             this._list = new Gtk.ListBox({
@@ -725,6 +722,13 @@ var Section = GObject.registerClass(
          */
         addRow(row, params={}) {
             if (!row) { row = new Row(params);}
+            this._list.append(row);
+            return row;
+        }
+
+        addLabelRow(key, value, params={}){
+            const row = new FrameRow(params);
+            row.addLabel(key, value);
             this._list.append(row);
             return row;
         }
@@ -824,11 +828,11 @@ var Section = GObject.registerClass(
     }
 );
 
-var SectionRow = GObject.removeRow(
+var FrameRow = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.SectionRow').replace(/[\W_]+/g, '_')
+        GTypeName: (Extension.uuid + '.FrameRow').replace(/[\W_]+/g, '_')
     },
-    class SectionRow extends ListBoxRow{
+    class FrameRow extends Gtk.ListBoxRow{
         _init(params){
             super._init(params);
             this.activatable = false;
@@ -846,8 +850,21 @@ var SectionRow = GObject.removeRow(
         }
 
         add(widget) {
-            this._grid.attach(widget, this.x, 0, 1, 1);
+            this._grid.attach(widget, this._numberOfChildren, 0, 1, 1);
             this._numberOfChildren++;
+        }
+        addLabel(key, value){
+            const keyLabel = new Gtk.Label({
+                label: key
+            });
+            this.add(keyLabel);
+            const valueLabel =new Gtk.Label({
+                label: value,
+                hexpand: true,
+                sensitive: false,
+                halign: Gtk.Align.END
+            });
+            this.add(valueLabel);
         }
         
         setVerticalAlignmentBottom(){
@@ -863,23 +880,24 @@ var Page = GObject.registerClass(
         GTypeName: (Extension.uuid + '.Page').replace(/[\W_]+/g, '_')
     },
     class Page extends Gtk.ScrolledWindow{
-        _init(params={}){
-            params = Object.assign({
+        _init(){
+            super._init({
                 can_focus: true,
                 hscrollbar_policy: Gtk.PolicyType.NEVER,
+                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC,
                 valign: Gtk.Align.FILL,
                 vexpand: true,
-            }, params);
-            super._init(params);
-            this.box = new Gtk.Box({
+            });
+            this._mainBox = new Gtk.Box({
                 can_focus: false,
-                margin_left: 72,
-                margin_right: 72,
+                margin_start: 24,
+                margin_end: 24,
                 margin_top: 32,
                 margin_bottom: 32,
                 orientation: Gtk.Orientation.VERTICAL
             });
-            this.add(this.box);
+            log(this._mainBox);
+            this.set_child(this._mainBox);
         }
 
         /**
@@ -887,10 +905,10 @@ var Page = GObject.registerClass(
          * will be placed above the section.
          *
          * @param {string|Gtk.Widget} [title] - Optional title for the section
-         * @param {Section} [section] - The section to add, or null to create new
-         * @return {Gtk.Frame} section - The new Section object.
+         * @param {Frame} [section] - The section to add, or null to create new
+         * @return {Gtk.Frame} section - The new Frame object.
          */
-        addSection(title, section, params={}){
+        addFrame(title, frame){
             if (typeof title === "string") {
                 let label = new Gtk.Label({
                     can_focus: false,
@@ -900,17 +918,27 @@ var Page = GObject.registerClass(
                     use_markup: true,
                     label: "<b>" + title + "</b>"
                 });
-                this.box.pack_start(label, false, true, 0);
+                //this._mainBox.pack_start(label, false, true, 0);
+                log(this._mainBox);
+                this._mainBox.append(label);
             } else if (title instanceof Gtk.Widget) {
-                this.box.pack_start(title, false, true, 0);
+                this._mainBox.append(title);
             }
 
-            if (!section) { section = new Section(params); }
-            this.box.add(section);
-            return section;
+            this._mainBox.append(frame);
+            return frame;
         }
     }
 );
+
+var StackListBox = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.StackListBox').replace(/[\W_]+/g, '_')
+    },
+    class StackListBox extends Gtk.ListBox{
+
+    }
+)
 
 
 /** A GtkStack subclass with a pre-attached GtkStackSwitcher */
@@ -924,11 +952,6 @@ var Stack = GObject.registerClass(
                 transition_type: Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
             }, params);
             super._init(params);
-            this.switcher = new Gtk.StackSwitcher({
-                halign: Gtk.Align.CENTER,
-                stack: this
-            });
-            this.switcher.show_all();
         }
 
         addPage(id, title, params={}){
@@ -995,114 +1018,6 @@ var NotebookPage = GObject.registerClass(
     }
 );
 
-var StackListBox = GObject.registerClass(
-    {
-        GTypeName: (Extension.uuid + '.StackListBox').replace(/[\W_]+/g, '_')
-    },
-    class StackListBox extends Gtk.ListBox{
-        _init(widget, params){
-            super._init(params);
-            this.valign = Gtk.Align.FILL;
-            this.vexpand = true;
-            this.hexpand = false;
-            log("Antes");
-            this.settingsFrameStack = widget.settingsFrameStack;
-            log(this.settingsFrameStack);
-            this.settingsListStack = widget.settingsListStack
-            this.connect("row-selected", (self, row) => {
-                if(row){
-                    let stackName = row.stackName;
-                    this.settingsFrameStack.set_visible_child_name(stackName);
-                    if(row.nextPage){
-                        if(widget.backButton.get_parent()){
-                            widget.leftHeaderBox.remove(widget.backButton);
-                        }
-                        widget.leftHeaderBox.prepend(widget.backButton);
-                        this.settingsListStack.set_visible_child_name(
-                            row.nextPage);
-                        this.settingsListStack.get_child_by_name(
-                            row.nextPage).listBox.selectFirstRow();
-                    }
-                }
-            });
-            this.scrollWindow =  new Gtk.ScrolledWindow({
-                valign: Gtk.Align.FILL,
-                vexpand: true
-            });
-            this.scrollWindow.set_policy(Gtk.PolicyType.NEVER,
-                                         Gtk.PolicyType.AUTOMATIC);
-            this.scrollWindow.set_child(this);
-            this.scrollWindow.listBox = this;
-        }
-
-        getRowAtIndex(index){
-            return this.get_row_at_index(index).get_children()[0];
-        }
-
-        getSelectedRow(){
-            return this.get_selected_row().get_children()[0];
-        }
-
-        selectFirstRow(){
-            this.select_row(this.get_row_at_index(0));
-        }
-
-        selectRowAtIndex(index){
-            this.select_row(this.get_row_at_index(index));
-        }
-
-        addRow(name, translateableName, iconName){
-            let row1 = new Gtk.ListBoxRow();
-            this.append(row1);
-
-            let row = new Gtk.Grid({
-                margin_top: 12,
-                margin_bottom: 12,
-                margin_start: 12,
-                margin_end: 12, 
-                column_spacing: 10
-            });
-            row1.set_child(row);
-            row1.stackName = name;
-            row1.translateableName = translateableName;
-            
-            let image = new Gtk.Image({ 
-                icon_name: iconName
-            });
-
-            let label = new Gtk.Label({
-                label: translateableName,
-                halign: Gtk.Align.START,
-            });
-            row.attach(image, 0, 0, 1, 1);
-            row.attach(label, 1, 0, 1, 1);
-
-            if(nextPage){
-                row1.nextPage = nextPage;
-                let image2 = new Gtk.Image({ 
-                    gicon: Gio.icon_new_for_string('go-next-symbolic'),
-                    halign: Gtk.Align.END,
-                    hexpand: true
-                });
-                row.attach(image2, 2, 0, 1, 1);
-            }
-        }
-
-        setSeparatorIndices(indexArray){
-            this.set_header_func((_row, _before) =>{
-                for(let i = 0; i < indexArray.length; i++){
-                    if(_row.get_index() === indexArray[i]){
-                        let sep = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL);
-                        sep.show();
-                        _row.set_header(sep);
-                        
-                    }
-                }
-            });
-        }
-    }
-);
-
 var Button = GObject.registerClass(
     {
         GTypeName: (Extension.uuid + '.Button').replace(/[\W_]+/g, '_')
@@ -1145,3 +1060,51 @@ var Button = GObject.registerClass(
 );
 
 
+var EntryDialog = GObject.registerClass(
+    class EntryDialog extends Gtk.Dialog{
+        _init(parent, title, text1, text2){
+            super._init({
+                title: title,
+                transient_for: parent.get_root(),
+                modal: true
+            });
+            let grid = new Gtk.Grid({
+                rowSpacing: 5,
+                columnSpacing: 5,
+                marginTop: 5,
+                marginBottom: 5,
+                marginStart: 5,
+                marginEnd:5,
+                hexpand: false,
+                halign: Gtk.Align.CENTER
+            });
+            grid.insert_after(this.get_content_area(), null);
+
+            let label1 = Gtk.Label.new(text1);
+            grid.attach(label1, 0, 0, 1, 1);
+            this._entry1 = new Gtk.Entry();
+            grid.attach(this._entry1, 1, 0, 1, 1);
+
+            let label2 = Gtk.Label.new(text2);
+            grid.attach(label2, 0, 1, 1, 1);
+            this._entry2 = new Gtk.Entry();
+            grid.attach(this._entry2, 1, 1, 1, 1);
+
+            this.add_button(_('Cancel'), Gtk.ResponseType.CANCEL);
+            this.add_button(_('Ok'), Gtk.ResponseType.OK);
+        }
+
+        getEntry1(){
+            return this._entry1.get_text();
+        }
+        setEntry1(entry1){
+            this._entry1.set_text(entry1);
+        }
+        getEntry2(){
+            return this._entry2.get_text();
+        }
+        setEntry2(entry2){
+            this._entry2.set_text(entry2);
+        }
+    }
+);
