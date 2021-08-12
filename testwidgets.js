@@ -909,7 +909,7 @@ var Page = GObject.registerClass(
          * @return {Gtk.Frame} section - The new Frame object.
          */
         addFrame(title, frame){
-            if (typeof title === "string") {
+            if (typeof title === "string" && title != "") {
                 let label = new Gtk.Label({
                     can_focus: false,
                     margin_bottom: 12,
@@ -923,7 +923,7 @@ var Page = GObject.registerClass(
                 this._mainBox.append(label);
             } else if (title instanceof Gtk.Widget) {
                 this._mainBox.append(title);
-            }
+            } 
 
             this._mainBox.append(frame);
             return frame;
@@ -1008,7 +1008,7 @@ var NotebookPage = GObject.registerClass(
             this._title = new Gtk.Label({
                 label: "<b>" + title + "</b>",
                 use_markup: true,
-                xalign: 0
+                halign: Gtk.Align.START
             });
         }
 

@@ -112,18 +112,25 @@ const AboutPage = GObject.registerClass(
         _init(){
             super._init();
             const info = new Widgets.Frame();
-            info.addLabelRow("Extension Version", "");
-            const gnomeVersion = "";
-            try{
-                gnomeVersion = imports.misc.config.PACKAGE_VERSION;
-            }catch(error){
-                log(error);
-            }
+            let extensionVersion;
+            let gnomeVersion;
             let osInfoText;
             let prettyName;
             let versionID;
             let buildID;
             let windowLabel;
+            try{
+                extensionVersion = Extension.metadata.version;
+            }catch(error){
+                extensionVersion = "";
+                log(error);
+            }
+            try{
+                gnomeVersion = imports.misc.config.PACKAGE_VERSION;
+            }catch(error){
+                gnomeVersion ="";
+                log(error);
+            }
             if((prettyName = GLib.get_os_info("PRETTY_NAME"))){
                 osInfoText = prettyName;
             }else{
@@ -145,12 +152,32 @@ const AboutPage = GObject.registerClass(
                 log(error);
                 windowLabel = "Unknown";
             }
-          
-
+            info.addLabelRow("Extension Version", extensionVersion);
             info.addLabelRow("GNOME Version", gnomeVersion);
             info.addLabelRow("OS", osInfoText);
             info.addLabelRow("Session", windowLabel);
             this.addFrame("Información", info);
+
+            const creditsScrolledWindow = new Gtk.ScrolledWindow({
+                marginTop: 10,
+                maxContentHeight: 200,
+                minContentHeight: 200,
+            });
+            this.addFrame(null, creditsScrolledWindow);
+            const credits = new Widgets.Notebook();
+            creditsScrolledWindow.set_child(credits);
+
+            const developersNotebookPage = new Widgets.NotebookPage(
+                "Developers"
+            );
+            developersNotebookPage.append(new Gtk.Label({
+                label: "<b>Lorenzo Carbonell</b> a.k.a <a href=\"https://atareao.es\">@atareao</a>",
+                use_markup: true,
+                halign: Gtk.Align.START,
+                hexpand: false,
+                vexpand: false
+            }));
+            credits.append_page(developersNotebookPage);
         }
     }
 );
