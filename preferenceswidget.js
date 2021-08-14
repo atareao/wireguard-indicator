@@ -548,7 +548,7 @@ var FolderSetting = GObject.registerClass(
     {
         GTypeName: (Extension.uuid + '.FolderSetting').replace(/[\W_]+/g, '_')
     },
-    class FolderSetting extends Gtk.FileChooserButton{
+    class FolderSetting extends Gtk.FileChooserWidget{
 
         _init(settings, keyName) {
             super._init({
@@ -692,11 +692,11 @@ var Setting = GObject.registerClass(
     }
 );
 
-var Section = GObject.registerClass(
+var Frame = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.Section').replace(/[\W_]+/g, '_')
+        GTypeName: (Extension.uuid + '.Frame').replace(/[\W_]+/g, '_')
     },
-    class Section extends Gtk.Frame{
+    class Frame extends Gtk.Frame{
         _init(params){
             super._init(params);
             this._list = new Gtk.ListBox({
@@ -725,6 +725,13 @@ var Section = GObject.registerClass(
          */
         addRow(row, params={}) {
             if (!row) { row = new Row(params);}
+            this._list.append(row);
+            return row;
+        }
+
+        addLabelRow(key, value, params={}){
+            const row = new FrameRow(params);
+            row.addLabel(key, value);
             this._list.append(row);
             return row;
         }
@@ -824,11 +831,11 @@ var Section = GObject.registerClass(
     }
 );
 
-var SectionRow = GObject.removeRow(
+var FrameRow = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.SectionRow').replace(/[\W_]+/g, '_')
+        GTypeName: (Extension.uuid + '.FrameRow').replace(/[\W_]+/g, '_')
     },
-    class SectionRow extends ListBoxRow{
+    class FrameRow extends Gtk.ListBoxRow{
         _init(params){
             super._init(params);
             this.activatable = false;
@@ -846,8 +853,21 @@ var SectionRow = GObject.removeRow(
         }
 
         add(widget) {
-            this._grid.attach(widget, this.x, 0, 1, 1);
+            this._grid.attach(widget, this._numberOfChildren, 0, 1, 1);
             this._numberOfChildren++;
+        }
+        addLabel(key, value){
+            const keyLabel = new Gtk.Label({
+                label: key
+            });
+            this.add(keyLabel);
+            const valueLabel =new Gtk.Label({
+                label: value,
+                hexpand: true,
+                sensitive: false,
+                halign: Gtk.Align.END
+            });
+            this.add(valueLabel);
         }
         
         setVerticalAlignmentBottom(){
@@ -863,23 +883,54 @@ var Page = GObject.registerClass(
         GTypeName: (Extension.uuid + '.Page').replace(/[\W_]+/g, '_')
     },
     class Page extends Gtk.ScrolledWindow{
-        _init(params={}){
-            params = Object.assign({
+        _init(){
+            super._init({
                 can_focus: true,
                 hscrollbar_policy: Gtk.PolicyType.NEVER,
+                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC,
                 valign: Gtk.Align.FILL,
                 vexpand: true,
-            }, params);
-            super._init(params);
-            this.box = new Gtk.Box({
+            });
+            this._mainBox = new Gtk.Box({
                 can_focus: false,
-                margin_left: 72,
-                margin_right: 72,
+                margin_start: 24,
+                margin_end: 24,
                 margin_top: 32,
                 margin_bottom: 32,
                 orientation: Gtk.Orientation.VERTICAL
             });
-            this.add(this.box);
+            log(this._mainBox);
+            this.set_child(this._mainBox);
+        }
+        addLabel(text){
+            if(typeof text === "string"){
+                let label = new Gtk.Label({
+                    margin_top: 5,
+                    margin_bottom: 5,
+                    can_focus: false,
+                    use_markup: true,
+                    label: text
+                });
+                this._mainBox.append(label);
+            } else if (text instanceof Gtk.Widget) {
+                this._mainBox.append(text);
+            }
+        }
+        addImage(image, size){
+            if(typeof image === "string"){
+                const imageBox = new Gtk.Image({
+                    margin_top: 15,
+                    margin_bottom: 15,
+                    icon_name: image,
+                    pixel_size: size
+                });
+                this._mainBox.append(imageBox);
+            }else if(typeof image === Gtk.Image){
+                this._mainBox.append(image);
+            }
+        }
+        addWidget(widget){
+            this._mainBox.append(widget);
         }
 
         /**
@@ -887,11 +938,11 @@ var Page = GObject.registerClass(
          * will be placed above the section.
          *
          * @param {string|Gtk.Widget} [title] - Optional title for the section
-         * @param {Section} [section] - The section to add, or null to create new
-         * @return {Gtk.Frame} section - The new Section object.
+         * @param {Frame} [section] - The section to add, or null to create new
+         * @return {Gtk.Frame} section - The new Frame object.
          */
-        addSection(title, section, params={}){
-            if (typeof title === "string") {
+        addFrame(title, frame){
+            if (typeof title === "string" && title != "") {
                 let label = new Gtk.Label({
                     can_focus: false,
                     margin_bottom: 12,
@@ -900,17 +951,27 @@ var Page = GObject.registerClass(
                     use_markup: true,
                     label: "<b>" + title + "</b>"
                 });
-                this.box.pack_start(label, false, true, 0);
+                //this._mainBox.pack_start(label, false, true, 0);
+                log(this._mainBox);
+                this._mainBox.append(label);
             } else if (title instanceof Gtk.Widget) {
-                this.box.pack_start(title, false, true, 0);
-            }
+                this._mainBox.append(title);
+            } 
 
-            if (!section) { section = new Section(params); }
-            this.box.add(section);
-            return section;
+            this._mainBox.append(frame);
+            return frame;
         }
     }
 );
+
+var StackListBox = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.StackListBox').replace(/[\W_]+/g, '_')
+    },
+    class StackListBox extends Gtk.ListBox{
+
+    }
+)
 
 
 /** A GtkStack subclass with a pre-attached GtkStackSwitcher */
@@ -985,7 +1046,7 @@ var NotebookPage = GObject.registerClass(
             this._title = new Gtk.Label({
                 label: "<b>" + title + "</b>",
                 use_markup: true,
-                xalign: 0
+                halign: Gtk.Align.START
             });
         }
 
