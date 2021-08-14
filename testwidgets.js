@@ -1138,3 +1138,74 @@ var EntryDialog = GObject.registerClass(
         }
     }
 );
+
+var ListWithStack = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.ListWithStack').replace(/[\W_]+/g, '_')
+    },
+    class ListWithStack extends Gtk.Box {
+        _init(params){
+            params = Object.assign({
+                orientation: Gtk.Orientation.HORIZONTAL,
+                homogeneous: false
+            }, params);
+            super._init(params);
+            const scrolledListWindow = new Gtk.ScrolledWindow({
+                valign: Gtk.Align.FILL,
+                vexpand: true,
+                hscrollbar_policy: Gtk.PolicyType.NEVER,
+                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC
+            });
+            this.append(scrolledListWindow);
+            this._list = new Gtk.ListBox({
+                widthRequest: 215,
+                valign: Gtk.Align.FILL,
+                vexpand: true,
+                hexpand: false
+            });
+            this._list.connect("row-selected", (self, row)=>{
+                log("selected");
+                log(row.stackName);
+                this._stack.set_visible_child_name(row.stackName);
+            });
+            scrolledListWindow.set_child(this._list);
+            const scrolledStackWindow = new Gtk.ScrolledWindow({
+                valign: Gtk.Align.FILL,
+                vexpand: true,
+                hscrollbar_policy: Gtk.PolicyType.NEVER,
+                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC
+            });
+            this.append(scrolledStackWindow);
+            this._stack = new Stack({
+                hexpand: true,
+                vexpand: true
+            });
+            scrolledStackWindow.set_child(this._stack);
+        }
+        add(labelText, iconName, page){
+            const listBoxRow = new Gtk.ListBoxRow();
+            this._list.append(listBoxRow);
+            const box = new Gtk.Box({
+                orientation:Gtk.Orientation.HORIZONTAL,
+                margin_top: 12,
+                margin_bottom: 12,
+                margin_start: 12,
+                margin_end: 12,
+                spacing: 10
+            });
+            listBoxRow.set_child(box);
+            listBoxRow.stackName = labelText.replace(/[\W_]+/g, '_');
+            let image = new Gtk.Image({
+                iconName: iconName,
+                iconSize: Gtk.IconSize.NORMAL
+            })
+            box.append(image);
+            let label = new Gtk.Label({
+                label: labelText,
+                halign: Gtk.Align.START
+            });
+            box.append(label);
+            this._stack.add_named(page, listBoxRow.stackName);
+        }
+    }
+);

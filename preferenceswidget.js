@@ -24,7 +24,7 @@
 
 String.format = imports.format.format;
 
-const Extension = imports.misc.ExtensionUtils.getCurrentExtension();
+const Extension = imports.misc.extensionUtils.getCurrentExtension();
 const {Gdk, GdkPixbuf, Gio, GLib, GObject, Gtk} = imports.gi;
 const Gettext = imports.gettext.domain(Extension.metadata['gettext-domain']);
 const _ = Gettext.gettext;
@@ -44,7 +44,7 @@ var ColorSetting = GObject.registerClass(
                 height_request: 32,
                 halign: Gtk.Align.END,
                 valign: Gtk.Align.CENTER,
-                margin_right: 12,
+                marginEnd: 12,
                 visible: true
             });
             let string_color = settings.get_value(keyName).deep_unpack();
@@ -208,7 +208,7 @@ var MaybeSetting = GObject.registerClass(
                 width_request: 120,
                 halign: Gtk.Align.END,
                 valign: Gtk.Align.CENTER,
-                margin_right: 12,
+                marginEnd: 12,
                 visible: true
             });
 
@@ -290,7 +290,7 @@ var NumberSetting = GObject.registerClass(
                 climb_rate: 1.0,
                 digits: (type === "d") ? 2 : 0,
                 //snap_to_ticks: true,
-                input_purpose: Gtk.InputPurpose.NUMBER,
+                //input_purpose: Gtk.InputPurpose.NUMBER,
                 can_focus: true,
                 width_request: 160,
                 halign: Gtk.Align.END,
@@ -396,8 +396,9 @@ var ArrayStringSetting = GObject.registerClass(
                 model.set(model.append(), [0, 1], [name, service]);
             }
             this._tunnels = new Gtk.TreeView({
-                expand: true,
-                model: model});
+                //expand: true,
+                model: model
+            });
 
             let col1 = new Gtk.TreeViewColumn({title: _('Name')});
             let cell1 = new Gtk.CellRendererText();
@@ -414,7 +415,7 @@ var ArrayStringSetting = GObject.registerClass(
             this.attach(this._tunnels, 0, 0, 1, 1);
             let buttons_box = Gtk.Grid.new();
             let button_add = Gtk.Button.new_from_icon_name(
-                'list-add-symbolic', Gtk.IconSize.BUTTON);
+                'list-add-symbolic');
             button_add.connect('clicked', () =>{
                 let dialog = new DialogWidgets.EntryDialog(_(
                     'Name'), _('Service'));
@@ -432,7 +433,7 @@ var ArrayStringSetting = GObject.registerClass(
             });
             buttons_box.attach(button_add, 0, 0, 1, 1);
             let button_remove = Gtk.Button.new_from_icon_name(
-                'list-remove-symbolic', Gtk.IconSize.BUTTON);
+                'list-remove-symbolic');
             button_remove.connect('clicked', () => {
                 let [isselected, liststore, iter] = this._tunnels.get_selection().get_selected();
                 if(isselected === true){
@@ -441,7 +442,7 @@ var ArrayStringSetting = GObject.registerClass(
             });
             buttons_box.attach(button_remove, 0, 1, 1, 1);
             let button_edit = Gtk.Button.new_from_icon_name(
-                'document-edit-symbolic', Gtk.IconSize.BUTTON);
+                'document-edit-symbolic');
             button_edit.connect('clicked', () => {
                 let [isselected, liststore, iter] = this._tunnels.get_selection().get_selected();
                 if(isselected === true){
@@ -627,10 +628,10 @@ var Row = GObject.registerClass(
                 can_focus: false,
                 selectable: false,
                 height_request: 48,
-                margin_left: 12,
-                margin_top: 8,
-                margin_bottom: 8,
-                margin_right: 12,
+                marginStart: 12,
+                marginTop: 8,
+                marginBottom: 8,
+                marginEnd: 12,
             }, params);
 
             super._init({
@@ -643,14 +644,14 @@ var Row = GObject.registerClass(
             this.grid = new Gtk.Grid({
                 can_focus: false,
                 column_spacing: 12,
-                margin_left: params.margin_left,
-                margin_top: params.margin_top,
-                margin_bottom: params.margin_bottom,
-                margin_right: params.margin_right,
+                marginStart: params.marginStart,
+                marginTop: params.marginTop,
+                marginBottom: params.marginBottom,
+                marginEnd: params.marginEnd,
                 vexpand: true,
                 valign: Gtk.Align.FILL
             });
-            this.add(this.grid);
+            this.set_child(this.grid);
         }
     }
 );
@@ -724,7 +725,7 @@ var Frame = GObject.registerClass(
          * @return {Gtk.ListBoxRow} row - The new row
          */
         addRow(row, params={}) {
-            if (!row) { row = new Row(params);}
+            if (!row) { row = new FrameRow(params);}
             this._list.append(row);
             return row;
         }
@@ -841,10 +842,10 @@ var FrameRow = GObject.registerClass(
             this.activatable = false;
             this._grid = new Gtk.Grid({
                 orientation: Gtk.Orientation.HORIZONTAL,
-                margin_top: 5,
-                margin_bottom: 5,
-                margin_start: 5,
-                margin_end: 5,
+                marginTop: 5,
+                marginBottom: 5,
+                marginStart: 5,
+                marginEnd: 5,
                 column_spacing: 20,
                 row_spacing: 20
             });
@@ -893,10 +894,10 @@ var Page = GObject.registerClass(
             });
             this._mainBox = new Gtk.Box({
                 can_focus: false,
-                margin_start: 24,
-                margin_end: 24,
-                margin_top: 32,
-                margin_bottom: 32,
+                marginStart: 24,
+                marginEnd: 24,
+                marginTop: 32,
+                marginBottom: 32,
                 orientation: Gtk.Orientation.VERTICAL
             });
             log(this._mainBox);
@@ -905,8 +906,8 @@ var Page = GObject.registerClass(
         addLabel(text){
             if(typeof text === "string"){
                 let label = new Gtk.Label({
-                    margin_top: 5,
-                    margin_bottom: 5,
+                    marginTop: 5,
+                    marginBottom: 5,
                     can_focus: false,
                     use_markup: true,
                     label: text
@@ -916,17 +917,31 @@ var Page = GObject.registerClass(
                 this._mainBox.append(text);
             }
         }
-        addImage(image, size){
-            if(typeof image === "string"){
-                const imageBox = new Gtk.Image({
-                    margin_top: 15,
-                    margin_bottom: 15,
-                    icon_name: image,
-                    pixel_size: size
+        addGlobalImage(iconName, pixelSize){
+            const imageBox = new Gtk.Image({
+                marginTop: 15,
+                marginBottom: 15,
+                iconName: iconName,
+                pixelSize: pixelSize,
+                vexpand: false
+            });
+            this._mainBox.append(imageBox);
+        }
+        addLocalImage(iconName, pixelSize){
+            const baseIcon = Extension.path + '/icons/' + iconName;
+            const fileIcon = Gio.File.new_for_path(baseIcon + '.png')
+            if(fileIcon.query_exists(null) == false){
+                fileIcon = Gio.File.new_for_path(baseIcon + '.svg')
+            }
+            if(fileIcon.query_exists(null)){
+                const picture = new Gtk.Image({
+                    marginTop: 15,
+                    marginBottom: 15,
+                    file: fileIcon.get_path(),
+                    pixelSize: pixelSize,
+                    vexpand: false
                 });
-                this._mainBox.append(imageBox);
-            }else if(typeof image === Gtk.Image){
-                this._mainBox.append(image);
+                this._mainBox.append(picture);
             }
         }
         addWidget(widget){
@@ -945,8 +960,8 @@ var Page = GObject.registerClass(
             if (typeof title === "string" && title != "") {
                 let label = new Gtk.Label({
                     can_focus: false,
-                    margin_bottom: 12,
-                    margin_start: 3,
+                    marginBottom: 12,
+                    marginStart: 3,
                     xalign: 0,
                     use_markup: true,
                     label: "<b>" + title + "</b>"
@@ -956,23 +971,17 @@ var Page = GObject.registerClass(
                 this._mainBox.append(label);
             } else if (title instanceof Gtk.Widget) {
                 this._mainBox.append(title);
-            } 
-
+            }
+            if(frame == null){
+                const frame = new Frame();
+                this._mainBox.append(frame);
+                return frame;
+            }
             this._mainBox.append(frame);
             return frame;
         }
     }
 );
-
-var StackListBox = GObject.registerClass(
-    {
-        GTypeName: (Extension.uuid + '.StackListBox').replace(/[\W_]+/g, '_')
-    },
-    class StackListBox extends Gtk.ListBox{
-
-    }
-)
-
 
 /** A GtkStack subclass with a pre-attached GtkStackSwitcher */
 var Stack = GObject.registerClass(
@@ -985,11 +994,6 @@ var Stack = GObject.registerClass(
                 transition_type: Gtk.StackTransitionType.SLIDE_LEFT_RIGHT
             }, params);
             super._init(params);
-            this.switcher = new Gtk.StackSwitcher({
-                halign: Gtk.Align.CENTER,
-                stack: this
-            });
-            this.switcher.show_all();
         }
 
         addPage(id, title, params={}){
@@ -1036,10 +1040,10 @@ var NotebookPage = GObject.registerClass(
         _init(title) {
             super._init({
                 orientation: Gtk.Orientation.VERTICAL,
-                margin_top: 20,
-                margin_bottom: 20,
-                margin_start: 20,
-                margin_end: 20,
+                marginTop: 20,
+                marginBottom: 20,
+                marginStart: 20,
+                marginEnd: 20,
                 spacing: 20,
                 homogeneous: false
             });
@@ -1117,10 +1121,10 @@ var StackListBox = GObject.registerClass(
             this.append(row1);
 
             let row = new Gtk.Grid({
-                margin_top: 12,
-                margin_bottom: 12,
-                margin_start: 12,
-                margin_end: 12, 
+                marginTop: 12,
+                marginBottom: 12,
+                marginStart: 12,
+                marginEnd: 12, 
                 column_spacing: 10
             });
             row1.set_child(row);
@@ -1205,4 +1209,73 @@ var Button = GObject.registerClass(
     }
 );
 
-
+var ListWithStack = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.ListWithStack').replace(/[\W_]+/g, '_')
+    },
+    class ListWithStack extends Gtk.Box {
+        _init(params){
+            params = Object.assign({
+                orientation: Gtk.Orientation.HORIZONTAL,
+                homogeneous: false
+            }, params);
+            super._init(params);
+            const scrolledListWindow = new Gtk.ScrolledWindow({
+                valign: Gtk.Align.FILL,
+                vexpand: true,
+                hscrollbar_policy: Gtk.PolicyType.NEVER,
+                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC
+            });
+            this.append(scrolledListWindow);
+            this._list = new Gtk.ListBox({
+                widthRequest: 215,
+                valign: Gtk.Align.FILL,
+                vexpand: true,
+                hexpand: false
+            });
+            this._list.connect("row-selected", (self, row)=>{
+                log("selected");
+                log(row.stackName);
+                this._stack.set_visible_child_name(row.stackName);
+            });
+            scrolledListWindow.set_child(this._list);
+            const scrolledStackWindow = new Gtk.ScrolledWindow({
+                valign: Gtk.Align.FILL,
+                vexpand: true,
+                hscrollbar_policy: Gtk.PolicyType.NEVER,
+                vscrollbar_policy: Gtk.PolicyType.AUTOMATIC
+            });
+            this.append(scrolledStackWindow);
+            this._stack = new Stack({
+                hexpand: true,
+                vexpand: true
+            });
+            scrolledStackWindow.set_child(this._stack);
+        }
+        add(labelText, iconName, page){
+            const listBoxRow = new Gtk.ListBoxRow();
+            this._list.append(listBoxRow);
+            const box = new Gtk.Box({
+                orientation:Gtk.Orientation.HORIZONTAL,
+                margin_top: 12,
+                margin_bottom: 12,
+                margin_start: 12,
+                margin_end: 12,
+                spacing: 10
+            });
+            listBoxRow.set_child(box);
+            listBoxRow.stackName = labelText.replace(/[\W_]+/g, '_');
+            let image = new Gtk.Image({
+                iconName: iconName,
+                iconSize: Gtk.IconSize.NORMAL
+            })
+            box.append(image);
+            let label = new Gtk.Label({
+                label: labelText,
+                halign: Gtk.Align.START
+            });
+            box.append(label);
+            this._stack.add_named(page, listBoxRow.stackName);
+        }
+    }
+);

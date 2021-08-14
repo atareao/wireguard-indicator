@@ -23,6 +23,13 @@ const Dialog = GObject.registerClass(
 
         }
         _createUI(){
+            const mainBox = new Widgets.ListWithStack({});
+            mainBox.insert_after(this.get_content_area(), null);
+            mainBox.add("Ayuda", 'system-settings-symbolic', new AboutPage());
+            mainBox.add("Ayuda 2", 'system-settings-symbolic', new AboutPage());
+            mainBox.add("Ayuda 3", 'system-settings-symbolic', new AboutPage());
+        }
+        _createUI2(){
 
             const mainBox = new Gtk.Box({
                 orientation: Gtk.Orientation.HORIZONTAL,

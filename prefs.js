@@ -22,17 +22,11 @@
  * IN THE SOFTWARE.
  */
 
-imports.gi.versions.GLib = "2.0";
-imports.gi.versions.GObject = "2.0";
-imports.gi.versions.Gio = "2.0";
-imports.gi.versions.Gtk = "3.0";
-
 const {GLib, GObject, Gio, Gtk} = imports.gi;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Extension = ExtensionUtils.getCurrentExtension();
+const Extension = imports.misc.extensionUtils.getCurrentExtension();
 const Convenience = Extension.imports.convenience;
-const PreferencesWidget = Extension.imports.preferenceswidget;
+const Widgets = Extension.imports.preferenceswidget;
 const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
 
@@ -41,30 +35,21 @@ function init() {
     Convenience.initTranslations();
 }
 
-var AboutWidget = GObject.registerClass(
+var AboutPage = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.AboutWidget').replace(/[\W_]+/g,'_')
+        GTypeName: (Extension.uuid + '.AboutPage').replace(/[\W_]+/g,'_')
     },
-    class AboutWidget extends Gtk.Grid{
+    class AboutPage extends Widgets.Page{
         _init(){
-            super._init({
-                margin_bottom: 18,
-                row_spacing: 8,
-                hexpand: true,
-                halign: Gtk.Align.CENTER,
-                orientation: Gtk.Orientation.VERTICAL
-            });
+            super._init();
+            const info = new Widgets.Frame();
+            let extensionVersion;
 
-            let aboutIcon = Gtk.Image.new_from_file(
-                this._get_icon_file('wireguard-icon'));
-            this.add(aboutIcon);
+            this.addLocalImage('wireguard-icon', 150);
+            this.addLabel(
+                '<span size="large"><b>' + _("WireGuard Indicator") + '</b></span>');
 
-            let aboutName = new Gtk.Label({
-                label: "<b>" + _("WireGuard Indicator") + "</b>",
-                use_markup: true
-            });
-            this.add(aboutName);
-
+            /*
             let aboutVersion = new Gtk.Label({ label: _('Version: ') + Extension.metadata.version.toString() });
             this.add(aboutVersion);
 
@@ -101,70 +86,38 @@ var AboutWidget = GObject.registerClass(
                 use_markup: true,
                 justify: Gtk.Justification.CENTER
             });
-        this.add(aboutLicense);
-        }
-        _get_icon_file(icon_name){
-            let base_icon = Extension.path + '/icons/' + icon_name;
-            let file_icon = Gio.File.new_for_path(base_icon + '.png')
-            if(file_icon.query_exists(null) == false){
-                file_icon = Gio.File.new_for_path(base_icon + '.svg')
-            }
-            if(file_icon.query_exists(null) == false){
-                return null;
-            }
-            return file_icon.get_path();
+            this.add(aboutLicense);
+            */
         }
     }
 );
 
 var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
-    class WireGuarIndicatorPreferencesWidget extends PreferencesWidget.Stack{
+    class WireGuarIndicatorPreferencesWidget extends Widgets.ListWithStack{
         _init(){
-            super._init();
+            super._init({});
 
-            let theme = Gtk.IconTheme.get_default();
-            if (theme == null) {
-                theme = new Gtk.IconTheme();
-                theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
-            }
-            theme.append_search_path(
-                Extension.dir.get_child('icons').get_path());
-
-            let preferencesPage = new PreferencesWidget.Page();
-            this.add_titled(preferencesPage, "preferences", _("Preferences"));
+            let preferencesPage = new Widgets.Page();
 
             var settings = Convenience.getSettings();
-            
-            let indicatorSection = preferencesPage.addSection(_("Indicator options"), null, {});
+            let indicatorSection = preferencesPage.addFrame(_("Indicator options"));
             indicatorSection.addGSetting(settings, "services");
             indicatorSection.addGSetting(settings, "checktime");
-            let appearanceSection = preferencesPage.addSection(_("General options"), null, {});
+            let appearanceSection = preferencesPage.addFrame(_("General options"));
             appearanceSection.addGSetting(settings, "darktheme");
 
-            // About Page
-            let aboutPage = this.addPage(
-                "about",
-                _("About"),
-                { vscrollbar_policy: Gtk.PolicyType.NEVER }
-            );
-            aboutPage.box.add(new AboutWidget());
-            aboutPage.box.margin_top = 18;
+            this.add(_("Preferences"), "preferences-other-symbolic", preferencesPage);
+
+            this.add(_("About"), "help-about-symbolic", new AboutPage());
         }
     }
 );
 
 function buildPrefsWidget() {
     let preferencesWidget = new WireGuarIndicatorPreferencesWidget();
-    GLib.timeout_add(GLib.PRIORITY_DEFAULT, 0, () => {
-        let prefsWindow = preferencesWidget.get_toplevel()
-        prefsWindow.set_position(Gtk.WindowPosition.CENTER_ALWAYS);
-        prefsWindow.get_titlebar().custom_title = preferencesWidget.switcher;
-        let icon = Extension.path + '/icons/wireguard-icon.svg';
-        log(icon);
-        prefsWindow.set_icon_from_file(icon);
-        return false;
+    preferencesWidget.connect("realize", ()=>{
+        const window = preferencesWidget.get_root();
+        window.set_title(_("WireGuard Indicator Configuration"));
     });
-
-    preferencesWidget.show_all();
     return preferencesWidget;
 }
