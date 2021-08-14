@@ -1,5 +1,5 @@
 /*
- * This file is part of wireguard-indicator
+ * This file is common file for helping to create apps and extenssions
  *
  * Copyright (c) 2020 Lorenzo Carbonell Cerezo <a.k.a. atareao>
  *

@@ -899,6 +899,36 @@ var Page = GObject.registerClass(
             log(this._mainBox);
             this.set_child(this._mainBox);
         }
+        addLabel(text){
+            if(typeof text === "string"){
+                let label = new Gtk.Label({
+                    margin_top: 5,
+                    margin_bottom: 5,
+                    can_focus: false,
+                    use_markup: true,
+                    label: text
+                });
+                this._mainBox.append(label);
+            } else if (text instanceof Gtk.Widget) {
+                this._mainBox.append(text);
+            }
+        }
+        addImage(image, size){
+            if(typeof image === "string"){
+                const imageBox = new Gtk.Image({
+                    margin_top: 15,
+                    margin_bottom: 15,
+                    icon_name: image,
+                    pixel_size: size
+                });
+                this._mainBox.append(imageBox);
+            }else if(typeof image === Gtk.Image){
+                this._mainBox.append(image);
+            }
+        }
+        addWidget(widget){
+            this._mainBox.append(widget);
+        }
 
         /**
          * Add and return a new section widget. If @title is given, a bold title

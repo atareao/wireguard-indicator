@@ -4,7 +4,7 @@ imports.gi.versions.GObject = "2.0"
 imports.gi.versions.Gtk = "4.0"
 imports.gi.versions.Gdk = "4.0"
 
-const {Gtk, GLib, GObject} = imports.gi;
+const {Gtk, GLib, GObject, GdkPixbuf} = imports.gi;
 imports.searchPath.push(".");
 const Widgets = imports.testwidgets;
 Gtk.init(); 
@@ -119,6 +119,9 @@ const AboutPage = GObject.registerClass(
             let versionID;
             let buildID;
             let windowLabel;
+            this.addImage('system-settings-symbolic', 100);
+            this.addLabel('<span size="large"><b>Mi aplicación</b></span>');
+            this.addLabel("Una aplicación de ejemplo");
             try{
                 extensionVersion = Extension.metadata.version;
             }catch(error){
@@ -178,6 +181,21 @@ const AboutPage = GObject.registerClass(
                 vexpand: false
             }));
             credits.append_page(developersNotebookPage);
+
+            const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(
+                '/home/lorenzo/Descargas/bmc-button.svg', 150, 50);
+            const donateImage = Gtk.Picture.new_for_pixbuf(pixbuf);
+            const donateLinkButton = new Gtk.LinkButton({
+                hexpand: false,
+                vexpand: false,
+                valign: Gtk.Align.CENTER,
+                halign: Gtk.Align.CENTER,
+                child: donateImage,
+                uri: 'https://www.buymeacoffee.com/atareao',
+                tooltip_text: 'Invítame a un café'
+            });
+            this.addWidget(donateLinkButton);
+
         }
     }
 );
