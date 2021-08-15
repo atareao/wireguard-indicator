@@ -706,7 +706,6 @@ var Frame = GObject.registerClass(
                 activate_on_single_click: true,
                 selection_mode: Gtk.SelectionMode.NONE,
             });
-            // Gtk.Frame.prototype.set_child.call(this, this._list);
             this.set_child(this._list);
             this._list.set_header_func(this._header_func);
         }
@@ -863,7 +862,7 @@ var FrameRow = GObject.registerClass(
             });
             this.add(keyLabel);
             const valueLabel =new Gtk.Label({
-                label: value,
+                label: (value?value:""),
                 hexpand: true,
                 sensitive: false,
                 halign: Gtk.Align.END
@@ -942,6 +941,32 @@ var Page = GObject.registerClass(
                     vexpand: false
                 });
                 this._mainBox.append(picture);
+            }
+        }
+        addLinkButton(iconName, pixelSize, uri, tooltip){
+            const baseIcon = Extension.path + '/icons/' + iconName;
+            let fileIcon = Gio.File.new_for_path(baseIcon + '.png')
+            if(fileIcon.query_exists(null) == false){
+                fileIcon = Gio.File.new_for_path(baseIcon + '.svg')
+            }
+            if(fileIcon.query_exists(null)){
+                const picture = new Gtk.Image({
+                    marginTop: 15,
+                    marginBottom: 15,
+                    file: fileIcon.get_path(),
+                    pixelSize: pixelSize,
+                    vexpand: false
+                });
+                const linkButton = new Gtk.LinkButton({
+                    hexpand: false,
+                    vexpand: false,
+                    valign: Gtk.Align.CENTER,
+                    halign: Gtk.Align.CENTER,
+                    child: picture,
+                    uri: uri,
+                    tooltip_text: tooltip
+                });
+                this._mainBox.append(linkButton);
             }
         }
         addWidget(widget){
@@ -1040,11 +1065,11 @@ var NotebookPage = GObject.registerClass(
         _init(title) {
             super._init({
                 orientation: Gtk.Orientation.VERTICAL,
-                marginTop: 20,
-                marginBottom: 20,
-                marginStart: 20,
-                marginEnd: 20,
-                spacing: 20,
+                marginTop: 5,
+                marginBottom: 5,
+                marginStart: 5,
+                marginEnd: 5,
+                spacing: 10,
                 homogeneous: false
             });
             this._title = new Gtk.Label({
@@ -1052,6 +1077,51 @@ var NotebookPage = GObject.registerClass(
                 use_markup: true,
                 halign: Gtk.Align.START
             });
+        }
+
+        appendLabel(text){
+            const label = new Gtk.Label({
+                marginTop: 5,
+                marginBottom: 5,
+                can_focus: false,
+                use_markup: true,
+                label: text
+            });
+            this.append(label);
+        }
+
+        appendImageWithLabel(iconName, pixelSize, text){
+            const box = new Gtk.Box({
+                orientation: Gtk.Orientation.HORIZONTAL,
+                marginTop: 5,
+                marginBottom: 5,
+                marginStart: 5,
+                marginEnd: 5,
+                spacing: 10,
+                homogeneous: false,
+                halign: Gtk.Align.CENTER
+            });
+            const baseIcon = Extension.path + '/icons/' + iconName;
+            let fileIcon = Gio.File.new_for_path(baseIcon + '.png')
+            if(fileIcon.query_exists(null) == false){
+                fileIcon = Gio.File.new_for_path(baseIcon + '.svg')
+            }
+            if(fileIcon.query_exists(null)){
+                const picture = new Gtk.Image({
+                    file: fileIcon.get_path(),
+                    pixelSize: pixelSize,
+                    vexpand: false
+                });
+                box.append(picture);
+            }
+
+            const label = new Gtk.Label({
+                can_focus: false,
+                use_markup: true,
+                label: text
+            });
+            box.append(label);
+            this.append(box);
         }
 
         getTitleLabel() {

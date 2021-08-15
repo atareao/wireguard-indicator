@@ -7,5 +7,6 @@
     "shell-version": ["40"],
     "url": "https://github.com/atareao/wireguard-indicator", 
     "uuid": "wireguard-indicator@atareao.es",
+    "icon": "wireguard-icon",
     "version": 5
 }

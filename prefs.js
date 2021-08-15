@@ -1,3 +1,5 @@
+#!/usr/bin/env gjs
+
 /*
  * wireguard-indicator@atareao.es
  *
@@ -27,6 +29,7 @@ const {GLib, GObject, Gio, Gtk} = imports.gi;
 const Extension = imports.misc.extensionUtils.getCurrentExtension();
 const Convenience = Extension.imports.convenience;
 const Widgets = Extension.imports.preferenceswidget;
+const AboutPage = Extension.imports.aboutpage.AboutPage;
 const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
 
@@ -35,11 +38,11 @@ function init() {
     Convenience.initTranslations();
 }
 
-var AboutPage = GObject.registerClass(
+var AboutPage2 = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.AboutPage').replace(/[\W_]+/g,'_')
+        GTypeName: (Extension.uuid + '.AboutPage2').replace(/[\W_]+/g,'_')
     },
-    class AboutPage extends Widgets.Page{
+    class AboutPage2 extends Widgets.Page{
         _init(){
             super._init();
             const info = new Widgets.Frame();
@@ -100,14 +103,20 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             let preferencesPage = new Widgets.Page();
 
             var settings = Convenience.getSettings();
+
             let indicatorSection = preferencesPage.addFrame(_("Indicator options"));
             indicatorSection.addGSetting(settings, "services");
-            indicatorSection.addGSetting(settings, "checktime");
-            let appearanceSection = preferencesPage.addFrame(_("General options"));
+
+            let timeSection = preferencesPage.addFrame(_("Check time"));
+            timeSection.addGSetting(settings, "checktime");
+
+            const themePage = new Widgets.Page();
+            const appearanceSection = themePage.addFrame(_("Appearance"));
             appearanceSection.addGSetting(settings, "darktheme");
 
-            this.add(_("Preferences"), "preferences-other-symbolic", preferencesPage);
-
+            this.add(_("WireGuard Preferences"), "preferences-other-symbolic",
+                     preferencesPage);
+            this.add(_("Appearance"), "preferences-other-symbolic", themePage);
             this.add(_("About"), "help-about-symbolic", new AboutPage());
         }
     }
@@ -118,6 +127,8 @@ function buildPrefsWidget() {
     preferencesWidget.connect("realize", ()=>{
         const window = preferencesWidget.get_root();
         window.set_title(_("WireGuard Indicator Configuration"));
+        window.default_height = 800;
+        window.default_width = 850;
     });
     return preferencesWidget;
 }

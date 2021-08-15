@@ -185,7 +185,7 @@ const AboutPage = GObject.registerClass(
                 use_markup: true,
                 halign: Gtk.Align.START,
                 hexpand: false,
-                vexpand: false
+                vexpand: true
             }));
             credits.append_page(developersNotebookPage);
 
