@@ -105,6 +105,11 @@ var WireGuardIndicator = GObject.registerClass(
         _loadConfiguration(){
             this._services = this._getValue('services');
             this._checktime = this._getValue('checktime');
+            if(this._checktime < 5){
+                this._checktime = 5;
+            }else if (this._checktime > 600){
+                this._checktime = 600;
+            }
             this._darkthem = this._getValue('darktheme')
             this._servicesSwitches = [];
             this.services_section.actor.hide();

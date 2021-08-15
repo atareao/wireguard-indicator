@@ -285,10 +285,10 @@ var NumberSetting = GObject.registerClass(
     },
     class NumberSetting extends Gtk.SpinButton{
 
-        _init(settings, keyName, type) {
+        _init(settings, keyName, lower, upper, digits) {
             super._init({
                 climb_rate: 1.0,
-                digits: (type === "d") ? 2 : 0,
+                digits: (digits) ? 2 : 0,
                 //snap_to_ticks: true,
                 //input_purpose: Gtk.InputPurpose.NUMBER,
                 can_focus: true,
@@ -297,30 +297,6 @@ var NumberSetting = GObject.registerClass(
                 valign: Gtk.Align.CENTER,
                 visible: true
             });
-
-            let lower, upper;
-
-            // FIXME: definitely not working
-            if (type === "y") {
-                [lower, upper] = [0, 255];
-            } else if (type === "q") {
-                [lower, upper] = [0, GLib.MAXUINT16];
-            } else if (type === "n") {
-                [lower, upper] = [GLib.MININT16, GLib.MAXINT16];
-            } else if (type === "i" || type === "h") {
-                [lower, upper] = [GLib.MININT32, GLib.MAXINT32];
-            } else if (type === "u") {
-                [lower, upper] = [0, GLib.MAXUINT32];
-            } else if (type === "x") {
-                throw TypeError("Can't map 64 bit numbers");
-                [lower, upper] = [GLib.MININT64, GLib.MAXINT64];
-            } else if (type === "t") {
-                throw TypeError("Can't map 64 bit numbers");
-                [lower, upper] = [0, GLib.MAXUINT64];
-            // TODO: not sure this is working
-            } else if (type === "d") {
-                [lower, upper] = [2.3E-308, 1.7E+308];
-            }
 
             this.adjustment = new Gtk.Adjustment({
                 lower: lower,
@@ -813,7 +789,29 @@ var Frame = GObject.registerClass(
             } else if (type === "mb") {
                 widget = new MaybeSetting(settings, keyName);
             } else if (type.length === 1 && "ynqiuxthd".indexOf(type) > -1) {
-                widget = new NumberSetting(settings, keyName, type);
+                let lower;
+                let upper;
+                if (type === "y") {
+                    [lower, upper] = [0, 255];
+                } else if (type === "q") {
+                    [lower, upper] = [0, GLib.MAXUINT16];
+                } else if (type === "n") {
+                    [lower, upper] = [GLib.MININT16, GLib.MAXINT16];
+                } else if (type === "i" || type === "h") {
+                    [lower, upper] = [GLib.MININT32, GLib.MAXINT32];
+                } else if (type === "u") {
+                    [lower, upper] = [0, GLib.MAXUINT32];
+                } else if (type === "x") {
+                    throw TypeError("Can't map 64 bit numbers");
+                    [lower, upper] = [GLib.MININT64, GLib.MAXINT64];
+                } else if (type === "t") {
+                    throw TypeError("Can't map 64 bit numbers");
+                    [lower, upper] = [0, GLib.MAXUINT64];
+                // TODO: not sure this is working
+                } else if (type === "d") {
+                    [lower, upper] = [2.3E-308, 1.7E+308];
+                }
+                widget = new NumberSetting(settings, keyName, lower, upper);
             } else if (type === "range") {
                 widget = new RangeSetting(settings, keyName);
             } else if (type.length === 1 && "sog".indexOf(type) > -1) {
@@ -822,6 +820,14 @@ var Frame = GObject.registerClass(
                 widget = new OtherSetting(settings, keyName);
             }
 
+            return this.addSetting(
+                key.get_summary(),
+                key.get_description(),
+                widget
+            );
+        }
+        addWidgetSetting(settings, keyName, widget){
+            let key = settings.settings_schema.get_key(keyName);
             return this.addSetting(
                 key.get_summary(),
                 key.get_description(),
