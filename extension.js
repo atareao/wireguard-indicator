@@ -94,8 +94,6 @@ var WireGuardIndicator = GObject.registerClass(
                 ExtensionUtils.openPrefs();
             });
             this.menu.addMenuItem(this.settingsMenuItem);
-            /* Help */
-            this.menu.addMenuItem(this._get_help());
             /* Init */
             this._sourceId = 0;
             this._settingsChanged();
@@ -225,34 +223,6 @@ var WireGuardIndicator = GObject.registerClass(
                                        style_class: 'system-menu-action'});
             icon.child = new St.Icon({icon_name: iconName });
             return icon;
-        }
-
-        _get_help(){
-            let menu_help = new PopupMenu.PopupSubMenuMenuItem(_('Help'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Project Page'), 'info', 'https://github.com/atareao/wireguard-indicator'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Get help online...'), 'help', 'https://www.atareao.es/podcast/wireguard-en-el-escritorio/'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Report a bug...'), 'bug', 'https://github.com/atareao/wireguard-indicator/issues'));
-
-            menu_help.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-            
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('El atareao'), 'atareao', 'https://www.atareao.es'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('GitHub'), 'github', 'https://github.com/atareao'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Twitter'), 'twitter', 'https://twitter.com/atareao'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Telegram'), 'telegram', 'https://t.me/canal_atareao'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Mastodon'), 'mastodon', 'https://mastodon.social/@atareao'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('Spotify'), 'spotify', 'https://open.spotify.com/show/2v0fC8PyeeUTQDD67I0mKW'));
-            menu_help.menu.addMenuItem(this._create_help_menu_item(
-                _('YouTube'), 'youtube', 'http://youtube.com/c/atareao'));
-            return menu_help;
         }
 
         _settingsChanged(){

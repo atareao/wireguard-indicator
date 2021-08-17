@@ -352,6 +352,66 @@ var RangeSetting = GObject.registerClass(
     }
 );
 
+var ArrayKeyValueSetting = GObject.registerClass(
+    {
+        GTypeName: Extension.uuid.replace(/[\W_]+/g, '_') + 'ArrayKeyValueSetting'
+    },
+    class ArrayKeyValueSetting extends Gtk.Frame{
+        _init(settings, keyName, keyLabel, valueLabel, params){
+            super._init(params);
+            this._keyName = keyName;
+            this._settings = settings;
+            this._keyLabel = keyLabel;
+            this._valueLabel = valueLabel;
+            this._list = new Gtk.ListBox({
+                can_focus: true,
+                hexpand: true,
+                activate_on_single_click: true,
+                selectionMode: Gtk.SelectionMode.NONE,
+            });
+            this.set_child(this._list);
+            this._list.set_header_func(this._header_func);
+            this._load();
+        }
+        _header_func(row, before){
+            if (before) {
+                row.set_header(
+                    new Gtk.Separator({
+                        orientation: Gtk.Orientation.HORIZONTAL,
+                    })
+                );
+            }
+        }
+        _load(){
+            this.removeAllRows();
+            const items = this._settings.get_strv(this._keyName);
+            for(let i=0; i < items.length; i++){
+                const [key, value] = items[i].split("|");
+                const frameRow = new KeyValueFrameRow(
+                    this._keyLabel, this._valueLabel, key, value);
+                this.addRow(frameRow);
+            }
+        }
+        removeRow(row){
+            if(row){
+                this._list.remove(row);
+            }
+        }
+        removeAllRows(){
+            const numberOfRows = this._list.length;
+            for(const i = numberOfRows - 1; i >= 0; i--){
+                const child = this._list.get_row_at_index(i);
+                this.removeRow(child);
+            }
+            this._list.show();
+        }
+        addRow(row){
+            this._list.append(row);
+            return row;
+        }
+    }
+);
+
 var ArrayStringSetting = GObject.registerClass(
     {
         GTypeName: Extension.uuid.replace(/[\W_]+/g, '_') + '_ArrayStringSetting'
@@ -833,6 +893,75 @@ var Frame = GObject.registerClass(
                 key.get_description(),
                 widget
             );
+        }
+    }
+);
+
+var KeyValueFrameRow = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.KeyValueFrameRow').replace(/[\W_]+/g, '_')
+    },
+    class KeyValueFrameRow extends Gtk.ListBoxRow{
+        _init(keyLabel, valueLabel, key, value, params){
+            super._init(params);
+            this._grid = new Gtk.Grid({
+                orientation: Gtk.Orientation.HORIZONTAL,
+                marginTop: 5,
+                marginBottom: 5,
+                marginStart: 5,
+                marginEnd: 5,
+                column_spacing: 20,
+                row_spacing: 10,
+                rowHomogeneous: true
+            });
+            const editPopover = new Gtk.Popover();
+            const editPopoverBox = new Gtk.Box({
+                orientation: Gtk.Orientation.VERTICAL,
+            });
+            editPopover.set_child(editPopoverBox);
+
+            const editButton = new Gtk.Button({
+                label: _("Edit"),
+                hasFrame: false,
+            });
+            editButton.connect('clicked', ()=>{
+                editPopover.popdown();
+            });
+            editPopoverBox.append(editButton);
+
+            const removeButton = new Gtk.Button({
+                label: _("Remove"),
+                hasFrame: false,
+            });
+            removeButton.connect('clicked', ()=>{
+                editPopover.popdown();
+            });
+            editPopoverBox.append(removeButton);
+
+            Gtk.ListBoxRow.prototype.set_child.call(this, this._grid);
+            this._grid.attach(new Gtk.Label({
+                label: keyLabel,
+                halign: Gtk.Align.START,
+            }), 0, 0, 1, 1);
+            this._keyEntry = new Gtk.Entry({
+                text: key,
+            });
+            this._grid.attach(this._keyEntry, 1, 0, 1, 1);
+            this._grid.attach(new Gtk.Label({
+                label: valueLabel,
+                halign: Gtk.Align.START,
+            }), 0, 1, 1, 1);
+            this._valueEntry = new Gtk.Entry({
+                text: value,
+            });
+            this._grid.attach(this._valueEntry, 1, 1, 1, 1);
+            const menuEditButton = new Gtk.MenuButton({
+                iconName: 'view-more-symbolic',
+                popover: editPopover,
+                hexpand: true,
+                halign: Gtk.Align.END
+            });
+            this._grid.attach(menuEditButton, 2, 0, 1, 2);
         }
     }
 );

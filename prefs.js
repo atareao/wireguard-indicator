@@ -50,6 +50,11 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             let indicatorSection = preferencesPage.addFrame(_("Indicator options"));
             indicatorSection.addGSetting(settings, "services");
 
+            let servicesSection = new Widgets.ArrayKeyValueSetting(
+                settings, "services", _("Name"), _("Service"));
+            preferencesPage.addFrame(_("Services"), servicesSection);
+
+
             let timeSection = preferencesPage.addFrame(_("Check time"));
             timeSection.addWidgetSetting(settings, "checktime", new Widgets.NumberSetting(settings, "checktime", 5, 60 * 100));
 
