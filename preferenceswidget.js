@@ -354,7 +354,11 @@ var RangeSetting = GObject.registerClass(
 
 var ArrayKeyValueSetting = GObject.registerClass(
     {
-        GTypeName: Extension.uuid.replace(/[\W_]+/g, '_') + 'ArrayKeyValueSetting'
+        GTypeName: Extension.uuid.replace(/[\W_]+/g, '_') + 'ArrayKeyValueSetting',
+        Signals: {
+            'edit': {param_types: [GObject.TYPE_INT]},
+            'remove': {param_types: [GObject.TYPE_INT]},
+        },
     },
     class ArrayKeyValueSetting extends Gtk.Frame{
         _init(settings, keyName, keyLabel, valueLabel, params){
@@ -897,14 +901,19 @@ var Frame = GObject.registerClass(
         addWidget(labelText, widget){
             const row = new FrameRow();
             row.addWidget(labelText, widget);
-            this.addRow(row);
+            this._list.append(row);
+            return row;
         }
     }
 );
 
 var KeyValueFrameRow = GObject.registerClass(
     {
-        GTypeName: (Extension.uuid + '.KeyValueFrameRow').replace(/[\W_]+/g, '_')
+        GTypeName: (Extension.uuid + '.KeyValueFrameRow').replace(/[\W_]+/g, '_'),
+        Signals: {
+            'edit': {param_types: [GObject.TYPE_INT]},
+            'remove': {param_types: [GObject.TYPE_INT]},
+        },
     },
     class KeyValueFrameRow extends Gtk.ListBoxRow{
         _init(keyLabel, valueLabel, key, value, params){
@@ -925,14 +934,15 @@ var KeyValueFrameRow = GObject.registerClass(
             });
             editPopover.set_child(editPopoverBox);
 
-            const editButton = new Gtk.Button({
+            this.editButton = new Gtk.Button({
                 label: _("Edit"),
                 hasFrame: false,
             });
-            editButton.connect('clicked', ()=>{
+            this.editButton.connect('clicked', ()=>{
                 editPopover.popdown();
+                this.emit('edit');
             });
-            editPopoverBox.append(editButton);
+            editPopoverBox.append(this.editButton);
 
             const removeButton = new Gtk.Button({
                 label: _("Remove"),
@@ -940,6 +950,7 @@ var KeyValueFrameRow = GObject.registerClass(
             });
             removeButton.connect('clicked', ()=>{
                 editPopover.popdown();
+                this.emit('remove');
             });
             editPopoverBox.append(removeButton);
 
@@ -1144,6 +1155,12 @@ var Page = GObject.registerClass(
                 });
                 //this._mainBox.pack_start(label, false, true, 0);
                 log(this._mainBox);
+                this._mainBox.append(label);
+            } else if (typeof title === "string" && title == "") {
+                let label = new Gtk.Label({
+                    canFocus: false,
+                    marginTop: 20,
+                });
                 this._mainBox.append(label);
             } else if (title instanceof Gtk.Widget) {
                 this._mainBox.append(title);

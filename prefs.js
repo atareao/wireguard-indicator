@@ -54,11 +54,11 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             let servicesSection = new Widgets.ArrayKeyValueSetting(
                 settings, "services", _("Name"), _("Service"));
             preferencesPage.addFrame(_("Services"), servicesSection);
-
-            const frame = new Widgets.FrameRow({
-                marginTop: 20,
+            servicesSection.connect("edit", ()=>{
+                log("edit");
             });
-            const addServicesSection = preferencesPage.addFrame("", frame);
+
+            const addServicesSection = preferencesPage.addFrame("");
             const buttonAdd = new Gtk.Button({
                 iconName: 'add-symbolic',
                 hexpand: true,
@@ -68,9 +68,9 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             });
             addServicesSection.addWidget(_("Add more services"), buttonAdd);
 
-
-            let timeSection = preferencesPage.addFrame(_("Check time"));
-            timeSection.addWidgetSetting(settings, "checktime", new Widgets.NumberSetting(settings, "checktime", 5, 60 * 100));
+            const checkPage = new Widgets.Page();
+            const checkSection = checkPage.addFrame(_("Check time"));
+            checkSection.addWidgetSetting(settings, "checktime", new Widgets.NumberSetting(settings, "checktime", 5, 60 * 100));
 
             const themePage = new Widgets.Page();
             const styleSection = themePage.addFrame(_("Theme"));
@@ -78,6 +78,7 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
 
             this.add(_("WireGuard Preferences"), "preferences-other-symbolic",
                      preferencesPage);
+            this.add(_("Check time"), "time", checkPage);
             this.add(_("Style"), "style", themePage);
             this.add(_("About"), "help-about-symbolic", new AboutPage());
         }
