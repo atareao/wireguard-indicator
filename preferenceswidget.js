@@ -894,6 +894,11 @@ var Frame = GObject.registerClass(
                 widget
             );
         }
+        addWidget(labelText, widget){
+            const row = new FrameRow();
+            row.addWidget(labelText, widget);
+            this.addRow(row);
+        }
     }
 );
 
@@ -950,18 +955,20 @@ var KeyValueFrameRow = GObject.registerClass(
             this._grid.attach(new Gtk.Label({
                 label: valueLabel,
                 halign: Gtk.Align.START,
-            }), 0, 1, 1, 1);
+            }), 2, 0, 1, 1);
             this._valueEntry = new Gtk.Entry({
                 text: value,
             });
-            this._grid.attach(this._valueEntry, 1, 1, 1, 1);
+            this._grid.attach(this._valueEntry, 3, 0, 1, 1);
             const menuEditButton = new Gtk.MenuButton({
                 iconName: 'view-more-symbolic',
                 popover: editPopover,
                 hexpand: true,
-                halign: Gtk.Align.END
+                vexpand: false,
+                halign: Gtk.Align.END,
+                valign: Gtk.Align.CENTER,
             });
-            this._grid.attach(menuEditButton, 2, 0, 1, 2);
+            this._grid.attach(menuEditButton, 4, 0, 1, 1);
         }
     }
 );
@@ -991,6 +998,7 @@ var FrameRow = GObject.registerClass(
             this._grid.attach(widget, this._numberOfChildren, 0, 1, 1);
             this._numberOfChildren++;
         }
+
         addLabel(key, value){
             const keyLabel = new Gtk.Label({
                 label: key
@@ -1004,7 +1012,15 @@ var FrameRow = GObject.registerClass(
             });
             this.add(valueLabel);
         }
-        
+
+        addWidget(labelText, button){
+            const label = new Gtk.Label({
+                label: labelText
+            });
+            this.add(label);
+            this.add(button);
+        }
+
         setVerticalAlignmentBottom(){
             this._grid.vexpand = true;
             this._grid.valign = Gtk.Align.END;

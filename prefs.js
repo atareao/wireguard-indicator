@@ -47,12 +47,26 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
 
             var settings = Convenience.getSettings();
 
-            let indicatorSection = preferencesPage.addFrame(_("Indicator options"));
+            let indicatorSection = preferencesPage.addFrame(
+                _("Indicator options"));
             indicatorSection.addGSetting(settings, "services");
 
             let servicesSection = new Widgets.ArrayKeyValueSetting(
                 settings, "services", _("Name"), _("Service"));
             preferencesPage.addFrame(_("Services"), servicesSection);
+
+            const frame = new Widgets.FrameRow({
+                marginTop: 20,
+            });
+            const addServicesSection = preferencesPage.addFrame("", frame);
+            const buttonAdd = new Gtk.Button({
+                iconName: 'add-symbolic',
+                hexpand: true,
+                vexpand: false,
+                halign: Gtk.Align.END,
+                valign: Gtk.Align.CENTER,
+            });
+            addServicesSection.addWidget(_("Add more services"), buttonAdd);
 
 
             let timeSection = preferencesPage.addFrame(_("Check time"));
