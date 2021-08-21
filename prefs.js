@@ -60,7 +60,7 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
 
             const addServicesSection = preferencesPage.addFrame("");
             const buttonAdd = new Gtk.Button({
-                iconName: 'add-symbolic',
+                iconName: 'list-add-symbolic',
                 hexpand: true,
                 vexpand: false,
                 halign: Gtk.Align.END,

@@ -7,32 +7,39 @@ const Extension = ExtensionUtils.getCurrentExtension();
 const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
 
-var EntryDialog = GObject.registerClass(
+var KeyValueDialog = GObject.registerClass(
     class EntryDialog extends Gtk.Dialog{
-        _init(parent, title, text1, text2){
+        _init(parent, title, key, value){
             super._init({
                 title: title,
-                transient_for: parent.get_root(),
-                modal: true
+                transientFor: parent.get_root(),
+                modal: true,
+                use_header_bar: true
             });
             let grid = new Gtk.Grid({
-                rowSpacing: 5,
-                columnSpacing: 5,
-                marginTop: 5,
-                marginBottom: 5,
-                marginStart: 5,
-                marginEnd:5,
+                marginTop: 10,
+                marginBottom: 10,
+                marginStart: 10,
+                marginEnd:10,
+                columnSpacing: 20,
+                rowSpacing: 20,
                 hexpand: false,
                 halign: Gtk.Align.CENTER
             });
             grid.insert_after(this.get_content_area(), null);
 
-            let label1 = Gtk.Label.new(text1);
+            let label1 = new Gtk.Label({
+                halign: Gtk.Align.START,
+                label: key
+            });
             grid.attach(label1, 0, 0, 1, 1);
             this._entry1 = new Gtk.Entry();
             grid.attach(this._entry1, 1, 0, 1, 1);
 
-            let label2 = Gtk.Label.new(text2);
+            let label2 = new Gtk.Label({
+                halign: Gtk.Align.START,
+                label: value
+            });
             grid.attach(label2, 0, 1, 1, 1);
             this._entry2 = new Gtk.Entry();
             grid.attach(this._entry2, 1, 1, 1, 1);
@@ -41,17 +48,17 @@ var EntryDialog = GObject.registerClass(
             this.add_button(_('Ok'), Gtk.ResponseType.OK);
         }
 
-        getEntry1(){
+        getKey(){
             return this._entry1.get_text();
         }
-        setEntry1(entry1){
-            this._entry1.set_text(entry1);
+        setKey(key){
+            this._entry1.set_text(key);
         }
-        getEntry2(){
+        getValue(){
             return this._entry2.get_text();
         }
-        setEntry2(entry2){
-            this._entry2.set_text(entry2);
+        setValue(value){
+            this._entry2.set_text(value);
         }
     }
 );

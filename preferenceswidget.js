@@ -31,6 +31,34 @@ const _ = Gettext.gettext;
 
 const DialogWidgets = Extension.imports.dialogwidgets;
 
+var KeyValue = GObject.registerClass(
+    {
+        Properties:{
+            'key': GObject.ParamSpec.string(
+                'key-property',
+                'Key Property',
+                'The Key property',
+                GObject.ParamFlags.READWRITE,
+                ''),
+            'value': GObject.ParamSpec.string(
+                'value-property',
+                'Value Property',
+                'The Value property',
+                GObject.ParamFlags.READWRITE,
+                ''),
+        }
+    },
+    class KeyValue extends GObject.Object{
+        _init(key, value){
+            super._init();
+            this._key = key
+            this._value = value
+        }
+        getKey(){
+            return this._key;
+        }
+    }
+)
 
 var ColorSetting = GObject.registerClass(
     {
@@ -373,8 +401,9 @@ var ArrayKeyValueSetting = GObject.registerClass(
                 activate_on_single_click: true,
                 selectionMode: Gtk.SelectionMode.NONE,
             });
+            this._numberOfChildren = 0;
             this.set_child(this._list);
-            this._list.set_header_func(this._header_func);
+            //this._list.set_header_func(this._header_func);
             this._load();
         }
         _header_func(row, before){
@@ -393,13 +422,49 @@ var ArrayKeyValueSetting = GObject.registerClass(
                 const [key, value] = items[i].split("|");
                 const frameRow = new KeyValueFrameRow(
                     this._keyLabel, this._valueLabel, key, value);
+                frameRow.connect("remove", ()=>{
+                    this.removeRow(frameRow)
+                    this.updateSettings();
+                });
+                frameRow.connect("edit", ()=>{
+                    const dialog = new DialogWidgets.KeyValueDialog(
+                        this, _("Edit"), this._keyLabel, this._valueLabel);
+                    dialog.setKey(frameRow.getKey());
+                    dialog.setValue(frameRow.getValue());
+                    dialog.connect("response", (widget, response_id)=>{
+                        const new_name = dialog.getKey();
+                        const new_service = dialog.getValue();
+                        if(response_id == Gtk.ResponseType.OK){
+                            frameRow.setKey(new_name);
+                            frameRow.setValue(new_service);
+                            this.updateSettings();
+                        }
+                        dialog.hide();
+                        dialog.destroy();
+                    });
+                    dialog.show();
+                });
                 this.addRow(frameRow);
             }
+            this.updateSettings();
         }
         removeRow(row){
             if(row){
                 this._list.remove(row);
+                this._numberOfChildren--;
             }
+        }
+        updateSettings(){
+            this._settings.set_strv(this._keyName, this.getValues());
+        }
+        getValues(){
+            const values = [];
+            for(let i = this._numberOfChildren - 1; i >= 0; i--){
+                const row = this._list.get_row_at_index(i);
+                const entry = row.getKey() + "|" + row.getValue();
+                values.push(entry);
+            }
+            return values;
         }
         removeAllRows(){
             const numberOfRows = this._list.length;
@@ -411,6 +476,7 @@ var ArrayKeyValueSetting = GObject.registerClass(
         }
         addRow(row){
             this._list.append(row);
+            this._numberOfChildren++;
             return row;
         }
     }
@@ -457,11 +523,11 @@ var ArrayStringSetting = GObject.registerClass(
             let button_add = Gtk.Button.new_from_icon_name(
                 'list-add-symbolic');
             button_add.connect('clicked', () =>{
-                let dialog = new DialogWidgets.EntryDialog(_(
+                let dialog = new DialogWidgets.KeyValueDialog(_(
                     'Name'), _('Service'));
                 if (dialog.run() == Gtk.ResponseType.OK){
-                    let new_name = dialog.getEntry1();
-                    let new_service = dialog.getEntry2();
+                    let new_name = dialog.getKey();
+                    let new_service = dialog.getValue();
                     let new_entry = new_name + "|" + new_service;
                     log(new_entry);
                     if(!this.get_values().includes(new_entry)){
@@ -911,8 +977,8 @@ var KeyValueFrameRow = GObject.registerClass(
     {
         GTypeName: (Extension.uuid + '.KeyValueFrameRow').replace(/[\W_]+/g, '_'),
         Signals: {
-            'edit': {param_types: [GObject.TYPE_INT]},
-            'remove': {param_types: [GObject.TYPE_INT]},
+            'edit': {param_types: [GObject.TYPE_OBJECT]},
+            'remove': {param_types: [GObject.TYPE_OBJECT]},
         },
     },
     class KeyValueFrameRow extends Gtk.ListBoxRow{
@@ -940,7 +1006,7 @@ var KeyValueFrameRow = GObject.registerClass(
             });
             this.editButton.connect('clicked', ()=>{
                 editPopover.popdown();
-                this.emit('edit');
+                this.emit('edit', this);
             });
             editPopoverBox.append(this.editButton);
 
@@ -950,7 +1016,7 @@ var KeyValueFrameRow = GObject.registerClass(
             });
             removeButton.connect('clicked', ()=>{
                 editPopover.popdown();
-                this.emit('remove');
+                this.emit('remove', this);
             });
             editPopoverBox.append(removeButton);
 
@@ -980,6 +1046,18 @@ var KeyValueFrameRow = GObject.registerClass(
                 valign: Gtk.Align.CENTER,
             });
             this._grid.attach(menuEditButton, 4, 0, 1, 1);
+        }
+        getValue(){
+            return this._valueEntry.get_text();
+        }
+        setValue(value){
+            return this._valueEntry.set_text(value);
+        }
+        getKey(){
+            return this._keyEntry.get_text();
+        }
+        setKey(key){
+            return this._keyEntry.set_text(key);
         }
     }
 );
