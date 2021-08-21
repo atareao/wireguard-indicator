@@ -59,6 +59,7 @@ var WireGuardIndicator = GObject.registerClass(
         _init(){
             super._init(St.Align.START);
             this._settings = Convenience.getSettings();
+            this._isActive = null;
 
             /* Icon indicator */
             let theme = Gtk.IconTheme.get_default();
@@ -126,11 +127,21 @@ var WireGuardIndicator = GObject.registerClass(
                 this.services_section.actor.show();
             });
         }
+        _checkStatus(){
+            let isActive = false;
+            this._servicesSwitches.forEach((serviceSwitch)=>{
+                if(serviceSwitch.state){
+                    isActive = true;
+                }
+            });
+            if(this._isActive == null || this._isActive != isActive){
+                this._isActive = isActive;
+                this._set_icon_indicator(this._isActive);
+            }
+        }
         _toggleSwitch(widget, value){
             try {
-                log("=====================");
                 let service = widget.label.get_name();
-                log(service);
                 let setstatus = ((value == true) ? 'start': 'stop');
                 let command = ['systemctl', setstatus, service];
                 let proc = Gio.Subprocess.new(
@@ -155,7 +166,6 @@ var WireGuardIndicator = GObject.registerClass(
         }
 
         _update(){
-            this._set_icon_indicator(true);
             this._servicesSwitches.forEach((serviceSwitch, index, array)=>{
                 let service = serviceSwitch.label.name;
                 try{
@@ -168,14 +178,12 @@ var WireGuardIndicator = GObject.registerClass(
                         try {
                             let [, stdout, stderr] = proc.communicate_utf8_finish(res);
                             let active = (stdout.indexOf('Active: active') > -1);
-                            if(!active){
-                                this._set_icon_indicator(false);
-                            }
                             GObject.signal_handlers_block_by_func(serviceSwitch,
                                                           this._toggleSwitch);
                             serviceSwitch.setToggleState(active);
                             GObject.signal_handlers_unblock_by_func(serviceSwitch,
                                                             this._toggleSwitch);
+                            this._checkStatus();
                         } catch (e) {
                             logError(e);
                         }
@@ -184,6 +192,7 @@ var WireGuardIndicator = GObject.registerClass(
                     logError(e);
                 }
             });
+            return true;
         }
 
         _set_icon_indicator(active){
@@ -226,7 +235,6 @@ var WireGuardIndicator = GObject.registerClass(
         }
 
         _settingsChanged(){
-            log("settingsChanged");
             this._loadConfiguration();
             this._update();
             if(this._sourceId > 0){
@@ -235,7 +243,6 @@ var WireGuardIndicator = GObject.registerClass(
             this._sourceId = GLib.timeout_add_seconds(
                 GLib.PRIORITY_DEFAULT, this._checktime,
                 this._update.bind(this));
-            log(this._sourceId);
         }
 
         disableUpdate(){

@@ -420,31 +420,7 @@ var ArrayKeyValueSetting = GObject.registerClass(
             const items = this._settings.get_strv(this._keyName);
             for(let i=0; i < items.length; i++){
                 const [key, value] = items[i].split("|");
-                const frameRow = new KeyValueFrameRow(
-                    this._keyLabel, this._valueLabel, key, value);
-                frameRow.connect("remove", ()=>{
-                    this.removeRow(frameRow)
-                    this.updateSettings();
-                });
-                frameRow.connect("edit", ()=>{
-                    const dialog = new DialogWidgets.KeyValueDialog(
-                        this, _("Edit"), this._keyLabel, this._valueLabel);
-                    dialog.setKey(frameRow.getKey());
-                    dialog.setValue(frameRow.getValue());
-                    dialog.connect("response", (widget, response_id)=>{
-                        const new_name = dialog.getKey();
-                        const new_service = dialog.getValue();
-                        if(response_id == Gtk.ResponseType.OK){
-                            frameRow.setKey(new_name);
-                            frameRow.setValue(new_service);
-                            this.updateSettings();
-                        }
-                        dialog.hide();
-                        dialog.destroy();
-                    });
-                    dialog.show();
-                });
-                this.addRow(frameRow);
+                this.addRow(key, value);
             }
             this.updateSettings();
         }
@@ -455,14 +431,22 @@ var ArrayKeyValueSetting = GObject.registerClass(
             }
         }
         updateSettings(){
-            this._settings.set_strv(this._keyName, this.getValues());
+            this._settings.set_strv(this._keyName, this.getSettings());
         }
-        getValues(){
+        getSettings(){
             const values = [];
             for(let i = this._numberOfChildren - 1; i >= 0; i--){
                 const row = this._list.get_row_at_index(i);
                 const entry = row.getKey() + "|" + row.getValue();
                 values.push(entry);
+            }
+            return values;
+        }
+        getValues(){
+            const values = [];
+            for(let i = this._numberOfChildren - 1; i >= 0; i--){
+                const row = this._list.get_row_at_index(i);
+                values.push(row.getValue());
             }
             return values;
         }
@@ -474,10 +458,37 @@ var ArrayKeyValueSetting = GObject.registerClass(
             }
             this._list.show();
         }
-        addRow(row){
-            this._list.append(row);
+        addRow(key, value){
+            if(this.getValues().includes(value)){
+                return null
+            }
+            const frameRow = new KeyValueFrameRow(
+                this._keyLabel, this._valueLabel, key, value);
+            frameRow.connect("remove", ()=>{
+                this.removeRow(frameRow)
+                this.updateSettings();
+            });
+            frameRow.connect("edit", ()=>{
+                const dialog = new DialogWidgets.KeyValueDialog(
+                    this, _("Edit"), this._keyLabel, this._valueLabel);
+                dialog.setKey(frameRow.getKey());
+                dialog.setValue(frameRow.getValue());
+                dialog.connect("response", (widget, response_id)=>{
+                    const new_name = dialog.getKey();
+                    const new_service = dialog.getValue();
+                    if(response_id == Gtk.ResponseType.OK){
+                        frameRow.setKey(new_name);
+                        frameRow.setValue(new_service);
+                        this.updateSettings();
+                    }
+                    dialog.hide();
+                    dialog.destroy();
+                });
+                dialog.show();
+            });
+            this._list.append(frameRow);
             this._numberOfChildren++;
-            return row;
+            return frameRow;
         }
     }
 );

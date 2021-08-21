@@ -33,6 +33,8 @@ const AboutPage = Extension.imports.aboutpage.AboutPage;
 const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
 
+const DialogWidgets = Extension.imports.dialogwidgets;
+
 
 function init() {
     Convenience.initTranslations();
@@ -47,12 +49,11 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
 
             var settings = Convenience.getSettings();
 
-            let indicatorSection = preferencesPage.addFrame(
-                _("Indicator options"));
-            indicatorSection.addGSetting(settings, "services");
+            const keyLabel = _("Name");
+            const valueLabel = _("Service");
 
             let servicesSection = new Widgets.ArrayKeyValueSetting(
-                settings, "services", _("Name"), _("Service"));
+                settings, "services", keyLabel, valueLabel);
             preferencesPage.addFrame(_("Services"), servicesSection);
             servicesSection.connect("edit", ()=>{
                 log("edit");
@@ -66,11 +67,28 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
                 halign: Gtk.Align.END,
                 valign: Gtk.Align.CENTER,
             });
+            buttonAdd.connect('clicked',()=>{
+                const dialog = new DialogWidgets.KeyValueDialog(
+                    this, _("Add"), keyLabel, valueLabel);
+                dialog.connect("response", (widget, response_id)=>{
+                    const new_name = dialog.getKey();
+                    const new_service = dialog.getValue();
+                    if(response_id == Gtk.ResponseType.OK){
+                        servicesSection.addRow(new_name, new_service);
+                        servicesSection.updateSettings();
+                    }
+                    dialog.hide();
+                    dialog.destroy();
+                });
+                dialog.show();
+            });
             addServicesSection.addWidget(_("Add more services"), buttonAdd);
 
             const checkPage = new Widgets.Page();
             const checkSection = checkPage.addFrame(_("Check time"));
-            checkSection.addWidgetSetting(settings, "checktime", new Widgets.NumberSetting(settings, "checktime", 5, 60 * 100));
+            checkSection.addWidgetSetting(
+                settings, "checktime",
+                new Widgets.NumberSetting(settings, "checktime", 5, 60 * 100));
 
             const themePage = new Widgets.Page();
             const styleSection = themePage.addFrame(_("Theme"));
