@@ -133,8 +133,8 @@ IN THE SOFTWARE
                 orientation: Gtk.Orientation.HORIZONTAL,
                 halign: Gtk.Align.CENTER
             });
-            const ghurl = "https://github.com/atareao/wireguard-indicator";
-            const ghissue = "https://github.com/atareao/wireguard-indicator/issues";
+            const ghurl = Extension.metadata.description;
+            const ghissue = `${ghurl}/issues`;
             
             const moreinfo = _("More information");
             page.appendImageWithLabel(
