@@ -31,35 +31,6 @@ const _ = Gettext.gettext;
 
 const DialogWidgets = Extension.imports.dialogwidgets;
 
-var KeyValue = GObject.registerClass(
-    {
-        Properties:{
-            'key': GObject.ParamSpec.string(
-                'key-property',
-                'Key Property',
-                'The Key property',
-                GObject.ParamFlags.READWRITE,
-                ''),
-            'value': GObject.ParamSpec.string(
-                'value-property',
-                'Value Property',
-                'The Value property',
-                GObject.ParamFlags.READWRITE,
-                ''),
-        }
-    },
-    class KeyValue extends GObject.Object{
-        _init(key, value){
-            super._init();
-            this._key = key
-            this._value = value
-        }
-        getKey(){
-            return this._key;
-        }
-    }
-)
-
 var ColorSetting = GObject.registerClass(
     {
         GTypeName: (Extension.uuid + '.ColorSetting').replace(/[\W_]+/g,'_')

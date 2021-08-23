@@ -8,6 +8,9 @@ const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
 
 var KeyValueDialog = GObject.registerClass(
+    {
+        GTypeName: (Extension.uuid + '.KeyValueDialog').replace(/[\W_]+/g,'_')
+    },
     class EntryDialog extends Gtk.Dialog{
         _init(parent, title, keyLabel, valueLabel, key="", value=""){
             super._init({

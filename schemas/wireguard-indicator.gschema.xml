@@ -6,6 +6,16 @@
             <summary>Services name</summary>
             <description>Set the name of the systemd services</description>
         </key>
+        <key name="nmcli" type="b">
+            <default>false</default>
+            <summary>Use nmcli</summary>
+            <description>Use nmcli to manage WireGuard connections</description>
+        </key>
+        <key name="sudo" type="b">
+            <default>false</default>
+            <summary>Use sudo</summary>
+            <description>Enable use sudo with service</description>
+        </key>
         <key name="checktime" type="i" >
             <default>5</default>
             <summary>Check time</summary>
