@@ -1,5 +1,3 @@
-#!/usr/bin/env gjs
-
 /*
  * wireguard-indicator@atareao.es
  *
@@ -35,7 +33,6 @@ const _ = Gettext.gettext;
 
 const DialogWidgets = Extension.imports.dialogwidgets;
 
-
 function init() {
     Convenience.initTranslations();
 }
@@ -51,6 +48,20 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
 
             const keyLabel = _("Name");
             const valueLabel = _("Service");
+
+            const nmcliFrame = new Widgets.Frame({
+                marginBottom: 15,
+            });
+            const nmcliSection = preferencesPage.addFrame(_("nmcli"),
+                                                          nmcliFrame);
+            nmcliSection.addGSetting(settings, "nmcli");
+
+            const sudoFrame = new Widgets.Frame({
+                marginBottom: 15,
+            });
+            const sudoSection = preferencesPage.addFrame(_("Sudo"),
+                                                         sudoFrame);
+            sudoSection.addGSetting(settings, "sudo");
 
             let servicesSection = new Widgets.ArrayKeyValueSetting(
                 settings, "services", keyLabel, valueLabel);
@@ -84,6 +95,14 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             });
             addServicesSection.addWidget(_("Add more services"), buttonAdd);
 
+            settings.connect("changed", (settings, key)=>{
+                if(key == "nmcli"){
+                    const value = !settings.get_boolean("nmcli");
+                    sudoSection.set_sensitive(value);
+                    servicesSection.set_sensitive(value);
+                    addServicesSection.set_sensitive(value);
+                }
+            });
             const checkPage = new Widgets.Page();
             const checkSection = checkPage.addFrame(_("Check time"));
             checkSection.addWidgetSetting(
@@ -99,6 +118,11 @@ var WireGuarIndicatorPreferencesWidget = GObject.registerClass(
             this.add(_("Check time"), "time", checkPage);
             this.add(_("Style"), "style", themePage);
             this.add(_("About"), "help-about-symbolic", new AboutPage());
+
+            const nmcliFile = Gio.File.new_for_path("/usr/bin/nmcli");
+            if(!nmcliFile.query_exists(null)){
+                settings.set_boolean("nmcli", false);
+            }
         }
     }
 );
