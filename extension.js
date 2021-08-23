@@ -36,6 +36,7 @@ const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
+const ByteArray = imports.byteArray;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = ExtensionUtils.getCurrentExtension();
@@ -52,6 +53,40 @@ function notify(msg, details, icon='tasker') {
     let notification = new MessageTray.Notification(source, msg, details);
     notification.setTransient(true);
     source.notify(notification);
+}
+
+function getNMCliServices(){
+    const services = [];
+    try {
+        let [, stdout, stderr, status] = GLib.spawn_command_line_sync('nmcli c show');
+
+        if (status !== 0) {
+            if (stderr instanceof Uint8Array)
+                stderr = ByteArray.toString(stderr);
+
+            throw new Error(stderr);
+        }
+
+        if (stdout instanceof Uint8Array)
+            stdout = ByteArray.toString(stdout);
+
+        // Now were done blocking the main loop, phewf!
+        const lines = stdout.split('\n');
+        const name_length = lines[0].indexOf('UUID');
+        const uuid_length = lines[0].indexOf('TYPE');
+        const type_length = lines[0].indexOf('DEVICE');
+        for(let i = 1; i < lines.length; i++){
+            const name = lines[i].substring(0, name_length).trim();
+            const uuid = lines[i].substring(name_length, uuid_length).trim();
+            const type = lines[i].substring(uuid_length, type_length).trim();
+            if(type == "wireguard"){
+                services.push(`${name}|${uuid}`);
+            }
+        }
+    } catch (e) {
+        logError(e);
+    }
+    return services;
 }
 
 var WireGuardIndicator = GObject.registerClass(
@@ -102,7 +137,13 @@ var WireGuardIndicator = GObject.registerClass(
                                    this._settingsChanged.bind(this));
         }
         _loadConfiguration(){
-            this._services = this._getValue('services');
+            this._usenmcli = this._getValue('nmcli');
+            if(this._usenmcli){
+                this._services = getNMCliServices();
+            }else{
+                this._services = this._getValue('services');
+            }
+            this._usesudo = this._getValue('sudo');
             this._checktime = this._getValue('checktime');
             if(this._checktime < 5){
                 this._checktime = 5;
@@ -142,8 +183,18 @@ var WireGuardIndicator = GObject.registerClass(
         _toggleSwitch(widget, value){
             try {
                 let service = widget.label.get_name();
-                let setstatus = ((value == true) ? 'start': 'stop');
-                let command = ['systemctl', setstatus, service];
+                let command;
+                if(this._usenmcli){
+                    const setstatus = ((value == true) ? 'up': 'down');
+                    command = ['nmcli', 'c', setstatus, 'uuid', service]
+                }else{
+                    const setstatus = ((value == true) ? 'start': 'stop');
+                    command = ['systemctl', setstatus, service];
+                    if(this._usesudo){
+                        command.unshift('sudo');
+                    }
+                }
+                log(command);
                 let proc = Gio.Subprocess.new(
                     command,
                     Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
@@ -169,7 +220,13 @@ var WireGuardIndicator = GObject.registerClass(
             this._servicesSwitches.forEach((serviceSwitch, index, array)=>{
                 let service = serviceSwitch.label.name;
                 try{
-                    let command = ['systemctl', 'status', service];
+                    let command;
+                    if(this._usenmcli){
+                        command = ['nmcli', 'c', 'show', '--active', 'uuid', service];
+                    }else{
+                        command = ['systemctl', 'status', service];
+                    }
+                    log(command);
                     let proc = Gio.Subprocess.new(
                         command,
                         Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
@@ -177,7 +234,13 @@ var WireGuardIndicator = GObject.registerClass(
                     proc.communicate_utf8_async(null, null, (proc, res) => {
                         try {
                             let [, stdout, stderr] = proc.communicate_utf8_finish(res);
-                            let active = (stdout.indexOf('Active: active') > -1);
+                            let active;
+                            if(this._usenmcli){
+                                active = stdout.length > 0;
+                            }else{
+                                active = (stdout.indexOf('Active: active') > -1);
+                            }
+                            log(`========= ${active} ============`);
                             GObject.signal_handlers_block_by_func(serviceSwitch,
                                                           this._toggleSwitch);
                             serviceSwitch.setToggleState(active);
@@ -213,24 +276,6 @@ var WireGuardIndicator = GObject.registerClass(
                 return null;
             }
             let icon = Gio.icon_new_for_string(file_icon.get_path());
-            return icon;
-        }
-
-        _create_help_menu_item(text, icon_name, url){
-            let icon = this._get_icon(icon_name);
-            let menu_item = new PopupMenu.PopupImageMenuItem(text, icon);
-            menu_item.connect('activate', () => {
-                Gio.app_info_launch_default_for_uri(url, null);
-            });
-            return menu_item;
-        }
-        _createActionButton(iconName, accessibleName){
-            let icon = new St.Button({ reactive:true,
-                                       can_focus: true,
-                                       track_hover: true,
-                                       accessible_name: accessibleName,
-                                       style_class: 'system-menu-action'});
-            icon.child = new St.Icon({icon_name: iconName });
             return icon;
         }
 
