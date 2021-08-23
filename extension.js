@@ -194,7 +194,6 @@ var WireGuardIndicator = GObject.registerClass(
                         command.unshift('sudo');
                     }
                 }
-                log(command);
                 let proc = Gio.Subprocess.new(
                     command,
                     Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
@@ -226,7 +225,6 @@ var WireGuardIndicator = GObject.registerClass(
                     }else{
                         command = ['systemctl', 'status', service];
                     }
-                    log(command);
                     let proc = Gio.Subprocess.new(
                         command,
                         Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDERR_PIPE
@@ -240,7 +238,6 @@ var WireGuardIndicator = GObject.registerClass(
                             }else{
                                 active = (stdout.indexOf('Active: active') > -1);
                             }
-                            log(`========= ${active} ============`);
                             GObject.signal_handlers_block_by_func(serviceSwitch,
                                                           this._toggleSwitch);
                             serviceSwitch.setToggleState(active);

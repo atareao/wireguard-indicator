@@ -511,7 +511,6 @@ var ArrayStringSetting = GObject.registerClass(
                     let new_name = dialog.getKey();
                     let new_service = dialog.getValue();
                     let new_entry = new_name + "|" + new_service;
-                    log(new_entry);
                     if(!this.get_values().includes(new_entry)){
                         model.set(model.append(), [0, 1], [new_name, new_service]);
                     }
@@ -567,7 +566,6 @@ var ArrayStringSetting = GObject.registerClass(
                 let new_name = model.get_value(iter, 0);
                 let new_service = model.get_value(iter, 1);
                 let new_entry = new_name + "|" + new_service;
-                log(new_entry);
                 values.push(new_entry);
                 exists = model.iter_next(iter);
             }
@@ -575,7 +573,6 @@ var ArrayStringSetting = GObject.registerClass(
         }
 
         _on_model_changed(){
-            log("=== Model Changed ===");
             this._settings.set_strv(this._keyName, this.get_values());
             this.get_toplevel().set_focus(null);
         }
@@ -1121,7 +1118,6 @@ var Page = GObject.registerClass(
                 marginBottom: 32,
                 orientation: Gtk.Orientation.VERTICAL
             });
-            log(this._mainBox);
             this.set_child(this._mainBox);
         }
         addLabel(text){
@@ -1214,7 +1210,6 @@ var Page = GObject.registerClass(
                     label: "<b>" + title + "</b>"
                 });
                 //this._mainBox.pack_start(label, false, true, 0);
-                log(this._mainBox);
                 this._mainBox.append(label);
             } else if (typeof title === "string" && title == "") {
                 let label = new Gtk.Label({
@@ -1368,9 +1363,7 @@ var StackListBox = GObject.registerClass(
             this.valign = Gtk.Align.FILL;
             this.vexpand = true;
             this.hexpand = false;
-            log("Antes");
             this.settingsFrameStack = widget.settingsFrameStack;
-            log(this.settingsFrameStack);
             this.settingsListStack = widget.settingsListStack
             this.connect("row-selected", (self, row) => {
                 if(row){
@@ -1532,8 +1525,6 @@ var ListWithStack = GObject.registerClass(
                 hexpand: false
             });
             this._list.connect("row-selected", (self, row)=>{
-                log("selected");
-                log(row.stackName);
                 this._stack.set_visible_child_name(row.stackName);
             });
             scrolledListWindow.set_child(this._list);
