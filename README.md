@@ -64,13 +64,11 @@ Enable the extension by click the switch.
 
 <span id="project_title">WireGuard Indicator</span> provide two ways to connect to your wireguard vpn:
 
-- nmcli
+-   nmcli
+  With `nmcli` we need to add our `wg.conf` file connection first by `sudo nmcli connection import type wireguard file /path/to/your/your-wg-file.conf`, since <span id="project_title">WireGuard Indicator</span> pick up the connection of `type=wireguard` they'll show up on the drop down and toggled right away after import (note: you may want to disable the auto connect via `nm-connection-editor` or your distro network setting).
 
-	With `nmcli` we need to add our `wg.conf` file connection first by `sudo nmcli connection import type wireguard file /path/to/your/your-wg-file.conf`, since <span id="project_title">WireGuard Indicator</span> pick up the connection of `type=wireguard` they'll show up on the drop down and toggled right away after import [note: you may want to disable the auto connect via `nm-connection-editor` or your distro network setting].
-
-- systemd
-
-	Add wireguard to systemd by running `sudo systemctl enable wg-quick@yourconfig.service`, make sure you have your `/etc/wireguard/config.conf` in place.
+-   systemd
+  Add wireguard to systemd by running `sudo systemctl enable wg-quick@yourconfig.service`, make sure you have your `/etc/wireguard/config.conf` in place.
 
 <!-- start using -->
 ## Using <span id="project_title">WireGuard Indicator</span>
