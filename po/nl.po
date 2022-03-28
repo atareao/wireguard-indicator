@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the WireGuard Indicator package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-23 20:30+0200\n"
+"POT-Creation-Date: 2022-03-28 07:49+0200\n"
 "PO-Revision-Date: 2022-02-27 13:51+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -58,13 +58,35 @@ msgstr "Donker thema gebruiken"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Gebruik het donkere thema in plaats van het lichte"
 
-#: extension.js:120
-msgid "Wireguard status"
-msgstr "Wireguard-status"
+#: preferenceswidget.js:224 testwidgets.js:222
+msgid "Nothing"
+msgstr "Niets"
 
-#: extension.js:128
-msgid "Settings"
-msgstr "Voorkeuren"
+#: preferenceswidget.js:237 testwidgets.js:235
+msgid "True"
+msgstr "Waar"
+
+#: preferenceswidget.js:250 testwidgets.js:248
+msgid "False"
+msgstr "Niet waar"
+
+#: preferenceswidget.js:444 preferenceswidget.js:983
+msgid "Edit"
+msgstr "Bewerken"
+
+#: preferenceswidget.js:491 preferenceswidget.js:509 preferenceswidget.js:538
+#: testwidgets.js:399 testwidgets.js:417 testwidgets.js:447 prefs.js:49
+msgid "Name"
+msgstr "Naam"
+
+#: preferenceswidget.js:497 preferenceswidget.js:509 preferenceswidget.js:538
+#: testwidgets.js:405 testwidgets.js:417 testwidgets.js:447 prefs.js:50
+msgid "Service"
+msgstr "Dienst"
+
+#: preferenceswidget.js:993
+msgid "Remove"
+msgstr "Verwijderen"
 
 #: dialogwidgets.js:55 testwidgets.js:1123
 msgid "Cancel"
@@ -73,6 +95,54 @@ msgstr "Annuleren"
 #: dialogwidgets.js:56 testwidgets.js:1124
 msgid "Ok"
 msgstr "Oké"
+
+#: extension.js:120
+msgid "Wireguard status"
+msgstr "Wireguard-status"
+
+#: extension.js:128
+msgid "Settings"
+msgstr "Voorkeuren"
+
+#: prefs.js:55
+msgid "nmcli"
+msgstr "nmcli"
+
+#: prefs.js:62
+msgid "Sudo"
+msgstr "Sudo"
+
+#: prefs.js:68
+msgid "Services"
+msgstr "Diensten"
+
+#: prefs.js:83
+msgid "Add"
+msgstr "Toevoegen"
+
+#: prefs.js:96
+msgid "Add more services"
+msgstr "Voeg meer diensten toe"
+
+#: prefs.js:113
+msgid "Theme"
+msgstr "Thema"
+
+#: prefs.js:116
+msgid "WireGuard Preferences"
+msgstr "Wireguard-voorkeuren"
+
+#: prefs.js:119
+msgid "Style"
+msgstr "Stijl"
+
+#: prefs.js:120
+msgid "About"
+msgstr "Over"
+
+#: prefs.js:134
+msgid "WireGuard Indicator Configuration"
+msgstr "Wireguard-indicatorvoorkeuren"
 
 #: aboutpage.js:47
 msgid "Buy me a coffee"
@@ -137,73 +207,3 @@ msgstr "Meer informatie"
 #: aboutpage.js:142
 msgid "Report an issue"
 msgstr "Probleem melden"
-
-#: prefs.js:49 testwidgets.js:399 testwidgets.js:417 testwidgets.js:447
-#: preferenceswidget.js:491 preferenceswidget.js:509 preferenceswidget.js:539
-msgid "Name"
-msgstr "Naam"
-
-#: prefs.js:50 testwidgets.js:405 testwidgets.js:417 testwidgets.js:447
-#: preferenceswidget.js:497 preferenceswidget.js:509 preferenceswidget.js:539
-msgid "Service"
-msgstr "Dienst"
-
-#: prefs.js:55
-msgid "nmcli"
-msgstr "nmcli"
-
-#: prefs.js:62
-msgid "Sudo"
-msgstr "Sudo"
-
-#: prefs.js:68
-msgid "Services"
-msgstr "Diensten"
-
-#: prefs.js:83
-msgid "Add"
-msgstr "Toevoegen"
-
-#: prefs.js:96
-msgid "Add more services"
-msgstr "Voeg meer diensten toe"
-
-#: prefs.js:113
-msgid "Theme"
-msgstr "Thema"
-
-#: prefs.js:116
-msgid "WireGuard Preferences"
-msgstr "Wireguard-voorkeuren"
-
-#: prefs.js:119
-msgid "Style"
-msgstr "Stijl"
-
-#: prefs.js:120
-msgid "About"
-msgstr "Over"
-
-#: prefs.js:134
-msgid "WireGuard Indicator Configuration"
-msgstr "Wireguard-indicatorvoorkeuren"
-
-#: testwidgets.js:222 preferenceswidget.js:224
-msgid "Nothing"
-msgstr "Niets"
-
-#: testwidgets.js:235 preferenceswidget.js:237
-msgid "True"
-msgstr "Waar"
-
-#: testwidgets.js:248 preferenceswidget.js:250
-msgid "False"
-msgstr "Niet waar"
-
-#: preferenceswidget.js:444 preferenceswidget.js:986
-msgid "Edit"
-msgstr "Bewerken"
-
-#: preferenceswidget.js:996
-msgid "Remove"
-msgstr "Verwijderen"
