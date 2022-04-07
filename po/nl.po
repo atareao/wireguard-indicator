@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-28 07:49+0200\n"
+"POT-Creation-Date: 2022-04-07 06:15+0200\n"
 "PO-Revision-Date: 2022-02-27 13:51+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -58,36 +58,6 @@ msgstr "Donker thema gebruiken"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Gebruik het donkere thema in plaats van het lichte"
 
-#: preferenceswidget.js:224 testwidgets.js:222
-msgid "Nothing"
-msgstr "Niets"
-
-#: preferenceswidget.js:237 testwidgets.js:235
-msgid "True"
-msgstr "Waar"
-
-#: preferenceswidget.js:250 testwidgets.js:248
-msgid "False"
-msgstr "Niet waar"
-
-#: preferenceswidget.js:444 preferenceswidget.js:983
-msgid "Edit"
-msgstr "Bewerken"
-
-#: preferenceswidget.js:491 preferenceswidget.js:509 preferenceswidget.js:538
-#: testwidgets.js:399 testwidgets.js:417 testwidgets.js:447 prefs.js:49
-msgid "Name"
-msgstr "Naam"
-
-#: preferenceswidget.js:497 preferenceswidget.js:509 preferenceswidget.js:538
-#: testwidgets.js:405 testwidgets.js:417 testwidgets.js:447 prefs.js:50
-msgid "Service"
-msgstr "Dienst"
-
-#: preferenceswidget.js:993
-msgid "Remove"
-msgstr "Verwijderen"
-
 #: dialogwidgets.js:55 testwidgets.js:1123
 msgid "Cancel"
 msgstr "Annuleren"
@@ -96,13 +66,17 @@ msgstr "Annuleren"
 msgid "Ok"
 msgstr "Oké"
 
-#: extension.js:120
-msgid "Wireguard status"
-msgstr "Wireguard-status"
+#: prefs.js:49 preferenceswidget.js:491 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:399 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Name"
+msgstr "Naam"
 
-#: extension.js:128
-msgid "Settings"
-msgstr "Voorkeuren"
+#: prefs.js:50 preferenceswidget.js:497 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:405 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Service"
+msgstr "Dienst"
 
 #: prefs.js:55
 msgid "nmcli"
@@ -143,6 +117,26 @@ msgstr "Over"
 #: prefs.js:134
 msgid "WireGuard Indicator Configuration"
 msgstr "Wireguard-indicatorvoorkeuren"
+
+#: preferenceswidget.js:224 testwidgets.js:222
+msgid "Nothing"
+msgstr "Niets"
+
+#: preferenceswidget.js:237 testwidgets.js:235
+msgid "True"
+msgstr "Waar"
+
+#: preferenceswidget.js:250 testwidgets.js:248
+msgid "False"
+msgstr "Niet waar"
+
+#: preferenceswidget.js:444 preferenceswidget.js:983
+msgid "Edit"
+msgstr "Bewerken"
+
+#: preferenceswidget.js:993
+msgid "Remove"
+msgstr "Verwijderen"
 
 #: aboutpage.js:47
 msgid "Buy me a coffee"
@@ -207,3 +201,11 @@ msgstr "Meer informatie"
 #: aboutpage.js:142
 msgid "Report an issue"
 msgstr "Probleem melden"
+
+#: extension.js:120
+msgid "Wireguard status"
+msgstr "Wireguard-status"
+
+#: extension.js:128
+msgid "Settings"
+msgstr "Voorkeuren"

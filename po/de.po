@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-28 07:49+0200\n"
+"POT-Creation-Date: 2022-04-07 06:15+0200\n"
 "PO-Revision-Date: 2022-04-06 12:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -58,36 +58,6 @@ msgstr "Dunkles Theme"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Dunkles Theme aktivieren sonst helles Theme"
 
-#: preferenceswidget.js:224 testwidgets.js:222
-msgid "Nothing"
-msgstr "Nichts"
-
-#: preferenceswidget.js:237 testwidgets.js:235
-msgid "True"
-msgstr "Wahr"
-
-#: preferenceswidget.js:250 testwidgets.js:248
-msgid "False"
-msgstr "Falsch"
-
-#: preferenceswidget.js:444 preferenceswidget.js:983
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: preferenceswidget.js:491 preferenceswidget.js:509 preferenceswidget.js:538
-#: testwidgets.js:399 testwidgets.js:417 testwidgets.js:447 prefs.js:49
-msgid "Name"
-msgstr "Name"
-
-#: preferenceswidget.js:497 preferenceswidget.js:509 preferenceswidget.js:538
-#: testwidgets.js:405 testwidgets.js:417 testwidgets.js:447 prefs.js:50
-msgid "Service"
-msgstr "Dienst"
-
-#: preferenceswidget.js:993
-msgid "Remove"
-msgstr "Entfernen"
-
 #: dialogwidgets.js:55 testwidgets.js:1123
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -96,13 +66,17 @@ msgstr "Abbrechen"
 msgid "Ok"
 msgstr "Ok"
 
-#: extension.js:120
-msgid "Wireguard status"
-msgstr "Wireguard Status"
+#: prefs.js:49 preferenceswidget.js:491 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:399 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Name"
+msgstr "Name"
 
-#: extension.js:128
-msgid "Settings"
-msgstr "Einstellungen"
+#: prefs.js:50 preferenceswidget.js:497 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:405 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Service"
+msgstr "Dienst"
 
 #: prefs.js:55
 msgid "nmcli"
@@ -143,6 +117,26 @@ msgstr "Über"
 #: prefs.js:134
 msgid "WireGuard Indicator Configuration"
 msgstr "WireGuard-Indikator-Konfiguration"
+
+#: preferenceswidget.js:224 testwidgets.js:222
+msgid "Nothing"
+msgstr "Nichts"
+
+#: preferenceswidget.js:237 testwidgets.js:235
+msgid "True"
+msgstr "Wahr"
+
+#: preferenceswidget.js:250 testwidgets.js:248
+msgid "False"
+msgstr "Falsch"
+
+#: preferenceswidget.js:444 preferenceswidget.js:983
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: preferenceswidget.js:993
+msgid "Remove"
+msgstr "Entfernen"
 
 #: aboutpage.js:47
 msgid "Buy me a coffee"
@@ -207,3 +201,11 @@ msgstr "Mehr Informationen"
 #: aboutpage.js:142
 msgid "Report an issue"
 msgstr "Ein Problem melden"
+
+#: extension.js:120
+msgid "Wireguard status"
+msgstr "Wireguard Status"
+
+#: extension.js:128
+msgid "Settings"
+msgstr "Einstellungen"

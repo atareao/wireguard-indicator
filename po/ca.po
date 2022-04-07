@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WireGuard Indicator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-28 07:49+0200\n"
+"POT-Creation-Date: 2022-04-07 06:15+0200\n"
 "PO-Revision-Date: 2021-02-23 11:05+0100\n"
 "Last-Translator: Dani Talens <databio@gmail.com>\n"
 "Language-Team: Català\n"
@@ -60,37 +60,6 @@ msgstr "Tema fosc"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Estableix el tema fosc"
 
-#: preferenceswidget.js:224 testwidgets.js:222
-msgid "Nothing"
-msgstr "Res"
-
-#: preferenceswidget.js:237 testwidgets.js:235
-msgid "True"
-msgstr "Vertader"
-
-#: preferenceswidget.js:250 testwidgets.js:248
-msgid "False"
-msgstr "Fals"
-
-#: preferenceswidget.js:444 preferenceswidget.js:983
-msgid "Edit"
-msgstr ""
-
-#: preferenceswidget.js:491 preferenceswidget.js:509 preferenceswidget.js:538
-#: testwidgets.js:399 testwidgets.js:417 testwidgets.js:447 prefs.js:49
-msgid "Name"
-msgstr ""
-
-#: preferenceswidget.js:497 preferenceswidget.js:509 preferenceswidget.js:538
-#: testwidgets.js:405 testwidgets.js:417 testwidgets.js:447 prefs.js:50
-#, fuzzy
-msgid "Service"
-msgstr "Nom del servei"
-
-#: preferenceswidget.js:993
-msgid "Remove"
-msgstr ""
-
 #: dialogwidgets.js:55 testwidgets.js:1123
 msgid "Cancel"
 msgstr ""
@@ -99,13 +68,18 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: extension.js:120
-msgid "Wireguard status"
-msgstr "Estat de Wireguard"
+#: prefs.js:49 preferenceswidget.js:491 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:399 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Name"
+msgstr ""
 
-#: extension.js:128
-msgid "Settings"
-msgstr "Configuració"
+#: prefs.js:50 preferenceswidget.js:497 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:405 testwidgets.js:417
+#: testwidgets.js:447
+#, fuzzy
+msgid "Service"
+msgstr "Nom del servei"
 
 #: prefs.js:55
 msgid "nmcli"
@@ -149,6 +123,26 @@ msgstr "Quant a"
 #, fuzzy
 msgid "WireGuard Indicator Configuration"
 msgstr "Indicador de WireGuard"
+
+#: preferenceswidget.js:224 testwidgets.js:222
+msgid "Nothing"
+msgstr "Res"
+
+#: preferenceswidget.js:237 testwidgets.js:235
+msgid "True"
+msgstr "Vertader"
+
+#: preferenceswidget.js:250 testwidgets.js:248
+msgid "False"
+msgstr "Fals"
+
+#: preferenceswidget.js:444 preferenceswidget.js:983
+msgid "Edit"
+msgstr ""
+
+#: preferenceswidget.js:993
+msgid "Remove"
+msgstr ""
 
 #: aboutpage.js:47
 msgid "Buy me a coffee"
@@ -216,6 +210,14 @@ msgstr ""
 #, fuzzy
 msgid "Report an issue"
 msgstr "Notifica un error."
+
+#: extension.js:120
+msgid "Wireguard status"
+msgstr "Estat de Wireguard"
+
+#: extension.js:128
+msgid "Settings"
+msgstr "Configuració"
 
 #~ msgid "Help"
 #~ msgstr "Ajuda"
