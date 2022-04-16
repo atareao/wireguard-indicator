@@ -1,0 +1,211 @@
+# French translations for WireGuard Indicator package.
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the WireGuard Indicator package.
+# Mastiggia <mastiggia@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WireGuard Indicator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-07 06:18+0200\n"
+"PO-Revision-Date: 2022-04-16 09:49+0200\n"
+"Last-Translator: Mastiggia <mastiggia@gmail.com>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: schemas/wireguard-indicator.gschema.xml:6
+msgid "Services name"
+msgstr "Nom du service"
+
+#: schemas/wireguard-indicator.gschema.xml:7
+msgid "Set the name of the systemd services"
+msgstr "Définir le nom des services systemd"
+
+#: schemas/wireguard-indicator.gschema.xml:11
+msgid "Use nmcli"
+msgstr "Utiliser nmcli"
+
+#: schemas/wireguard-indicator.gschema.xml:12
+msgid "Use nmcli to manage WireGuard connections"
+msgstr "Utiliser nmcli pour gérer les connexions WireGuard"
+
+#: schemas/wireguard-indicator.gschema.xml:16
+msgid "Use sudo"
+msgstr "Utiliser sudo"
+
+#: schemas/wireguard-indicator.gschema.xml:17
+msgid "Enable use sudo with service"
+msgstr "Activer l'utilisation de sudo avec le service"
+
+#: schemas/wireguard-indicator.gschema.xml:21 prefs.js:107 prefs.js:118
+msgid "Check time"
+msgstr "Période de vérification"
+
+#: schemas/wireguard-indicator.gschema.xml:22
+msgid "Set the check time to test the WireGuard status"
+msgstr "Définissez la période de vérification pour tester l'état de WireGuard"
+
+#: schemas/wireguard-indicator.gschema.xml:26
+msgid "Dark theme"
+msgstr "Thème sombre"
+
+#: schemas/wireguard-indicator.gschema.xml:27
+msgid "Enable dark theme otherwise light theme"
+msgstr "Activer le thème sombre sinon le thème clair"
+
+#: dialogwidgets.js:55 testwidgets.js:1123
+msgid "Cancel"
+msgstr "Annuler"
+
+#: dialogwidgets.js:56 testwidgets.js:1124
+msgid "Ok"
+msgstr "Ok"
+
+#: prefs.js:49 preferenceswidget.js:491 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:399 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Name"
+msgstr "Nom"
+
+#: prefs.js:50 preferenceswidget.js:497 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:405 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Service"
+msgstr "Service"
+
+#: prefs.js:55
+msgid "nmcli"
+msgstr "nmcli"
+
+#: prefs.js:62
+msgid "Sudo"
+msgstr "Sudo"
+
+#: prefs.js:68
+msgid "Services"
+msgstr "Services"
+
+#: prefs.js:83
+msgid "Add"
+msgstr "Ajouter"
+
+#: prefs.js:96
+msgid "Add more services"
+msgstr "Ajouter plus de services"
+
+#: prefs.js:113
+msgid "Theme"
+msgstr "Thème"
+
+#: prefs.js:116
+msgid "WireGuard Preferences"
+msgstr "Préférences WireGuard"
+
+#: prefs.js:119
+msgid "Style"
+msgstr "Style"
+
+#: prefs.js:120
+msgid "About"
+msgstr "À propos de"
+
+#: prefs.js:134
+msgid "WireGuard Indicator Configuration"
+msgstr "Configuration de WireGuard Indicator"
+
+#: preferenceswidget.js:224 testwidgets.js:222
+msgid "Nothing"
+msgstr "Rien"
+
+#: preferenceswidget.js:237 testwidgets.js:235
+msgid "True"
+msgstr "True"
+
+#: preferenceswidget.js:250 testwidgets.js:248
+msgid "False"
+msgstr "Faux"
+
+#: preferenceswidget.js:444 preferenceswidget.js:983
+msgid "Edit"
+msgstr "Éditer"
+
+#: preferenceswidget.js:993
+msgid "Remove"
+msgstr "Supprimer"
+
+#: aboutpage.js:47
+msgid "Buy me a coffee"
+msgstr "Offrez moi un café"
+
+#: aboutpage.js:52
+msgid "Version"
+msgstr "Version"
+
+#: aboutpage.js:54
+msgid "GNOME Version"
+msgstr "Version GNOME"
+
+#: aboutpage.js:56
+msgid "OS"
+msgstr "OS"
+
+#: aboutpage.js:57
+msgid "SessionType"
+msgstr "Type de session"
+
+#: aboutpage.js:89
+msgid "Developers"
+msgstr "Développeurs"
+
+#: aboutpage.js:96
+msgid "Contributors"
+msgstr "Contributeurs"
+
+#: aboutpage.js:97
+msgid "Thank you to all contributors!"
+msgstr "Merci à tous les contributeurs !"
+
+#: aboutpage.js:98
+msgid "For a list of all contributors, please visit"
+msgstr "Pour une liste de tous les contributeurs, veuillez visiter"
+
+#: aboutpage.js:107
+msgid "Supporters"
+msgstr "Supporters"
+
+#: aboutpage.js:108
+msgid "Thank you to all supporters!"
+msgstr "Merci à tous les supporters !"
+
+#: aboutpage.js:109
+msgid "For a list of all supporters, please visit"
+msgstr "Pour une liste de tous les supporters, veuillez visiter"
+
+#: aboutpage.js:116
+msgid "License"
+msgstr "Licence"
+
+#: aboutpage.js:129
+msgid "More info"
+msgstr "Plus d'infos"
+
+#: aboutpage.js:139
+msgid "More information"
+msgstr "Plus d'informations"
+
+#: aboutpage.js:142
+msgid "Report an issue"
+msgstr "Signaler un problème"
+
+#: extension.js:120
+msgid "Wireguard status"
+msgstr "Statut de Wireguard"
+
+#: extension.js:128
+msgid "Settings"
+msgstr "Paramètres"
