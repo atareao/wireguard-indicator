@@ -173,6 +173,7 @@ var WireGuardIndicator = GObject.registerClass(
             this._servicesSwitches.forEach((serviceSwitch)=>{
                 if(serviceSwitch.state){
                     isActive = true;
+                    return;
                 }
             });
             if(this._isActive == null || this._isActive != isActive){
