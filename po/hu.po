@@ -1,0 +1,212 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# infeeeee <gyetpet@mailbox.org>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wireguard-indicator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-07 06:18+0200\n"
+"PO-Revision-Date: 2022-05-21 11:56+0200\n"
+"Last-Translator: infeeeee <gyetpet@mailbox.org>\n"
+"Language-Team: Hungarian <gyetpet@mailbox.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 40.0\n"
+
+#: schemas/wireguard-indicator.gschema.xml:6
+msgid "Services name"
+msgstr "Szolgáltatások nevei"
+
+#: schemas/wireguard-indicator.gschema.xml:7
+msgid "Set the name of the systemd services"
+msgstr "Systemd szolgáltaások neveinek a beállítása"
+
+#: schemas/wireguard-indicator.gschema.xml:11
+msgid "Use nmcli"
+msgstr "Nmcli használata"
+
+#: schemas/wireguard-indicator.gschema.xml:12
+msgid "Use nmcli to manage WireGuard connections"
+msgstr "Nmcli használata a WireGuard kapcsolatok kezeléséhez"
+
+#: schemas/wireguard-indicator.gschema.xml:16
+msgid "Use sudo"
+msgstr "Sudo használata"
+
+#: schemas/wireguard-indicator.gschema.xml:17
+msgid "Enable use sudo with service"
+msgstr "Szolgáltatások használatához hasznéjon Sudo-t"
+
+#: schemas/wireguard-indicator.gschema.xml:21 prefs.js:107 prefs.js:118
+msgid "Check time"
+msgstr "Ellenőrzési időköz"
+
+#: schemas/wireguard-indicator.gschema.xml:22
+msgid "Set the check time to test the WireGuard status"
+msgstr "Állítsa be az ellenőrzési időközt WireGuard állapotának ellenőrzéséhez"
+
+#: schemas/wireguard-indicator.gschema.xml:26
+msgid "Dark theme"
+msgstr "Sötét téma"
+
+#: schemas/wireguard-indicator.gschema.xml:27
+msgid "Enable dark theme otherwise light theme"
+msgstr "Sötét téma bekapcsolása, egyébként világos használata"
+
+#: dialogwidgets.js:55 testwidgets.js:1123
+msgid "Cancel"
+msgstr "Mégse"
+
+#: dialogwidgets.js:56 testwidgets.js:1124
+msgid "Ok"
+msgstr "Ok"
+
+#: prefs.js:49 preferenceswidget.js:491 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:399 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Name"
+msgstr "Név"
+
+#: prefs.js:50 preferenceswidget.js:497 preferenceswidget.js:509
+#: preferenceswidget.js:538 testwidgets.js:405 testwidgets.js:417
+#: testwidgets.js:447
+msgid "Service"
+msgstr "Szolgáltatás"
+
+#: prefs.js:55
+msgid "nmcli"
+msgstr "Nmcli"
+
+#: prefs.js:62
+msgid "Sudo"
+msgstr "Sudo"
+
+#: prefs.js:68
+msgid "Services"
+msgstr "Szolgáltatások"
+
+#: prefs.js:83
+msgid "Add"
+msgstr "Hozzáadás"
+
+#: prefs.js:96
+msgid "Add more services"
+msgstr "Új szolgáltatások hozzáadása"
+
+#: prefs.js:113
+msgid "Theme"
+msgstr "Téma"
+
+#: prefs.js:116
+msgid "WireGuard Preferences"
+msgstr "Wireguard Beállítások"
+
+#: prefs.js:119
+msgid "Style"
+msgstr "Megjelenés"
+
+#: prefs.js:120
+msgid "About"
+msgstr "Névjegy"
+
+#: prefs.js:134
+msgid "WireGuard Indicator Configuration"
+msgstr "WireGuard Indicator Beállítások"
+
+#: preferenceswidget.js:224 testwidgets.js:222
+msgid "Nothing"
+msgstr "Semmi"
+
+#: preferenceswidget.js:237 testwidgets.js:235
+msgid "True"
+msgstr "Igaz"
+
+#: preferenceswidget.js:250 testwidgets.js:248
+msgid "False"
+msgstr "Hamis"
+
+#: preferenceswidget.js:444 preferenceswidget.js:983
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: preferenceswidget.js:993
+msgid "Remove"
+msgstr "Eltávolítás"
+
+#: aboutpage.js:47
+msgid "Buy me a coffee"
+msgstr "Vegyen nekem egy kávét"
+
+#: aboutpage.js:52
+msgid "Version"
+msgstr "Verzió"
+
+#: aboutpage.js:54
+msgid "GNOME Version"
+msgstr "GNOME verzió"
+
+#: aboutpage.js:56
+msgid "OS"
+msgstr "Rendszer"
+
+#: aboutpage.js:57
+msgid "SessionType"
+msgstr "Munkamenet"
+
+#: aboutpage.js:89
+msgid "Developers"
+msgstr "Fejlesztők"
+
+#: aboutpage.js:96
+msgid "Contributors"
+msgstr "Közreműködők"
+
+#: aboutpage.js:97
+msgid "Thank you to all contributors!"
+msgstr "Köszönet minden közreműködőnek!"
+
+#: aboutpage.js:98
+msgid "For a list of all contributors, please visit"
+msgstr "Az összes közreműködő listájának megtekintéséhez látogasson el ide:"
+
+#: aboutpage.js:107
+msgid "Supporters"
+msgstr "Támogatók"
+
+#: aboutpage.js:108
+msgid "Thank you to all supporters!"
+msgstr "Köszönet minden támogatónak!"
+
+#: aboutpage.js:109
+msgid "For a list of all supporters, please visit"
+msgstr "Az összes támogató listájának megtekintéséhez látogasson el ide:"
+
+#: aboutpage.js:116
+msgid "License"
+msgstr "Licensz"
+
+#: aboutpage.js:129
+msgid "More info"
+msgstr "Bővebben"
+
+#: aboutpage.js:139
+msgid "More information"
+msgstr "Több információ"
+
+#: aboutpage.js:142
+msgid "Report an issue"
+msgstr "Probléma jelentése"
+
+#: extension.js:120
+msgid "Wireguard status"
+msgstr "Wireguard állapot"
+
+#: extension.js:128
+msgid "Settings"
+msgstr "Beállítások"
