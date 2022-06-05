@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WireGuard Indicator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-07 06:15+0200\n"
+"POT-Creation-Date: 2022-06-05 12:23+0200\n"
 "PO-Revision-Date: 2021-02-23 11:05+0100\n"
 "Last-Translator: Dani Talens <databio@gmail.com>\n"
 "Language-Team: Català\n"
@@ -18,45 +18,46 @@ msgstr ""
 "X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: schemas/wireguard-indicator.gschema.xml:6
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:6
 #, fuzzy
 msgid "Services name"
 msgstr "Nom del servei"
 
-#: schemas/wireguard-indicator.gschema.xml:7
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:7
 #, fuzzy
 msgid "Set the name of the systemd services"
 msgstr "Indica el nom del servei Systemd de WireGuard"
 
-#: schemas/wireguard-indicator.gschema.xml:11
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:11
 msgid "Use nmcli"
 msgstr ""
 
-#: schemas/wireguard-indicator.gschema.xml:12
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:12
 msgid "Use nmcli to manage WireGuard connections"
 msgstr ""
 
-#: schemas/wireguard-indicator.gschema.xml:16
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:16
 msgid "Use sudo"
 msgstr ""
 
-#: schemas/wireguard-indicator.gschema.xml:17
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:17
 msgid "Enable use sudo with service"
 msgstr ""
 
-#: schemas/wireguard-indicator.gschema.xml:21 prefs.js:107 prefs.js:118
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:21 prefs.js:107
+#: prefs.js:118
 msgid "Check time"
 msgstr "Interval de comprovació"
 
-#: schemas/wireguard-indicator.gschema.xml:22
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:22
 msgid "Set the check time to test the WireGuard status"
 msgstr "Indica l'interval de comprovació de Wireguard"
 
-#: schemas/wireguard-indicator.gschema.xml:26
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:26
 msgid "Dark theme"
 msgstr "Tema fosc"
 
-#: schemas/wireguard-indicator.gschema.xml:27
+#: schemas/es.atareao.wireguard-indicator.gschema.xml:27
 msgid "Enable dark theme otherwise light theme"
 msgstr "Estableix el tema fosc"
 
@@ -68,14 +69,14 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: prefs.js:49 preferenceswidget.js:491 preferenceswidget.js:509
-#: preferenceswidget.js:538 testwidgets.js:399 testwidgets.js:417
+#: prefs.js:49 preferenceswidget.js:515 preferenceswidget.js:533
+#: preferenceswidget.js:562 testwidgets.js:399 testwidgets.js:417
 #: testwidgets.js:447
 msgid "Name"
 msgstr ""
 
-#: prefs.js:50 preferenceswidget.js:497 preferenceswidget.js:509
-#: preferenceswidget.js:538 testwidgets.js:405 testwidgets.js:417
+#: prefs.js:50 preferenceswidget.js:521 preferenceswidget.js:533
+#: preferenceswidget.js:562 testwidgets.js:405 testwidgets.js:417
 #: testwidgets.js:447
 #, fuzzy
 msgid "Service"
@@ -124,23 +125,23 @@ msgstr "Quant a"
 msgid "WireGuard Indicator Configuration"
 msgstr "Indicador de WireGuard"
 
-#: preferenceswidget.js:224 testwidgets.js:222
+#: preferenceswidget.js:248 testwidgets.js:222
 msgid "Nothing"
 msgstr "Res"
 
-#: preferenceswidget.js:237 testwidgets.js:235
+#: preferenceswidget.js:261 testwidgets.js:235
 msgid "True"
 msgstr "Vertader"
 
-#: preferenceswidget.js:250 testwidgets.js:248
+#: preferenceswidget.js:274 testwidgets.js:248
 msgid "False"
 msgstr "Fals"
 
-#: preferenceswidget.js:444 preferenceswidget.js:983
+#: preferenceswidget.js:468 preferenceswidget.js:999
 msgid "Edit"
 msgstr ""
 
-#: preferenceswidget.js:993
+#: preferenceswidget.js:1009
 msgid "Remove"
 msgstr ""
 
@@ -211,11 +212,11 @@ msgstr ""
 msgid "Report an issue"
 msgstr "Notifica un error."
 
-#: extension.js:120
+#: extension.js:119
 msgid "Wireguard status"
 msgstr "Estat de Wireguard"
 
-#: extension.js:128
+#: extension.js:127
 msgid "Settings"
 msgstr "Configuració"
 
