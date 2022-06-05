@@ -40,7 +40,6 @@ const ByteArray = imports.byteArray;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = ExtensionUtils.getCurrentExtension();
-const Convenience = Extension.imports.convenience;
 
 const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
@@ -93,7 +92,7 @@ var WireGuardIndicator = GObject.registerClass(
     class WireGuardIndicator extends PanelMenu.Button{
         _init(){
             super._init(St.Align.START);
-            this._settings = Convenience.getSettings();
+            this._settings = ExtensionUtils.getSettings();
             this._isActive = null;
 
             /* Icon indicator */
@@ -162,7 +161,7 @@ var WireGuardIndicator = GObject.registerClass(
                     name,
                     {active: false});
                 serviceSwitch.label.set_name(service);
-                serviceSwitch.connect('toggled', this._toggleSwitch.bind(this)); 
+                serviceSwitch.connect('toggled', this._toggleSwitch.bind(this));
                 this._servicesSwitches.push(serviceSwitch);
                 this.services_section.addMenuItem(serviceSwitch);
                 this.services_section.actor.show();
@@ -299,7 +298,7 @@ var WireGuardIndicator = GObject.registerClass(
 let wireGuardIndicator;
 
 function init(){
-    Convenience.initTranslations();
+    ExtensionUtils.initTranslations();
 }
 
 function enable(){

@@ -610,7 +610,7 @@ var OtherSetting = GObject.registerClass(
 );
 
 /**
- * Convenience classes for widgets similar to Gnome Control Center
+ * Interesting classes for widgets similar to Gnome Control Center
  */
 var Row = GObject.registerClass(
     {
@@ -866,7 +866,7 @@ var FrameRow = GObject.registerClass(
             });
             this.add(valueLabel);
         }
-        
+
         setVerticalAlignmentBottom(){
             this._grid.vexpand = true;
             this._grid.valign = Gtk.Align.END;
@@ -953,7 +953,7 @@ var Page = GObject.registerClass(
                 this._mainBox.append(label);
             } else if (title instanceof Gtk.Widget) {
                 this._mainBox.append(title);
-            } 
+            }
 
             this._mainBox.append(frame);
             return frame;
