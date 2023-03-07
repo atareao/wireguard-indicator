@@ -19,7 +19,7 @@ codefactor-badge: True
 ![License MIT](https://img.shields.io/badge/license-MIT-green)
 ![Contributors](https://img.shields.io/github/contributors-anon/atareao/wireguard-indicator)
 ![Last commit](https://img.shields.io/github/last-commit/atareao/wireguard-indicator)
-[![CodeFactor](https://www.codefactor.io/repository/github/atareao/wireguard-indicator/badge/master)](https://www.codefactor.io/repository/github/atareao/wireguard-indicator/overview/master)
+[![CodeFactor](https://www.codefactor.io/repository/github/atareao/wireguard-indicator/badge)](https://www.codefactor.io/repository/github/atareao/wireguard-indicator)
 <!-- end badges -->
 
 <!-- start description -->
@@ -30,33 +30,33 @@ codefactor-badge: True
 </a>
 </p>
 <h2>🏠 <a href="https://www.atareao.es/aplicacion/wireguard-indicator" id="homepage">Homepage</a></h2>
-<p><span id="project_title">WireGuard Indicator</span> is an indicator to show the status of your WireGuard VPN.</p>
-<p>WireGuard Indicator can enable and disable the WireGuard VPN by clicking on it.</p>
-<p>You need becomes root</p>
+<p><span id="project_title">WireGuard Indicator</span> is a GNOME Shell indicator that shows the status of your WireGuard VPN.</p>
+<p>WireGuard Indicator can enable or disable the WireGuard VPN by clicking on it.</p>
+<p>You need superuser privileges (i.e. root access).</p>
 
 <!-- end description -->
 
 <!-- start prerequisites -->
 ## Prerequisites
 
-You need WireGuard. To install it, simply,
+You need WireGuard. To install it, simply type in the terminal:
 
 ```
 sudo apt install wireguard
 ```
 
-Of course, you need to configure your loved WireGuard.
+Of course, you need to [configure your beloved WireGuard first](https://www.wireguard.com/quickstart/).
 
 <!-- end prerequisites -->
 
 <!-- start installing -->
-## Installing <span id="project_title">WireGuard Indicator</span>
+## Installing the <span id="project_title">WireGuard Indicator</span>
 
-To install <span id="project_title">WireGuard Indicator</span>, follow these steps:
+To install the <span id="project_title">WireGuard Indicator</span>, follow these steps:
 
-Goto [GNOME Extensions page](https://extensions.gnome.org/) and search for WireGuard Indicator.
+Go to the [GNOME Extensions page](https://extensions.gnome.org/) and search for "[WireGuard Indicator](https://extensions.gnome.org/extension/3612/wireguard-indicator/)".
 
-Enable the extension by click the switch.
+Enable the extension by clicking the switch.
 
 <!-- end installing -->
 
@@ -64,34 +64,34 @@ Enable the extension by click the switch.
 
 <span id="project_title">WireGuard Indicator</span> provide two ways to connect to your wireguard vpn:
 
--   nmcli
-  With `nmcli` we need to add our `wg.conf` file connection first by `sudo nmcli connection import type wireguard file /path/to/your/your-wg-file.conf`, since <span id="project_title">WireGuard Indicator</span> pick up the connection of `type=wireguard` they'll show up on the drop down and toggled right away after import (note: you may want to disable the auto connect via `nm-connection-editor` or your distro network setting).
+- **nmcli**\
+With `nmcli` we need to add our `wg.conf` file connection first by `sudo nmcli connection import type wireguard file /path/to/your/your-wg-file.conf`, since <span id="project_title">WireGuard Indicator</span> pick up the connection of `type=wireguard` they'll show up on the drop down and toggled right away after import (note: you may want to disable the auto connect via `nm-connection-editor` or your distro network setting).
 
--   systemd
-  Add wireguard to systemd by running `sudo systemctl enable wg-quick@yourconfig.service`, make sure you have your `/etc/wireguard/config.conf` in place.
+- **systemd**\
+Add wireguard to systemd by running `sudo systemctl enable wg-quick@yourconfig.service`, make sure you have your `/etc/wireguard/config.conf` in place.
 
 <!-- start using -->
 ## Using <span id="project_title">WireGuard Indicator</span>
 
-When you start **<span id="project_title">WireGuard Indicator</span>** it goes to Indicator Area, as you can see in the next screenshot,
+When you start **<span id="project_title">WireGuard Indicator</span>** it appears in the Indicator Area, as you can see in the next screenshot:
 
 ![WireGuard Indicator](./screenshots/screenshot_01.png)
 
-In this screenshot, the language is Spanish, but, if there is no translation for your language, you will find the app in English.
+In this screenshot, the language is in Spanish. If there is no translation for your language, you can have the app in English.
 
-If you click to enable WireGuard, a dialog appears to ask you for your password to gain root rights.
+If you enable on one of the WireGuard connections, a dialog will appear and ask you for your password to gain root privileges.
 
 ![WireGuard Indicator](./screenshots/screenshot_02.png)
 
-You can set some options as you can see in next screenshot
+You can set additional options as you can see in next screenshot:
 
 ![WireGuard Indicator](./screenshots/screenshot_03.png)
 
-* Enable the dark theme for the WireGuard Indicator icon
+* Enable the dark theme for the WireGuard Indicator icon:
 
 ![WireGuard Indicator](./screenshots/screenshot_04.png)
 
-* Set the systemd service name
+* Set the `systemd` service name
 * Set the check time
 
 <!-- end using -->
@@ -99,7 +99,7 @@ You can set some options as you can see in next screenshot
 <!-- start contributing -->
 ## Contributing to <span id="project_title">WireGuard Indicator</span>
 
-To contribute to **<span id="project_title">WireGuard Indicator</span>**, follow these steps:
+To contribute to **<span id="project_title">WireGuard Indicator</span>**, please follow these steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <branch_name>`.
@@ -108,8 +108,6 @@ To contribute to **<span id="project_title">WireGuard Indicator</span>**, follow
 5. Create the pull request.
 
 Alternatively see the GitHub documentation on [creating a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-</commit_message></branch_name>
-
 
 <!-- end contributing -->
 
