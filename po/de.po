@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-06-05 12:23+0200\n"
+"POT-Creation-Date: 2023-05-20 20:20+0200\n"
 "PO-Revision-Date: 2022-04-06 12:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -59,23 +59,21 @@ msgstr "Dunkles Theme"
 msgid "Enable dark theme otherwise light theme"
 msgstr "Dunkles Theme aktivieren sonst helles Theme"
 
-#: dialogwidgets.js:55 testwidgets.js:1123
+#: dialogwidgets.js:55
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: dialogwidgets.js:56 testwidgets.js:1124
+#: dialogwidgets.js:56
 msgid "Ok"
 msgstr "Ok"
 
 #: prefs.js:49 preferenceswidget.js:515 preferenceswidget.js:533
-#: preferenceswidget.js:562 testwidgets.js:399 testwidgets.js:417
-#: testwidgets.js:447
+#: preferenceswidget.js:562
 msgid "Name"
 msgstr "Name"
 
 #: prefs.js:50 preferenceswidget.js:521 preferenceswidget.js:533
-#: preferenceswidget.js:562 testwidgets.js:405 testwidgets.js:417
-#: testwidgets.js:447
+#: preferenceswidget.js:562
 msgid "Service"
 msgstr "Dienst"
 
@@ -119,15 +117,15 @@ msgstr "Über"
 msgid "WireGuard Indicator Configuration"
 msgstr "WireGuard-Indikator-Konfiguration"
 
-#: preferenceswidget.js:248 testwidgets.js:222
+#: preferenceswidget.js:248
 msgid "Nothing"
 msgstr "Nichts"
 
-#: preferenceswidget.js:261 testwidgets.js:235
+#: preferenceswidget.js:261
 msgid "True"
 msgstr "Wahr"
 
-#: preferenceswidget.js:274 testwidgets.js:248
+#: preferenceswidget.js:274
 msgid "False"
 msgstr "Falsch"
 
