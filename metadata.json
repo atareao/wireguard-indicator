@@ -4,9 +4,9 @@
     "gettext-domain": "wireguard-indicator@atareao.es",
     "name": "WireGuard Indicator",
     "settings-schema": "es.atareao.wireguard-indicator",
-    "shell-version": ["40", "41", "42", "43"],
+    "shell-version": ["40", "41", "42", "43", "44"],
     "url": "https://github.com/atareao/wireguard-indicator",
     "uuid": "wireguard-indicator@atareao.es",
     "icon": "wireguard-icon",
-    "version": 9
+    "version": 10
 }
