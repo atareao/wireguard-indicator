@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-20 20:20+0200\n"
+"POT-Creation-Date: 2023-06-05 05:59+0200\n"
 "PO-Revision-Date: 2022-07-04 21:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,44 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1\n"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:6
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:6
 msgid "Services name"
 msgstr "Palvelun nimi"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:7
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:7
 msgid "Set the name of the systemd services"
 msgstr "Aseta systemd järjestelmäpalvelun nimi"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:11
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:11
 msgid "Use nmcli"
 msgstr "Käytä nmcli palvelua"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:12
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:12
 msgid "Use nmcli to manage WireGuard connections"
 msgstr "Käytä nmcli palvelua WireGuard yhteyksien hallintaan"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:16
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:16
 msgid "Use sudo"
 msgstr "Käytä sudo oikeuksia"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:17
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:17
 msgid "Enable use sudo with service"
 msgstr "Käytä järjestelmäpalvelun hallinnan yhteydessä sudo oikeuksia"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:21 prefs.js:107
-#: prefs.js:118
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:21
 msgid "Check time"
 msgstr "Tarkista aika"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:22
 msgid "Set the check time to test the WireGuard status"
 msgstr "Aseta tarkistusaika WireGuard yhteyden tilan tarkistamiselle"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:26
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:26
 msgid "Dark theme"
 msgstr "Tumma teema"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:27
 msgid "Enable dark theme otherwise light theme"
 msgstr "Käytä tummaa teemaa, muutoin vaaleaa teemaa"
 
@@ -67,144 +66,107 @@ msgstr "Peruuta"
 msgid "Ok"
 msgstr "Ok"
 
-#: prefs.js:49 preferenceswidget.js:515 preferenceswidget.js:533
-#: preferenceswidget.js:562
-msgid "Name"
-msgstr "Nimi"
+#~ msgid "Name"
+#~ msgstr "Nimi"
 
-#: prefs.js:50 preferenceswidget.js:521 preferenceswidget.js:533
-#: preferenceswidget.js:562
-msgid "Service"
-msgstr "Palvelu"
+#~ msgid "Service"
+#~ msgstr "Palvelu"
 
-#: prefs.js:55
-msgid "nmcli"
-msgstr "nmcli"
+#~ msgid "nmcli"
+#~ msgstr "nmcli"
 
-#: prefs.js:62
-msgid "Sudo"
-msgstr "Sudo"
+#~ msgid "Sudo"
+#~ msgstr "Sudo"
 
-#: prefs.js:68
-msgid "Services"
-msgstr "Palvelut"
+#~ msgid "Services"
+#~ msgstr "Palvelut"
 
-#: prefs.js:83
-msgid "Add"
-msgstr "Lisää"
+#~ msgid "Add"
+#~ msgstr "Lisää"
 
-#: prefs.js:96
-msgid "Add more services"
-msgstr "Lisää uusia palveluita"
+#~ msgid "Add more services"
+#~ msgstr "Lisää uusia palveluita"
 
-#: prefs.js:113
-msgid "Theme"
-msgstr "Teema"
+#~ msgid "Theme"
+#~ msgstr "Teema"
 
-#: prefs.js:116
-msgid "WireGuard Preferences"
-msgstr "WireGuard asetukset"
+#~ msgid "WireGuard Preferences"
+#~ msgstr "WireGuard asetukset"
 
-#: prefs.js:119
-msgid "Style"
-msgstr "Tyyli"
+#~ msgid "Style"
+#~ msgstr "Tyyli"
 
-#: prefs.js:120
-msgid "About"
-msgstr "Tietoja"
+#~ msgid "About"
+#~ msgstr "Tietoja"
 
-#: prefs.js:134
-msgid "WireGuard Indicator Configuration"
-msgstr "WireGuard indikaattorin asetukset"
+#~ msgid "WireGuard Indicator Configuration"
+#~ msgstr "WireGuard indikaattorin asetukset"
 
-#: preferenceswidget.js:248
-msgid "Nothing"
-msgstr "Ei mitään"
+#~ msgid "Nothing"
+#~ msgstr "Ei mitään"
 
-#: preferenceswidget.js:261
-msgid "True"
-msgstr "Tosi"
+#~ msgid "True"
+#~ msgstr "Tosi"
 
-#: preferenceswidget.js:274
-msgid "False"
-msgstr "Epätosi"
+#~ msgid "False"
+#~ msgstr "Epätosi"
 
-#: preferenceswidget.js:468 preferenceswidget.js:999
-msgid "Edit"
-msgstr "Muokkaa"
+#~ msgid "Edit"
+#~ msgstr "Muokkaa"
 
-#: preferenceswidget.js:1009
-msgid "Remove"
-msgstr "Poista"
+#~ msgid "Remove"
+#~ msgstr "Poista"
 
-#: aboutpage.js:47
-msgid "Buy me a coffee"
-msgstr "Tarjoa kahvi"
+#~ msgid "Buy me a coffee"
+#~ msgstr "Tarjoa kahvi"
 
-#: aboutpage.js:52
-msgid "Version"
-msgstr "Versio"
+#~ msgid "Version"
+#~ msgstr "Versio"
 
-#: aboutpage.js:54
-msgid "GNOME Version"
-msgstr "GNOME versio"
+#~ msgid "GNOME Version"
+#~ msgstr "GNOME versio"
 
-#: aboutpage.js:56
-msgid "OS"
-msgstr "Käyttöjärjestelmäversio"
+#~ msgid "OS"
+#~ msgstr "Käyttöjärjestelmäversio"
 
-#: aboutpage.js:57
-msgid "SessionType"
-msgstr "Istunnon tyyppi"
+#~ msgid "SessionType"
+#~ msgstr "Istunnon tyyppi"
 
-#: aboutpage.js:89
-msgid "Developers"
-msgstr "Kehittäjät"
+#~ msgid "Developers"
+#~ msgstr "Kehittäjät"
 
-#: aboutpage.js:96
-msgid "Contributors"
-msgstr "Tukijat"
+#~ msgid "Contributors"
+#~ msgstr "Tukijat"
 
-#: aboutpage.js:97
-msgid "Thank you to all contributors!"
-msgstr "Kiitos kaikille tukijoille"
+#~ msgid "Thank you to all contributors!"
+#~ msgstr "Kiitos kaikille tukijoille"
 
-#: aboutpage.js:98
-msgid "For a list of all contributors, please visit"
-msgstr "Listan kaikista tukijoista löydät"
+#~ msgid "For a list of all contributors, please visit"
+#~ msgstr "Listan kaikista tukijoista löydät"
 
-#: aboutpage.js:107
-msgid "Supporters"
-msgstr "Tukijat"
+#~ msgid "Supporters"
+#~ msgstr "Tukijat"
 
-#: aboutpage.js:108
-msgid "Thank you to all supporters!"
-msgstr "Kiitos kaikille tukijoille"
+#~ msgid "Thank you to all supporters!"
+#~ msgstr "Kiitos kaikille tukijoille"
 
-#: aboutpage.js:109
-msgid "For a list of all supporters, please visit"
-msgstr "Listan kaikista tukijoista löydät"
+#~ msgid "For a list of all supporters, please visit"
+#~ msgstr "Listan kaikista tukijoista löydät"
 
-#: aboutpage.js:116
-msgid "License"
-msgstr "Lisenssi"
+#~ msgid "License"
+#~ msgstr "Lisenssi"
 
-#: aboutpage.js:129
-msgid "More info"
-msgstr "Lisätietoa"
+#~ msgid "More info"
+#~ msgstr "Lisätietoa"
 
-#: aboutpage.js:139
-msgid "More information"
-msgstr "Lisätietoja"
+#~ msgid "More information"
+#~ msgstr "Lisätietoja"
 
-#: aboutpage.js:142
-msgid "Report an issue"
-msgstr "Ilmoita ongelmasta"
+#~ msgid "Report an issue"
+#~ msgstr "Ilmoita ongelmasta"
 
-#: extension.js:119
-msgid "Wireguard status"
-msgstr "Wireguardin tila"
+#~ msgid "Wireguard status"
+#~ msgstr "Wireguardin tila"
 
-#: extension.js:127
-msgid "Settings"
-msgstr "Asetukset"
+#~ msgid "Settings"
+#~ msgstr "Asetukset"

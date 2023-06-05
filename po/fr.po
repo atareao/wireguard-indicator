@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WireGuard Indicator\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-20 20:20+0200\n"
+"POT-Creation-Date: 2023-06-05 05:59+0200\n"
 "PO-Revision-Date: 2022-04-16 09:49+0200\n"
 "Last-Translator: Mastiggia <mastiggia@gmail.com>\n"
 "Language-Team: French\n"
@@ -18,44 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:6
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:6
 msgid "Services name"
 msgstr "Nom du service"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:7
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:7
 msgid "Set the name of the systemd services"
 msgstr "Définir le nom des services systemd"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:11
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:11
 msgid "Use nmcli"
 msgstr "Utiliser nmcli"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:12
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:12
 msgid "Use nmcli to manage WireGuard connections"
 msgstr "Utiliser nmcli pour gérer les connexions WireGuard"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:16
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:16
 msgid "Use sudo"
 msgstr "Utiliser sudo"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:17
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:17
 msgid "Enable use sudo with service"
 msgstr "Activer l'utilisation de sudo avec le service"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:21 prefs.js:107
-#: prefs.js:118
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:21
 msgid "Check time"
 msgstr "Période de vérification"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:22
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:22
 msgid "Set the check time to test the WireGuard status"
 msgstr "Définissez la période de vérification pour tester l'état de WireGuard"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:26
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:26
 msgid "Dark theme"
 msgstr "Thème sombre"
 
-#: schemas/es.atareao.wireguard-indicator.gschema.xml:27
+#: schemas/org.gnome.shell.extensions.atareao.wireguard-indicator.gschema.xml:27
 msgid "Enable dark theme otherwise light theme"
 msgstr "Activer le thème sombre sinon le thème clair"
 
@@ -67,144 +66,107 @@ msgstr "Annuler"
 msgid "Ok"
 msgstr "Ok"
 
-#: prefs.js:49 preferenceswidget.js:515 preferenceswidget.js:533
-#: preferenceswidget.js:562
-msgid "Name"
-msgstr "Nom"
+#~ msgid "Name"
+#~ msgstr "Nom"
 
-#: prefs.js:50 preferenceswidget.js:521 preferenceswidget.js:533
-#: preferenceswidget.js:562
-msgid "Service"
-msgstr "Service"
+#~ msgid "Service"
+#~ msgstr "Service"
 
-#: prefs.js:55
-msgid "nmcli"
-msgstr "nmcli"
+#~ msgid "nmcli"
+#~ msgstr "nmcli"
 
-#: prefs.js:62
-msgid "Sudo"
-msgstr "Sudo"
+#~ msgid "Sudo"
+#~ msgstr "Sudo"
 
-#: prefs.js:68
-msgid "Services"
-msgstr "Services"
+#~ msgid "Services"
+#~ msgstr "Services"
 
-#: prefs.js:83
-msgid "Add"
-msgstr "Ajouter"
+#~ msgid "Add"
+#~ msgstr "Ajouter"
 
-#: prefs.js:96
-msgid "Add more services"
-msgstr "Ajouter plus de services"
+#~ msgid "Add more services"
+#~ msgstr "Ajouter plus de services"
 
-#: prefs.js:113
-msgid "Theme"
-msgstr "Thème"
+#~ msgid "Theme"
+#~ msgstr "Thème"
 
-#: prefs.js:116
-msgid "WireGuard Preferences"
-msgstr "Préférences WireGuard"
+#~ msgid "WireGuard Preferences"
+#~ msgstr "Préférences WireGuard"
 
-#: prefs.js:119
-msgid "Style"
-msgstr "Style"
+#~ msgid "Style"
+#~ msgstr "Style"
 
-#: prefs.js:120
-msgid "About"
-msgstr "À propos de"
+#~ msgid "About"
+#~ msgstr "À propos de"
 
-#: prefs.js:134
-msgid "WireGuard Indicator Configuration"
-msgstr "Configuration de WireGuard Indicator"
+#~ msgid "WireGuard Indicator Configuration"
+#~ msgstr "Configuration de WireGuard Indicator"
 
-#: preferenceswidget.js:248
-msgid "Nothing"
-msgstr "Rien"
+#~ msgid "Nothing"
+#~ msgstr "Rien"
 
-#: preferenceswidget.js:261
-msgid "True"
-msgstr "True"
+#~ msgid "True"
+#~ msgstr "True"
 
-#: preferenceswidget.js:274
-msgid "False"
-msgstr "Faux"
+#~ msgid "False"
+#~ msgstr "Faux"
 
-#: preferenceswidget.js:468 preferenceswidget.js:999
-msgid "Edit"
-msgstr "Éditer"
+#~ msgid "Edit"
+#~ msgstr "Éditer"
 
-#: preferenceswidget.js:1009
-msgid "Remove"
-msgstr "Supprimer"
+#~ msgid "Remove"
+#~ msgstr "Supprimer"
 
-#: aboutpage.js:47
-msgid "Buy me a coffee"
-msgstr "Offrez moi un café"
+#~ msgid "Buy me a coffee"
+#~ msgstr "Offrez moi un café"
 
-#: aboutpage.js:52
-msgid "Version"
-msgstr "Version"
+#~ msgid "Version"
+#~ msgstr "Version"
 
-#: aboutpage.js:54
-msgid "GNOME Version"
-msgstr "Version GNOME"
+#~ msgid "GNOME Version"
+#~ msgstr "Version GNOME"
 
-#: aboutpage.js:56
-msgid "OS"
-msgstr "OS"
+#~ msgid "OS"
+#~ msgstr "OS"
 
-#: aboutpage.js:57
-msgid "SessionType"
-msgstr "Type de session"
+#~ msgid "SessionType"
+#~ msgstr "Type de session"
 
-#: aboutpage.js:89
-msgid "Developers"
-msgstr "Développeurs"
+#~ msgid "Developers"
+#~ msgstr "Développeurs"
 
-#: aboutpage.js:96
-msgid "Contributors"
-msgstr "Contributeurs"
+#~ msgid "Contributors"
+#~ msgstr "Contributeurs"
 
-#: aboutpage.js:97
-msgid "Thank you to all contributors!"
-msgstr "Merci à tous les contributeurs !"
+#~ msgid "Thank you to all contributors!"
+#~ msgstr "Merci à tous les contributeurs !"
 
-#: aboutpage.js:98
-msgid "For a list of all contributors, please visit"
-msgstr "Pour une liste de tous les contributeurs, veuillez visiter"
+#~ msgid "For a list of all contributors, please visit"
+#~ msgstr "Pour une liste de tous les contributeurs, veuillez visiter"
 
-#: aboutpage.js:107
-msgid "Supporters"
-msgstr "Supporters"
+#~ msgid "Supporters"
+#~ msgstr "Supporters"
 
-#: aboutpage.js:108
-msgid "Thank you to all supporters!"
-msgstr "Merci à tous les supporters !"
+#~ msgid "Thank you to all supporters!"
+#~ msgstr "Merci à tous les supporters !"
 
-#: aboutpage.js:109
-msgid "For a list of all supporters, please visit"
-msgstr "Pour une liste de tous les supporters, veuillez visiter"
+#~ msgid "For a list of all supporters, please visit"
+#~ msgstr "Pour une liste de tous les supporters, veuillez visiter"
 
-#: aboutpage.js:116
-msgid "License"
-msgstr "Licence"
+#~ msgid "License"
+#~ msgstr "Licence"
 
-#: aboutpage.js:129
-msgid "More info"
-msgstr "Plus d'infos"
+#~ msgid "More info"
+#~ msgstr "Plus d'infos"
 
-#: aboutpage.js:139
-msgid "More information"
-msgstr "Plus d'informations"
+#~ msgid "More information"
+#~ msgstr "Plus d'informations"
 
-#: aboutpage.js:142
-msgid "Report an issue"
-msgstr "Signaler un problème"
+#~ msgid "Report an issue"
+#~ msgstr "Signaler un problème"
 
-#: extension.js:119
-msgid "Wireguard status"
-msgstr "Statut de Wireguard"
+#~ msgid "Wireguard status"
+#~ msgstr "Statut de Wireguard"
 
-#: extension.js:127
-msgid "Settings"
-msgstr "Paramètres"
+#~ msgid "Settings"
+#~ msgstr "Paramètres"

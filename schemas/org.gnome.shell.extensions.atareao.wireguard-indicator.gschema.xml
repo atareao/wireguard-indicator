@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="wireguard-indicator@atareao.es">
-    <schema path="/es/atareao/wireguard-indicator/" id="es.atareao.wireguard-indicator">
+    <schema path="/org/gnome/shell/extensions/atareao/wireguard-indicator/" id="org.gnome.shell.extensions.atareao.wireguard-indicator">
         <key name="services" type="as" >
             <default>["service1|wg-quick@wg0.service", "service2|wg-quick@wg1.service"]</default>
             <summary>Services name</summary>
