@@ -22,7 +22,6 @@
  * IN THE SOFTWARE.
  */
 
-imports.gi.versions.Gtk = "3.0";
 imports.gi.versions.Gdk = "3.0";
 imports.gi.versions.Gio = "2.0";
 imports.gi.versions.Clutter = "1.0";
@@ -40,6 +39,7 @@ const ByteArray = imports.byteArray;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = ExtensionUtils.getCurrentExtension();
+const Config = imports.misc.config;
 
 const Gettext = imports.gettext.domain(Extension.uuid);
 const _ = Gettext.gettext;
@@ -96,10 +96,18 @@ var WireGuardIndicator = GObject.registerClass(
             this._isActive = null;
 
             /* Icon indicator */
-            let theme = new Gtk.IconTheme();
-            theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
-            theme.append_search_path(
-                Extension.dir.get_child('icons').get_path());
+            const icons_folder_path = Extension.dir.get_child('icons').get_path();
+            if (Config.PACKAGE_VERSION.startsWith("44")){
+                const iconTheme = new St.IconTheme();
+                if (!iconTheme.get_search_path().includes(icons_folder_path)) {
+                    iconTheme.append_search_path(icons_folder_path);
+                }
+                iconTheme.rescan_if_needed();
+            }else{
+                const iconTheme = new Gtk.IconTheme();
+                iconTheme.set_custom_theme(St.Settings.get().gtk_icon_theme);
+                iconTheme.append_search_path(icons_folder_path);
+            }
 
             let box = new St.BoxLayout();
             let label = new St.Label({text: 'Button',
