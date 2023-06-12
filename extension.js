@@ -96,13 +96,8 @@ var WireGuardIndicator = GObject.registerClass(
             this._isActive = null;
 
             /* Icon indicator */
-            let theme = Gtk.IconTheme.get_default();
-            if (theme == null) {
-                // Workaround due to lazy initialization on wayland
-                // as proposed by @fmuellner in GNOME mutter issue #960
-                theme = new Gtk.IconTheme();
-                theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
-            }
+            let theme = new Gtk.IconTheme();
+            theme.set_custom_theme(St.Settings.get().gtk_icon_theme);
             theme.append_search_path(
                 Extension.dir.get_child('icons').get_path());
 
